@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <div>test페이지입니다</div>
+      <div>수정페이지입니다.</div>
     </>
   );
 }
