@@ -93,7 +93,7 @@ button {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: "Pretendard Variable";
+  font-family: 'Nanum';
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -131,7 +131,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
