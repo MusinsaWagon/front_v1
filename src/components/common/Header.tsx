@@ -4,7 +4,7 @@ interface HeaderProps {
   src: string;
   title: string;
   description: string;
-  bottom?: string;
+  bottom?: string | undefined;
 }
 
 //헤더 컴포넌트 (props: src, title, description, bottom)
@@ -36,7 +36,7 @@ const HeaderContainer = styled.div<{ bottom?: string }>`
   justify-content: space-between;
   position: relative;
   bottom: ${(props) => props.bottom || 'initial'};
-  margin-bottom: ${(props) => '-' + props.bottom || null};
+  margin-bottom: ${(props) => '-' + props.bottom};
 `;
 
 const TitleWrapper = styled.div`

@@ -23,9 +23,3 @@ export const CloseBtnWrapper = styled.div`
   justify-content: flex-end;
   width: 100%;
 `;
-
-export const Steps = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 7.56%;
-`;
