@@ -1,10 +1,11 @@
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes/Routes';
 
 function App() {
   return (
-    <>
-      <div>수정페이지입니다.</div>
-    </>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 }
 
