@@ -34,11 +34,15 @@ const TabBar = () => {
 
 const Container = styled.div`
   height: 72px;
+  width: 100vw;
   background-color: ${COLORS.black};
   display: flex;
   align-items: start;
   justify-content: space-evenly;
   border-radius: 23px 23px 0 0;
+
+  position: fixed;
+  bottom: 0;
 `;
 const Item = styled.button`
   background-color: transparent;

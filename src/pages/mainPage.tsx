@@ -1,4 +1,6 @@
+import styled from 'styled-components';
 const MainPage = () => {
-  return <div>mainpage입니다.</div>;
+  return <Container>mainPage입니다</Container>;
 };
+const Container = styled.div``;
 export default MainPage;
