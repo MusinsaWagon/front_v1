@@ -11,7 +11,7 @@ export default function HeaderSection({ type }: HS_Props) {
   const headerInfo = getHeaderInfo(type);
 
   return (
-    <>
+    <HeaderWrapper>
       <Header
         src={headerInfo.imgSrc}
         title={headerInfo.title}
@@ -23,9 +23,14 @@ export default function HeaderSection({ type }: HS_Props) {
           <StepCard key={index} step={step} index={index} />
         ))}
       </Steps>
-    </>
+    </HeaderWrapper>
   );
 }
+
+const HeaderWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 30px;
+`;
 
 const Steps = styled.div`
   display: flex;
