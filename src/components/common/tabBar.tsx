@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '../../Theme';
+import { COLORS } from '../../constant/theme';
 
 import home from '../../assets/images/homeIcon.png';
 import heart from '../../assets/images/heartIcon.png';
@@ -40,8 +40,8 @@ const Container = styled.div`
   align-items: start;
   justify-content: space-evenly;
   border-radius: 23px 23px 0 0;
-
   position: fixed;
+  z-index: 100;
   bottom: 0;
 `;
 const Item = styled.button`
