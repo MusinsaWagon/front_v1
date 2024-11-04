@@ -46,7 +46,10 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
     </Container>
   );
 };
-const Container = styled.div``;
+const Container = styled.div`
+  border-bottom: 0.8px solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 21.28px;
+`;
 const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -83,6 +86,6 @@ const ItemsContainer = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   gap: 15.35px;
-  padding: 9px 22px;
+  padding: 20px 0;
 `;
 export default ProductSection;
