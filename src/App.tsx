@@ -1,14 +1,11 @@
-import './App.css';
-import Modal from './components/common/Modal';
-import EnrollProd from './pages/enrollProd/EnrollProd';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes/Routes';
 
 function App() {
   return (
-    // <>
-    //   <div>수정페이지입니다.</div>
-    // </>
-    // <Modal type="notification" />
-    <EnrollProd />
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 }
 
