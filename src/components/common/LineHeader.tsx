@@ -2,23 +2,40 @@ import styled from 'styled-components';
 
 interface LineHeaderProps {
   width: string;
+  lineWidth: string;
+  padding?: string;
+  msg: string;
+  msg2: string;
+  price: number;
+  saleRate?: number | null;
 }
 
-export default function LineHeader({ width }: LineHeaderProps) {
+export default function LineHeader({
+  width,
+  lineWidth,
+  padding,
+  saleRate,
+  msg,
+  msg2,
+  price,
+}: LineHeaderProps) {
   return (
-    <ProdHeader>
-      <span>[{'PRENDA'}]</span>
-      <Line width={width} />
-      <span>PRDA DENIM PATCH CREWNECK SHIRT</span>
-      <label>￦ 39,900</label>
+    <ProdHeader width={width} $padding={padding}>
+      <span>[{msg}]</span>
+      <Line $lineWidth={lineWidth} />
+      <span>{msg2}</span>
+      <label>￦ {price}</label>
     </ProdHeader>
   );
 }
 
-export const ProdHeader = styled.div`
+export const ProdHeader = styled.div<{ width: string; $padding?: string }>`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: ${({ width }) => width};
+  padding: ${({ $padding }) => $padding};
 
   span:first-child {
     color: #1d1d1d;
@@ -29,6 +46,7 @@ export const ProdHeader = styled.div`
   }
 
   span:nth-last-child(2) {
+    height: 28.11px;
     color: #0c0c0c;
     width: 100%;
     text-align: left;
@@ -38,7 +56,7 @@ export const ProdHeader = styled.div`
   }
 
   label {
-    margin-top: 9.43%;
+    margin-top: 10px;
     text-align: right;
     width: 100%;
     font-weight: 800;
@@ -47,9 +65,9 @@ export const ProdHeader = styled.div`
   }
 `;
 
-export const Line = styled.div<{ width: string }>`
+export const Line = styled.div<{ $lineWidth: string }>`
   height: 0.57px;
   background-color: rgba(0, 0, 0, 0.5);
-  width: ${({ width }) => width};
+  width: ${({ $lineWidth }) => $lineWidth};
   margin: 6px 0;
 `;
