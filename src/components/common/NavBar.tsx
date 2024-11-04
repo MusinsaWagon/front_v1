@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import logo from '../../assets/images/Logo.png';
+import { COLORS } from '../../constant/theme';
 
-import { COLORS } from '../../Theme';
 const Header = () => {
   return (
     <Container>
@@ -18,8 +18,9 @@ const Container = styled.div`
   align-items: end;
   justify-content: center;
   padding-bottom: 17px;
-  border-bottom: 1px solid ${COLORS.white};
-  position: fixed;
+  border-bottom: 1px solid #4f4f4f;
+  position: sticky;
+  z-index: 100;
   top: 0;
 `;
 const Logo = styled.img`

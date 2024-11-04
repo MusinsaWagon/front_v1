@@ -1,10 +1,10 @@
 import { Routes as ReactRouters, Route, Outlet } from 'react-router-dom';
 
-import Header from '../components/common/header';
-import TabBar from '../components/common/tabBar';
+import Header from '../components/common/NavBar';
+import TabBar from '../components/common/Footer';
 
 //pages
-import MainPage from '../pages/mainPage';
+import MainPage from '../pages/Main';
 const Routes = () => {
   return (
     <ReactRouters>
