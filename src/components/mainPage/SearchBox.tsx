@@ -8,7 +8,7 @@ const SearchBox = () => {
     <Container>
       <SearchContainer>
         <Icon src={searchIcon} />
-        <InputBox placeholder="원하는 상품, 브랜드 검색1" />
+        <InputBox placeholder="원하는 상품, 브랜드 검색" />
       </SearchContainer>
       <BurgerBtn>
         <Icon src={hamburger} />

@@ -1,31 +1,20 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 //constans
 import { COLORS } from '../constant/theme';
 
 //components
 import SearchBox from '../components/mainPage/SearchBox';
 import BrandsBox from '../components/mainPage/BrandsBox';
-import ProductSection from '../components/mainPage/products/ProductSection';
-
+import ProductPreviewList from '../components/mainPage/ProductPreviewList';
 //imgs
 import musinsa from '../assets/images/musinsa.png';
 import ably from '../assets/images/ably.png';
 import zigzag from '../assets/images/zigzag.png';
 
 //axios
-import { getData } from '../apis/axios';
+import Inquiry from '../components/mainPage/Inquiry';
 
 const MainPage = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getData();
-      console.log('red:', response);
-      setData(response);
-    }
-    fetchData();
-  }, []);
   return (
     <Container>
       <TopBox>
@@ -38,14 +27,15 @@ const MainPage = () => {
         </BrandsContainer>
       </TopBox>
       <InnerContainer>
-        <ProductSection datas={data} title="전체 상품" />
-        <ProductSection datas={data} title="오늘의 인기 상품" />
+        <ProductPreviewList />
       </InnerContainer>
+      <Inquiry />
     </Container>
   );
 };
 const Container = styled.div`
   background-color: ${COLORS.black};
+  position: relative;
 `;
 const TopBox = styled.div`
   padding: 13px 22px;
@@ -57,11 +47,10 @@ const BrandsContainer = styled.div`
   padding: 16px 0;
 `;
 const InnerContainer = styled.div`
-  height: 100vh;
   width: 100vw;
   background-color: ${COLORS.white};
   border-radius: 23px 23px 0 0;
-  padding: 25px 22px;
+  padding: 25px 22px 72px 22px;
   box-sizing: border-box;
 `;
 
