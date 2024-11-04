@@ -7,6 +7,7 @@ interface ButtonProps {
   borderRadius: string;
   onClick: () => void;
   src?: string;
+  marginTop?: string;
 }
 
 export default function Button({
@@ -15,12 +16,14 @@ export default function Button({
   onClick,
   borderRadius,
   src,
+  marginTop,
 }: ButtonProps) {
   return (
     <ButtonWrapper
       $borderRadius={borderRadius}
       width={width}
       $aspectRatio={aspectRatio}
+      $marginTop={marginTop}
     >
       <button onClick={onClick}>{src && <img src={src} />}상품 등록하기</button>
     </ButtonWrapper>
@@ -31,9 +34,11 @@ const ButtonWrapper = styled.div<{
   width: string;
   $aspectRatio: string;
   $borderRadius: string;
+  $marginTop?: string;
 }>`
   width: ${({ width }) => width};
   ${({ $aspectRatio }) => `aspect-ratio: ${$aspectRatio};`}
+  ${({ $marginTop }) => `margin-top: ${$marginTop};`}
 
   button {
     display: flex;
