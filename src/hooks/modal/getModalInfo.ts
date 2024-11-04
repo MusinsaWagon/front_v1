@@ -31,14 +31,13 @@ export const steps = (type: string): Step[] => {
       ]
     : [
         {
-          title: '가격 설정',
-          description: '상품의 원하는 가격을 설정해주세요.',
+          title: '상품 확인',
+          description: '알림 받을 상품의 가격을 확인해주세요.',
           src: 'src/assets/images/step1-1.png',
         },
         {
-          title: '기간 설정',
-          description:
-            '원하는 가격을 설정 후 해당 가격의 알림을 받을 기간을 설정해주세요.',
+          title: '가격 범위 설정',
+          description: '상품의 원하는 가격을 설정해주세요. 최저-최고 가격 입력',
           src: 'src/assets/images/step1-2.png',
         },
         {
@@ -65,9 +64,11 @@ export const getHeaderInfo = (type: string): HeaderInfo => {
 
 export const getInputInfos = (type: string) => {
   return {
-    label: type === 'product' ? '쇼핑몰 선택' : '원하는 가격 설정',
+    label: type === 'product' ? '쇼핑몰 선택' : '원하는 최소 가격',
     placeholder:
-      type === 'product' ? '쇼핑몰을 선택해주세요' : '원하는 가격을 적어주세요',
+      type === 'product'
+        ? '쇼핑몰을 선택해주세요'
+        : '원하는 최소 가격을 적어주세요 (숫자만 기입)',
     type: type === 'product' ? 'select' : 'input',
     label2: type === 'product' ? '상품 URL 입력' : '알림 기간 설정',
     placeholder2:

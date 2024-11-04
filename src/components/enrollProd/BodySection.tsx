@@ -33,7 +33,13 @@ export default function BodySection({ type }: BodySectionProps) {
       <ProdWrapper>
         <label>등록하려는 상품 정보</label>
         <ProdInfo>
-          <LineHeader width="100%" />
+          <LineHeader
+            lineWidth="100%"
+            width="100%"
+            msg="PRENDA"
+            msg2="PRDA DENIM PATCH CREWNECK SHIRT"
+            price={39900}
+          />
           <ImageWrapper>
             {Array.from({ length: 3 }).map((_, index) => (
               <Image src="" key={index} width="31.61%" aspectRatio="1/1" />

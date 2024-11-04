@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   padding: 3% 3.35%;
   box-sizing: border-box;
   box-shadow: inset 0 0 0 3px #ffe760;
-  aspect-ratio: 358/370;
+  aspect-ratio: 358/534;
   width: 89.05%;
   position: fixed;
   top: 50%;
