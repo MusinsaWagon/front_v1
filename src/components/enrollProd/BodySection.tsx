@@ -67,7 +67,7 @@ export const InputWrapper = styled.div`
 
 export const ProdWrapper = styled.div`
   margin-top: 19px;
-  margin-bottom: 8.58vh;
+  margin-bottom: 8.58%;
   width: 100%;
   display: flex;
   flex-direction: column;
