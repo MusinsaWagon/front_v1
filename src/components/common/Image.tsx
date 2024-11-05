@@ -5,9 +5,15 @@ interface ImageProps {
   src: string;
   width: string;
   aspectRatio: string;
+  borderRadius: string;
 }
 
-export default function Image({ src, width, aspectRatio }: ImageProps) {
+export default function Image({
+  src,
+  width,
+  aspectRatio,
+  borderRadius,
+}: ImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleImageLoad = () => {
@@ -15,14 +21,22 @@ export default function Image({ src, width, aspectRatio }: ImageProps) {
   };
 
   return (
-    <ImageWrapper width={width} $aspectRatio={aspectRatio}>
+    <ImageWrapper
+      width={width}
+      $aspectRatio={aspectRatio}
+      $borderRadius={borderRadius}
+    >
       {!isLoaded && <div />}
       <img src={src} onLoad={handleImageLoad} />
     </ImageWrapper>
   );
 }
 
-const ImageWrapper = styled.div<{ width: string; $aspectRatio: string }>`
+const ImageWrapper = styled.div<{
+  width: string;
+  $aspectRatio: string;
+  $borderRadius: string;
+}>`
   width: ${({ width }) => width};
   ${({ $aspectRatio }) => `aspect-ratio: ${$aspectRatio};`};
 
@@ -37,7 +51,7 @@ const ImageWrapper = styled.div<{ width: string; $aspectRatio: string }>`
     transition: opacity 0.5s ease-in-out;
     width: 100%;
     height: 100%;
-    border-radius: 4.09px;
+    ${({ $borderRadius }) => `border-radius: ${$borderRadius};`};
   }
 
   & > div {
@@ -45,6 +59,6 @@ const ImageWrapper = styled.div<{ width: string; $aspectRatio: string }>`
     object-fit: cover;
     width: 100%;
     height: 100%;
-    border-radius: 4.09px;
+    ${({ $borderRadius }) => `border-radius: ${$borderRadius};`};
   }
 `;
