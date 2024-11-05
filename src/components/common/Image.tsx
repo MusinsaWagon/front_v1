@@ -27,7 +27,7 @@ export default function Image({
       $borderRadius={borderRadius}
     >
       {!isLoaded && <div />}
-      <img src={src} onLoad={handleImageLoad} />
+      <img src={src} onLoad={handleImageLoad} loading="lazy" />
     </ImageWrapper>
   );
 }
