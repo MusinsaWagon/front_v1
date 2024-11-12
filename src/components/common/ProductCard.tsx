@@ -12,7 +12,7 @@ export default function ProductCard({ label, saleRate }: ProductCardProps) {
     <CardWrapper>
       {label && <label>{label}</label>}
       <Card>
-        <Image width="29.69%" aspectRatio="95/90" src="" />
+        <Image borderRadius="5px" width="29.69%" aspectRatio="95/90" src="" />
         <LineHeader
           width="62.28%"
           lineWidth="100%"
