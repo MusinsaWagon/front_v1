@@ -42,7 +42,13 @@ export default function BodySection({ type }: BodySectionProps) {
           />
           <ImageWrapper>
             {Array.from({ length: 3 }).map((_, index) => (
-              <Image src="" key={index} width="31.61%" aspectRatio="1/1" />
+              <Image
+                src=""
+                key={index}
+                width="31.61%"
+                aspectRatio="1/1"
+                borderRadius="4.09px"
+              />
             ))}
           </ImageWrapper>
         </ProdInfo>
