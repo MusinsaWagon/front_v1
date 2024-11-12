@@ -5,11 +5,15 @@ import TabBar from '../components/common/Footer';
 
 //pages
 import MainPage from '../pages/Main';
+import EnrollProd from '../pages/enrollProd/EnrollProd';
+import ProductDetail from '../pages/product/ProductDetail';
 const Routes = () => {
   return (
     <ReactRouters>
       <Route path="/" element={<Layout />}>
         <Route path="/main" element={<MainPage />} />
+        <Route path="enroll" element={<EnrollProd type="product" />} />
+        <Route path="product/:id" element={<ProductDetail />} />
       </Route>
     </ReactRouters>
   );

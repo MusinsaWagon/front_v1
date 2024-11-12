@@ -41,6 +41,7 @@ export default function Modal({ type, onClick, priceList }: ModalProps) {
           onClick={onClick}
           borderRadius="100px"
           marginTop="7.19%"
+          msg="알림 등록하기"
         />
       </M.Content>
     </M.Wrapper>

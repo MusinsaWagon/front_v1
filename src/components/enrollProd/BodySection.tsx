@@ -42,13 +42,20 @@ export default function BodySection({ type }: BodySectionProps) {
           />
           <ImageWrapper>
             {Array.from({ length: 3 }).map((_, index) => (
-              <Image src="" key={index} width="31.61%" aspectRatio="1/1" />
+              <Image
+                src=""
+                key={index}
+                width="31.61%"
+                aspectRatio="1/1"
+                borderRadius="4.09px"
+              />
             ))}
           </ImageWrapper>
         </ProdInfo>
         <span>등록 후 업데이트까지 시간이 소요될 수 있습니다.</span>
       </ProdWrapper>
       <Button
+        msg="상품 등록하기"
         onClick={handleEnroll}
         borderRadius="100px"
         width="100%"
@@ -67,7 +74,7 @@ export const InputWrapper = styled.div`
 
 export const ProdWrapper = styled.div`
   margin-top: 19px;
-  margin-bottom: 8.58vh;
+  margin-bottom: 8.58%;
   width: 100%;
   display: flex;
   flex-direction: column;
