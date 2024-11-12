@@ -55,6 +55,7 @@ export default function BodySection({ type }: BodySectionProps) {
         <span>등록 후 업데이트까지 시간이 소요될 수 있습니다.</span>
       </ProdWrapper>
       <Button
+        msg="상품 등록하기"
         onClick={handleEnroll}
         borderRadius="100px"
         width="100%"
