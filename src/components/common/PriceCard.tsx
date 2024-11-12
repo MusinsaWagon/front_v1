@@ -17,17 +17,17 @@ export default function PriceCard({
   const cards = [
     {
       type: '역대 최저가',
-      src: 'src/assets/images/lowestPrice.png',
+      src: '/images/lowestPrice.png',
       color: COLORS.red,
     },
     {
       type: '평균가',
-      src: 'src/assets/images/currentPrice.png',
+      src: '/images/currentPrice.png',
       color: COLORS.font_black,
     },
     {
       type: '역대 최고가',
-      src: 'src/assets/images/highestprice.png',
+      src: '/images/highestPrice.png',
       color: COLORS.green,
     },
   ];
