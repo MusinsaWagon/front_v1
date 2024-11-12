@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick: () => void;
   src?: string;
   marginTop?: string;
+  msg: string;
 }
 
 export default function Button({
@@ -17,6 +18,7 @@ export default function Button({
   borderRadius,
   src,
   marginTop,
+  msg,
 }: ButtonProps) {
   return (
     <ButtonWrapper
@@ -25,7 +27,10 @@ export default function Button({
       $aspectRatio={aspectRatio}
       $marginTop={marginTop}
     >
-      <button onClick={onClick}>{src && <img src={src} />}상품 등록하기</button>
+      <button onClick={onClick}>
+        {src && <img src={src} />}
+        {msg}
+      </button>
     </ButtonWrapper>
   );
 }
