@@ -22,6 +22,8 @@ const ProductPreviewList = () => {
     </Container>
   );
 };
-const Container = styled.div``;
+const Container = styled.div`
+  text-align: left;
+`;
 
 export default ProductPreviewList;

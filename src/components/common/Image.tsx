@@ -2,9 +2,9 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 interface ImageProps {
-  src: string;
+  src: string | undefined;
   width: string;
-  aspectRatio: string;
+  aspectRatio: string | null;
   borderRadius: string;
 }
 
@@ -23,8 +23,8 @@ export default function Image({
   return (
     <ImageWrapper
       width={width}
-      aspectRatio={aspectRatio}
-      borderRadius={borderRadius}
+      $aspectRatio={aspectRatio || 'auto'}
+      $borderRadius={borderRadius}
     >
       {!isLoaded && <Placeholder />}
       <StyledImg
