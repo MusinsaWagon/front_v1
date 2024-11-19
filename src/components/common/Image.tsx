@@ -23,42 +23,50 @@ export default function Image({
   return (
     <ImageWrapper
       width={width}
-      $aspectRatio={aspectRatio}
-      $borderRadius={borderRadius}
+      aspectRatio={aspectRatio}
+      borderRadius={borderRadius}
     >
-      {!isLoaded && <div />}
-      <img src={src} onLoad={handleImageLoad} loading="lazy" />
+      {!isLoaded && <Placeholder />}
+      <StyledImg
+        src={src}
+        onLoad={handleImageLoad}
+        loading="lazy"
+        isLoaded={isLoaded}
+      />
     </ImageWrapper>
   );
 }
 
 const ImageWrapper = styled.div<{
   width: string;
-  $aspectRatio: string;
-  $borderRadius: string;
+  aspectRatio: string;
+  borderRadius: string;
 }>`
   width: ${({ width }) => width};
-  ${({ $aspectRatio }) => `aspect-ratio: ${$aspectRatio};`};
-
+  aspect-ratio: ${({ aspectRatio }) => aspectRatio};
   position: relative;
+  overflow: hidden;
+  border-radius: ${({ borderRadius }) => borderRadius};
+`;
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    width: 100%;
-    height: 100%;
-    ${({ $borderRadius }) => `border-radius: ${$borderRadius};`};
-  }
+const StyledImg = styled.img<{ isLoaded: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: ${({ isLoaded }) => (isLoaded ? 1 : 0)};
+  visibility: ${({ isLoaded }) => (isLoaded ? 'visible' : 'hidden')};
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  border-radius: inherit;
+`;
 
-  & > div {
-    background-color: #c0c0c0;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    ${({ $borderRadius }) => `border-radius: ${$borderRadius};`};
-  }
+const Placeholder = styled.div`
+  background-color: #c0c0c0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
