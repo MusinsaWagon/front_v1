@@ -20,15 +20,20 @@ export default function PriceInfo({ prevPrice, curPrice }: PriceInfoProps) {
             {isPriceUp ? '+' : '-'} {fluctRate.toFixed(1)} %
           </span>
           <span>
-            {isPriceUp ? '+' : '-'} ￦ {fluctPrice}
+            {isPriceUp ? '+' : '-'} ￦{' '}
+            {fluctPrice.toLocaleString('ko-KR', { minimumFractionDigits: 0 })}
           </span>
         </div>
       </Fluctuation>
       <Price>
         <span>현재가</span>
         <div>
-          <span>￦ {prevPrice}</span>
-          <span>￦ {curPrice}</span>
+          <span>
+            ￦ {prevPrice.toLocaleString('ko-KR', { minimumFractionDigits: 0 })}
+          </span>
+          <span>
+            ￦ {curPrice.toLocaleString('ko-KR', { minimumFractionDigits: 0 })}
+          </span>
         </div>
       </Price>
     </Container>

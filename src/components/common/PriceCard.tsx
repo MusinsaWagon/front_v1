@@ -45,7 +45,12 @@ export default function PriceCard({
               <img src={card.src} />
               <span>{card.type}</span>
             </CardHeader>
-            <span style={{ color: card.color }}>￦ {priceList[index]}</span>
+            <span style={{ color: card.color }}>
+              ￦{' '}
+              {priceList[index].toLocaleString('ko-KR', {
+                minimumFractionDigits: 0,
+              })}
+            </span>
           </Card>
         ))}
       </Cards>
