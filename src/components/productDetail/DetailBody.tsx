@@ -6,8 +6,11 @@ import PriceChart from './PriceChart';
 import PriceInfo from './PriceInfo';
 import basket from '../../assets/images/basket.png';
 import bell from '../../assets/images/bell.png';
+import Modal from '../common/Modal';
+import { useState } from 'react';
 
 export default function DetailBody() {
+  const [showModal, setShowModal] = useState(false);
   const data1M = [
     { date: '2024-10-01', price: 29900 },
     { date: '2024-10-03', price: 31000 },
@@ -82,7 +85,9 @@ export default function DetailBody() {
           aspectRatio="176/35"
           borderRadius="7px"
           src={bell}
-          onClick={() => {}}
+          onClick={() => {
+            setShowModal(true);
+          }}
           msg="알림 등록"
         />
       </BtnWrapper>
@@ -103,6 +108,16 @@ export default function DetailBody() {
           data1Y={data1Y}
         />
       </ChartWrapper>
+      {showModal && (
+        <Modal
+          type="price"
+          onClick={() => {}}
+          onClose={() => {
+            setShowModal(false);
+          }}
+          priceList={[24150, 34000, 40000]}
+        />
+      )}
     </BodyWrapper>
   );
 }
