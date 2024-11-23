@@ -8,6 +8,13 @@ interface ImageProps {
   borderRadius: string;
 }
 
+type ImageWrapperProps = {
+  [K in keyof Pick<
+    ImageProps,
+    'width' | 'aspectRatio' | 'borderRadius'
+  > as `$${K}`]: ImageProps[K];
+};
+
 export default function Image({
   src,
   width,
@@ -22,7 +29,7 @@ export default function Image({
 
   return (
     <ImageWrapper
-      width={width}
+      $width={width}
       $aspectRatio={aspectRatio}
       $borderRadius={borderRadius}
     >
@@ -37,12 +44,8 @@ export default function Image({
   );
 }
 
-const ImageWrapper = styled.div<{
-  width: string;
-  $aspectRatio: string;
-  $borderRadius: string;
-}>`
-  width: ${({ width }) => width};
+const ImageWrapper = styled.div<ImageWrapperProps>`
+  width: ${({ $width }) => $width};
   aspect-ratio: ${({ $aspectRatio }) => $aspectRatio};
   position: relative;
   overflow: hidden;

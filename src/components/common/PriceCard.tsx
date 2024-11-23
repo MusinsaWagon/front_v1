@@ -8,6 +8,10 @@ interface PriceCardProps {
   priceList: number[];
 }
 
+type CardWrapperProps = {
+  [K in keyof Omit<PriceCardProps, 'priceList'> as `$${K}`]: PriceCardProps[K];
+};
+
 export default function PriceCard({
   aspectRatio,
   marginTop,
@@ -58,11 +62,7 @@ export default function PriceCard({
   );
 }
 
-const CardWrapper = styled.div<{
-  $aspectRatio: string;
-  $marginTop?: string;
-  $marginBottom?: string;
-}>`
+const CardWrapper = styled.div<CardWrapperProps>`
   width: 100%;
   padding: 6px 0;
   ${({ $aspectRatio }) => 'aspect-ratio:' + $aspectRatio};

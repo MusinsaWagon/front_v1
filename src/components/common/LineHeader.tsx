@@ -26,7 +26,7 @@ export default function LineHeader({
   const isFullWidth = width === '100%';
 
   return (
-    <ProdHeader width={width} $padding={padding}>
+    <ProdHeader $width={width} $padding={padding}>
       <TitleWrapper>
         <span>[{msg}]</span>
         {review && <Review review={review} />}
@@ -53,12 +53,12 @@ export default function LineHeader({
   );
 }
 
-const ProdHeader = styled.div<{ width: string; $padding?: string }>`
+const ProdHeader = styled.div<{ $width: string; $padding?: string }>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${({ width }) => width};
+  width: ${({ $width }) => $width};
   padding: ${({ $padding }) => $padding};
 
   span:nth-child(3) {
