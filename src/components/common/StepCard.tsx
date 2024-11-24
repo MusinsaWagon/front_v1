@@ -37,6 +37,7 @@ const StepCardContainer = styled.div`
 
   span {
     font-weight: bold;
+    line-height: 8px;
   }
 
   span:nth-child(2) {

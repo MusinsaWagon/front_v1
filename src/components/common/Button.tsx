@@ -11,6 +11,13 @@ interface ButtonProps {
   msg: string;
 }
 
+type ButtonWrapperProps = {
+  [K in keyof Pick<
+    ButtonProps,
+    'width' | 'aspectRatio' | 'borderRadius' | 'marginTop'
+  > as `$${K}`]: ButtonProps[K];
+};
+
 export default function Button({
   width,
   aspectRatio,
@@ -23,7 +30,7 @@ export default function Button({
   return (
     <ButtonWrapper
       $borderRadius={borderRadius}
-      width={width}
+      $width={width}
       $aspectRatio={aspectRatio}
       $marginTop={marginTop}
     >
@@ -35,13 +42,8 @@ export default function Button({
   );
 }
 
-const ButtonWrapper = styled.div<{
-  width: string;
-  $aspectRatio: string;
-  $borderRadius: string;
-  $marginTop?: string;
-}>`
-  width: ${({ width }) => width};
+const ButtonWrapper = styled.div<ButtonWrapperProps>`
+  width: ${({ $width }) => $width};
   ${({ $aspectRatio }) => `aspect-ratio: ${$aspectRatio};`}
   ${({ $marginTop }) => `margin-top: ${$marginTop};`}
 

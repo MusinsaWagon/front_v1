@@ -8,6 +8,10 @@ interface PriceCardProps {
   priceList: number[];
 }
 
+type CardWrapperProps = {
+  [K in keyof Omit<PriceCardProps, 'priceList'> as `$${K}`]: PriceCardProps[K];
+};
+
 export default function PriceCard({
   aspectRatio,
   marginTop,
@@ -45,7 +49,12 @@ export default function PriceCard({
               <img src={card.src} />
               <span>{card.type}</span>
             </CardHeader>
-            <span style={{ color: card.color }}>￦ {priceList[index]}</span>
+            <span style={{ color: card.color }}>
+              ￦{' '}
+              {priceList[index].toLocaleString('ko-KR', {
+                minimumFractionDigits: 0,
+              })}
+            </span>
           </Card>
         ))}
       </Cards>
@@ -53,11 +62,7 @@ export default function PriceCard({
   );
 }
 
-const CardWrapper = styled.div<{
-  $aspectRatio: string;
-  $marginTop?: string;
-  $marginBottom?: string;
-}>`
+const CardWrapper = styled.div<CardWrapperProps>`
   width: 100%;
   padding: 6px 0;
   ${({ $aspectRatio }) => 'aspect-ratio:' + $aspectRatio};

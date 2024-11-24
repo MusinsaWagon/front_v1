@@ -16,7 +16,7 @@ export default function Header({
   bottom,
 }: HeaderProps) {
   return (
-    <HeaderContainer bottom={bottom}>
+    <HeaderContainer $bottom={bottom}>
       <TitleWrapper>
         <img src={src} />
         <span>{title}</span>
@@ -28,15 +28,15 @@ export default function Header({
   );
 }
 
-const HeaderContainer = styled.div<{ bottom?: string }>`
+const HeaderContainer = styled.div<{ $bottom?: string }>`
   display: flex;
   flex-direction: column;
   width: 100%;
   aspect-ratio: 334/42;
   justify-content: space-between;
   position: relative;
-  bottom: ${(props) => props.bottom || 'initial'};
-  margin-bottom: ${(props) => '-' + props.bottom};
+  bottom: ${(props) => props.$bottom || 'initial'};
+  margin-bottom: ${(props) => '-' + props.$bottom};
 `;
 
 const TitleWrapper = styled.div`

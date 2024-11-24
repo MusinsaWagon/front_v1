@@ -84,22 +84,22 @@ export const reverseRotate = keyframes`
   }
 `;
 
-export const DropdownBtn = styled.img<{ rotate: string; click: string }>`
+export const DropdownBtn = styled.img<{ $rotate: string; $click: string }>`
   position: relative;
   right: 3.05%;
   width: 3.25%;
   height: 22.33%;
   box-sizing: border-box;
   pointer-events: none;
-  transform: ${({ rotate }) =>
-    rotate === 'true' ? 'rotate(180deg)' : 'rotate(0deg)'};
+  transform: ${({ $rotate }) =>
+    $rotate === 'true' ? 'rotate(180deg)' : 'rotate(0deg)'};
 
-  ${({ rotate, click }) =>
-    rotate === 'true'
+  ${({ $rotate, $click }) =>
+    $rotate === 'true'
       ? css`
           animation: ${rotateAnm} ease-in 0.8s;
         `
-      : click === 'true' &&
+      : $click === 'true' &&
         css`
           animation: ${reverseRotate} ease-in 0.8s;
         `}
