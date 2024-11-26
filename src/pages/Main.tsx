@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+
 //components
 import SearchBox from '../components/mainPage/SearchBox';
 import BrandsBox from '../components/mainPage/BrandsBox';
 import ProductPreviewList from '../components/mainPage/ProductPreviewList';
+import EntireProductList from '../components/mainPage/EntireProductList';
+
 //imgs
 import musinsa from '../assets/images/musinsa.png';
 import ably from '../assets/images/ably.png';
@@ -12,6 +16,8 @@ import zigzag from '../assets/images/zigzag.png';
 import Inquiry from '../components/mainPage/Inquiry';
 
 const MainPage = () => {
+  const location = useLocation();
+  const state = location.state;
   return (
     <Container>
       <TopBox>
@@ -24,7 +30,7 @@ const MainPage = () => {
         </BrandsContainer>
       </TopBox>
       <InnerContainer>
-        <ProductPreviewList />
+        {state?.showEntire ? <EntireProductList /> : <ProductPreviewList />}
       </InnerContainer>
       <Inquiry />
     </Container>

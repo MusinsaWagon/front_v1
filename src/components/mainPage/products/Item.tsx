@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import heartIcon from '../../../assets/images/heartIcon.png';
+<<<<<<< HEAD
 
+=======
+import { COLORS } from '../../../constant/theme';
+import { useLocation } from 'react-router-dom';
+import Image from '../../common/Image';
+>>>>>>> develop
 interface ProductProps {
   productNumber: number;
   name: string;
@@ -21,6 +27,8 @@ interface ChangeRateProps {
   isPositive: boolean;
 }
 const Item: React.FC<DataProps> = ({ info }) => {
+  const location = useLocation();
+  const state = location.state;
   const priceDifference = info.currentPrice - info.previousPrice;
   const priceChangeRate = (
     (priceDifference / info.previousPrice) *
@@ -28,9 +36,15 @@ const Item: React.FC<DataProps> = ({ info }) => {
   ).toFixed(1);
 
   return (
-    <Container>
-      <ImgBox>
-        <Img src={`https://image.msscdn.net${info.imgUrl}`} />
+    <Container isEntire={state?.showEntire}>
+      <ImgBox isEntire={state?.showEntire}>
+        <Image
+          borderRadius="11.86px"
+          width="100%"
+          aspectRatio={'1 / 1'}
+          src={`https://image.msscdn.net${info.imgUrl}`}
+        />
+
         <LikeBtn>
           <LikeImg src={heartIcon} />
         </LikeBtn>
@@ -49,24 +63,20 @@ const Item: React.FC<DataProps> = ({ info }) => {
     </Container>
   );
 };
-const Container = styled.div`
+const Container = styled.div<{ isEntire: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 9.43px;
+  gap: ${(props) => (props.isEntire ? '9.43px' : '20px')};
+  width: 100%;
 `;
-const ImgBox = styled.div`
-  width: 136.39px;
-  height: 129.27px;
+const ImgBox = styled.div<{ isEntire: boolean }>`
+  width: ${(props) => (props.isEntire ? null : '136.39px')};
+  height: ${(props) => (props.isEntire ? null : '129.27px')};
   background-color: #e6e6e6;
   border-radius: 11.86px;
   position: relative;
 `;
-const Img = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 11.86px;
-  /* border: none; */
-`;
+
 const LikeBtn = styled.button`
   height: 23.92px;
   width: 23.72px;
@@ -87,9 +97,9 @@ const LikeImg = styled.img`
   width: 16.42px;
 `;
 const ContBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8.71px;
+  display: grid;
+  /* flex-direction: column; */
+  row-gap: 7px;
 `;
 const Brand = styled.span`
   font-weight: 600;
@@ -101,8 +111,9 @@ const Name = styled.p`
   font-weight: 700;
   font-size: 10.19px;
   padding: 0;
-  height: 20px;
+  height: 35px;
   display: block;
+  line-height: 120%;
 `;
 const Price = styled.span`
   font-weight: 700;
@@ -110,8 +121,13 @@ const Price = styled.span`
 `;
 const ChangeRate = styled.span<ChangeRateProps>`
   font-weight: 700;
+<<<<<<< HEAD
   font-size: 9.49px;
   color: ${(props) =>
     props.isPositive ? props.theme.colors.green : props.theme.colors.red};
+=======
+  font-size: 0.5rem;
+  color: ${(props) => (props.isPositive ? COLORS.green : `${COLORS.red}`)};
+>>>>>>> develop
 `;
 export default Item;

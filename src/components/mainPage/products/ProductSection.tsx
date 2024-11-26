@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Item from './Item';
+import { useNavigate } from 'react-router-dom';
 interface Product {
   productNumber: number;
   name: string;
@@ -23,6 +24,11 @@ interface ContProps {
   state?: string;
 }
 const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
+  const navigate = useNavigate();
+
+  const handleArrowClick = () => {
+    navigate('/main', { state: { showEntire: true } });
+  };
   return (
     <Container>
       <TitleBox>
@@ -35,7 +41,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
             </Cont>
           </InnerLeftBox>
         </LeftBox>
-        <Arrow>〉</Arrow>
+        <Arrow onClick={handleArrowClick}>〉</Arrow>
       </TitleBox>
       <ItemsContainer>
         {datas?.map((data) => (
@@ -48,6 +54,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
 const Container = styled.div`
   border-bottom: 0.8px solid rgba(0, 0, 0, 0.3);
   margin-bottom: 21.28px;
+  width: 100%;
 `;
 const TitleBox = styled.div`
   display: flex;
@@ -87,5 +94,6 @@ const ItemsContainer = styled.div`
   overflow-x: scroll;
   gap: 15.35px;
   padding: 20px 0;
+  width: 100%;
 `;
 export default ProductSection;

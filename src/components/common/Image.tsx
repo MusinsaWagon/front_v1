@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 interface ImageProps {
-  src: string;
+  src: string | undefined;
   width: string;
   aspectRatio: string;
   borderRadius: string;
