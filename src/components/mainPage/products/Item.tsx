@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 import heartIcon from '../../../assets/images/heartIcon.png';
-<<<<<<< HEAD
-
-=======
-import { COLORS } from '../../../constant/theme';
 import { useLocation } from 'react-router-dom';
 import Image from '../../common/Image';
->>>>>>> develop
 interface ProductProps {
   productNumber: number;
   name: string;
@@ -121,13 +116,8 @@ const Price = styled.span`
 `;
 const ChangeRate = styled.span<ChangeRateProps>`
   font-weight: 700;
-<<<<<<< HEAD
   font-size: 9.49px;
   color: ${(props) =>
     props.isPositive ? props.theme.colors.green : props.theme.colors.red};
-=======
-  font-size: 0.5rem;
-  color: ${(props) => (props.isPositive ? COLORS.green : `${COLORS.red}`)};
->>>>>>> develop
 `;
 export default Item;
