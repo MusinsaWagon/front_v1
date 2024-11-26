@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import icon from '../../assets/images/inquiryIcon.png';
-import { COLORS } from '../../constant/theme';
+
 const Inquiry = () => {
   return (
     <Btn>
@@ -20,7 +20,7 @@ const Btn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${COLORS.white};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 const Img = styled.img`
   height: 18.29px;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import logo from '../../assets/images/Logo.png';
-import { COLORS } from '../../constant/theme';
 
 const Header = () => {
   return (
@@ -11,7 +10,7 @@ const Header = () => {
 };
 
 const Container = styled.div`
-  background-color: ${COLORS.black};
+  background-color: ${({ theme }) => theme.colors.black};
   height: 79px;
   width: calc(100vw);
   display: flex;

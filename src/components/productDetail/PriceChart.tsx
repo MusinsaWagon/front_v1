@@ -208,7 +208,7 @@ const ButtonGroup = styled.div`
     background-color: white;
 
     &:hover {
-      border: 1px solid ${COLORS.yellow};
+      border: 1px solid ${({ theme }) => theme.colors.yellow};
       border-radius: 8.5px;
     }
 

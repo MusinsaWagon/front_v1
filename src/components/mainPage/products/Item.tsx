@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import heartIcon from '../../../assets/images/heartIcon.png';
-import { COLORS } from '../../../constant/theme';
+
 interface ProductProps {
   productNumber: number;
   name: string;
@@ -111,7 +111,7 @@ const Price = styled.span`
 const ChangeRate = styled.span<ChangeRateProps>`
   font-weight: 700;
   font-size: 9.49px;
-  color: ${(props) => (props.isPositive ? COLORS.green : `${COLORS.red}`)};
+  color: ${(props) =>
+    props.isPositive ? props.theme.colors.green : props.theme.colors.red};
 `;
-
 export default Item;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constant/theme';
 
 interface BrandsBoxProps {
   name: string;
@@ -36,7 +35,7 @@ const BrandImg = styled.img`
   background-color: transparent;
 `;
 const BrandName = styled.span`
-  color: ${COLORS.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 9px;
 `;
 

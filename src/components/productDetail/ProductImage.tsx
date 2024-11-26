@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Image from '../common/Image';
 import heartIcon from '../../assets/images/heartIcon.png';
 import { useState } from 'react';
-import { COLORS } from '../../constant/theme';
 
 export default function ProductImage() {
   const [isHeart, setIsHeart] = useState(false);
@@ -35,8 +34,8 @@ const Heart = styled.button<{ $isHeart: boolean }>`
   position: absolute;
   bottom: 20px;
   right: 20px;
-  background-color: ${({ $isHeart }) =>
-    $isHeart ? COLORS.yellow : 'rgba(0, 0, 0, 0.3)'};
+  background-color: ${({ $isHeart, theme }) =>
+    $isHeart ? theme.colors.yellow : 'rgba(0, 0, 0, 0.3)'};
   display: flex;
   align-items: center;
   justify-content: center;

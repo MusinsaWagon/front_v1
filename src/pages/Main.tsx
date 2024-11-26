@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-//constans
-import { COLORS } from '../constant/theme';
-
 //components
 import SearchBox from '../components/mainPage/SearchBox';
 import BrandsBox from '../components/mainPage/BrandsBox';
@@ -34,7 +31,7 @@ const MainPage = () => {
   );
 };
 const Container = styled.div`
-  background-color: ${COLORS.black};
+  background-color: ${({ theme }) => theme.colors.black};
   position: relative;
 `;
 const TopBox = styled.div`
@@ -48,7 +45,7 @@ const BrandsContainer = styled.div`
 `;
 const InnerContainer = styled.div`
   width: 100vw;
-  background-color: ${COLORS.white};
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 23px 23px 0 0;
   padding: 25px 22px 72px 22px;
   box-sizing: border-box;
