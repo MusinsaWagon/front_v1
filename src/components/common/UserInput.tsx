@@ -36,8 +36,8 @@ export default function UserInput({
             <input placeholder={placeholder} value={selectContent} readOnly />
             <U.DropdownBtn
               src={dropdown}
-              rotate={showDropdown.toString()}
-              click={firstClick.toString()}
+              $rotate={showDropdown.toString()}
+              $click={firstClick.toString()}
             />
           </U.Select>
           {showDropdown && (
