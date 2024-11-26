@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface ImageProps {
   src: string | undefined;
   width: string;
-  aspectRatio: string | null;
+  aspectRatio: string;
   borderRadius: string;
 }
 
@@ -23,8 +23,8 @@ export default function Image({
   return (
     <ImageWrapper
       width={width}
-      $aspectRatio={aspectRatio || 'auto'}
-      $borderRadius={borderRadius}
+      aspectRatio={aspectRatio}
+      borderRadius={borderRadius}
     >
       {!isLoaded && <Placeholder />}
       <StyledImg

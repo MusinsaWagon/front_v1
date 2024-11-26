@@ -37,13 +37,10 @@ const Item: React.FC<DataProps> = ({ info }) => {
         <Image
           borderRadius="11.86px"
           width="100%"
-          aspectRatio={state ? '1 / 1' : null}
+          aspectRatio={'1 / 1'}
           src={`https://image.msscdn.net${info.imgUrl}`}
         />
-        {/* <Img
-          src={`https://image.msscdn.net${info.imgUrl}`}
-          isEntire={state?.showEntire}
-        /> */}
+
         <LikeBtn>
           <LikeImg src={heartIcon} />
         </LikeBtn>
@@ -65,7 +62,7 @@ const Item: React.FC<DataProps> = ({ info }) => {
 const Container = styled.div<{ isEntire: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: 9.43px;
+  gap: ${(props) => (props.isEntire ? '9.43px' : '20px')};
   width: 100%;
 `;
 const ImgBox = styled.div<{ isEntire: boolean }>`
@@ -75,12 +72,7 @@ const ImgBox = styled.div<{ isEntire: boolean }>`
   border-radius: 11.86px;
   position: relative;
 `;
-// const Img = styled.img<{ isEntire: boolean }>`
-//   width: 100%;
-//   height: 100%;
-//   aspect-ratio: ${(props) => (props.isEntire ? 1 / 1 : null)};
-//   border-radius: 11.86px;
-// `;
+
 const LikeBtn = styled.button`
   height: 23.92px;
   width: 23.72px;

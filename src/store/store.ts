@@ -1,7 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-
+import { configureStore } from '@reduxjs/toolkit';
+import categoryReducer from './categories/categories.slice';
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    categories: categoryReducer,
+  },
 });
 
 // RootState와 AppDispatch 타입 추출

@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveCategory } from '../../store/categories/categories.slice';
+import { useEffect } from 'react';
 
+import { RootState } from '../../store/store';
 const Category = () => {
+  const category = useSelector((state: RootState) => state.categories);
+  const dispatch = useDispatch();
   const categories = [
     '전체',
     '상의',
@@ -13,18 +19,20 @@ const Category = () => {
     '이너웨어/잠옷',
     '주얼리',
   ];
-
-  // const rows = [];
-  // for (let i = 0; i < categories.length; i += 3) {
-  //   rows.push(categories.slice(i, i + 3));
-  // }
-
+  const getActiveCategory = (category: string) => {
+    dispatch(setActiveCategory(category));
+  };
+  useEffect(() => {
+    console.log(category);
+  }, [category]);
   return (
     <Container>
       <Title>CostFlower</Title>
       <StyledTable>
         {categories.map((category, index) => (
-          <CellBtn key={index}>{category}</CellBtn>
+          <CellBtn key={index} onClick={() => getActiveCategory(category)}>
+            {category}
+          </CellBtn>
         ))}
       </StyledTable>
     </Container>
@@ -33,7 +41,6 @@ const Category = () => {
 
 const Container = styled.div`
   width: calc(100% + 44px);
-  /* width: 100%; */
   margin: auto;
   box-sizing: border-box;
   margin-bottom: 15px;
