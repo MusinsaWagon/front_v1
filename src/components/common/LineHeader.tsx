@@ -26,7 +26,7 @@ export default function LineHeader({
   const isFullWidth = width === '100%';
 
   return (
-    <ProdHeader width={width} $padding={padding}>
+    <ProdHeader $width={width} $padding={padding}>
       <TitleWrapper>
         <span>[{msg}]</span>
         {review && <Review review={review} />}
@@ -34,16 +34,18 @@ export default function LineHeader({
       <Line $lineWidth={lineWidth} />
       <span>{msg2}</span>
       {price && (
-        <PriceWrapper $isFullWidth={isFullWidth} saleRate={saleRate}>
+        <PriceWrapper $isFullWidth={isFullWidth} $saleRate={saleRate}>
           {saleRate && (
             <SaleInfo>
               <div />
               <span>{saleRate} %</span>
             </SaleInfo>
           )}
-          <Price $isFullWidth={isFullWidth} saleRate={saleRate}>
+          <Price $isFullWidth={isFullWidth} $saleRate={saleRate}>
             <label>현재가</label>
-            <label>￦ {price}</label>
+            <label>
+              ￦ {price.toLocaleString('ko-KR', { minimumFractionDigits: 0 })}
+            </label>
           </Price>
         </PriceWrapper>
       )}
@@ -51,12 +53,12 @@ export default function LineHeader({
   );
 }
 
-const ProdHeader = styled.div<{ width: string; $padding?: string }>`
+const ProdHeader = styled.div<{ $width: string; $padding?: string }>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${({ width }) => width};
+  width: ${({ $width }) => $width};
   padding: ${({ $padding }) => $padding};
 
   span:nth-child(3) {
@@ -91,14 +93,14 @@ const Line = styled.div<{ $lineWidth: string }>`
 
 const PriceWrapper = styled.div<{
   $isFullWidth: boolean;
-  saleRate?: number | null;
+  $saleRate?: number | null;
 }>`
   height: 25px;
   display: flex;
   width: 100%;
   align-items: end;
-  justify-content: ${({ $isFullWidth, saleRate }) =>
-    $isFullWidth ? 'flex-end' : saleRate ? 'space-between' : 'flex-start'};
+  justify-content: ${({ $isFullWidth, $saleRate }) =>
+    $isFullWidth ? 'flex-end' : $saleRate ? 'space-between' : 'flex-start'};
 `;
 
 const SaleInfo = styled.div`
@@ -127,11 +129,11 @@ const SaleInfo = styled.div`
   }
 `;
 
-const Price = styled.div<{ $isFullWidth: boolean; saleRate?: number | null }>`
+const Price = styled.div<{ $isFullWidth: boolean; $saleRate?: number | null }>`
   display: flex;
   align-items: end;
-  flex-direction: ${({ $isFullWidth, saleRate }) =>
-    $isFullWidth || saleRate ? 'column' : 'row'};
+  flex-direction: ${({ $isFullWidth, $saleRate }) =>
+    $isFullWidth || $saleRate ? 'column' : 'row'};
   gap: 6px;
 
   & > label {
