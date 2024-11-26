@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '@/constant/theme.ts';
 
 interface ButtonProps {
   width: string;
@@ -47,6 +46,8 @@ const ButtonWrapper = styled.div<ButtonWrapperProps>`
   ${({ $aspectRatio }) => `aspect-ratio: ${$aspectRatio};`}
   ${({ $marginTop }) => `margin-top: ${$marginTop};`}
 
+  
+
   button {
     display: flex;
     align-items: center;
@@ -56,8 +57,9 @@ const ButtonWrapper = styled.div<ButtonWrapperProps>`
     height: 100%;
     font-size: 10px;
     font-weight: 800;
-    background: ${COLORS.yellow};
+    background: ${({ theme }) => theme.colors.yellow};
     ${({ $borderRadius }) => `border-radius: ${$borderRadius};`}
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
   }
 
   img {

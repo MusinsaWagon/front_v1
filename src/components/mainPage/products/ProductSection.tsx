@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '../../../constant/theme';
 import Item from './Item';
 import { useNavigate } from 'react-router-dom';
 interface Product {
@@ -84,7 +83,8 @@ const InnerLeftBox = styled.div`
 const Cont = styled.span<ContProps>`
   font-weight: ${(props) => props.FontWeight};
   font-size: 14.77px;
-  background-color: ${(props) => (props.state ? `${COLORS.yellow}` : null)};
+  background-color: ${(props) =>
+    props.state ? `${props.theme.colors.yellow}` : null};
 `;
 
 const Arrow = styled.span``;

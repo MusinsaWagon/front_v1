@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constant/theme';
 import Review from '../productDetail/Review';
 
 interface LineHeaderProps {
@@ -106,7 +105,7 @@ const PriceWrapper = styled.div<{
 const SaleInfo = styled.div`
   width: 62px;
   height: 16px;
-  background-color: ${COLORS.red};
+  background-color: ${({ theme }) => theme.colors.red};
   border-radius: 9px;
   display: flex;
   align-items: center;

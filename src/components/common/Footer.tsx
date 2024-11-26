@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constant/theme';
-
 import home from '../../assets/images/homeIcon.png';
 import heart from '../../assets/images/heartIcon.png';
 import upload from '../../assets/images/uploadIcon.png';
@@ -35,7 +33,7 @@ const TabBar = () => {
 const Container = styled.div`
   height: 72px;
   width: 100vw;
-  background-color: ${COLORS.black};
+  background-color: ${({ theme }) => theme.colors.black};
   display: flex;
   align-items: start;
   justify-content: space-evenly;
