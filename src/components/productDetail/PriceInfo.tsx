@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constant/theme';
 
 interface PriceInfoProps {
   prevPrice: number;
@@ -50,7 +49,8 @@ const Container = styled.div`
 const Fluctuation = styled.div<{ $isPriceUp: boolean }>`
   width: 35.38%;
   box-shadow: inset 0 0 0 2px
-    ${({ $isPriceUp }) => ($isPriceUp ? COLORS.green : COLORS.red)};
+    ${({ $isPriceUp, theme }) =>
+      $isPriceUp ? theme.colors.green : theme.colors.red};
   border-radius: 5px;
   height: 100%;
   display: flex;
@@ -65,7 +65,8 @@ const Fluctuation = styled.div<{ $isPriceUp: boolean }>`
     border-left: 9.25px solid transparent;
     border-right: 9.25px solid transparent;
     border-bottom: 9.25px solid
-      ${({ $isPriceUp }) => ($isPriceUp ? COLORS.green : COLORS.red)};
+      ${({ $isPriceUp, theme }) =>
+        $isPriceUp ? theme.colors.green : theme.colors.red};
     transform: ${({ $isPriceUp }) => ($isPriceUp ? '' : 'rotate(180deg)')};
   }
 
@@ -75,7 +76,8 @@ const Fluctuation = styled.div<{ $isPriceUp: boolean }>`
     font-size: 12px;
     font-weight: bold;
     gap: 7px 0;
-    color: ${({ $isPriceUp }) => ($isPriceUp ? COLORS.green : COLORS.red)};
+    color: ${({ $isPriceUp, theme }) =>
+      $isPriceUp ? theme.colors.green : theme.colors.red};
   }
 `;
 

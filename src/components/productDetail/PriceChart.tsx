@@ -1,108 +1,3 @@
-// import Chart from 'react-apexcharts';
-// import ApexCharts from 'apexcharts';
-// import { useState } from 'react';
-// import { COLORS } from '../../constant/theme';
-
-// interface DataPoint {
-//   date: string;
-//   price: number;
-// }
-
-// interface PriceChartProps {
-//   data1M: DataPoint[];
-//   data3M: DataPoint[];
-//   data6M: DataPoint[];
-// }
-
-// export default function PriceChart({
-//   data1M,
-//   data3M,
-//   data6M,
-// }: PriceChartProps) {
-//   const [selectedData, setSelectedData] = useState(data1M);
-
-//   const options: ApexCharts.ApexOptions = {
-//     chart: {
-//       type: 'line',
-//       zoom: { enabled: false },
-//     },
-//     colors: [COLORS.yellow],
-//     markers: {
-//       size: 6,
-//       colors: [COLORS.yellow],
-//       strokeColors: COLORS.yellow,
-//       strokeWidth: 2,
-//     },
-//     xaxis: {
-//       type: 'datetime',
-//       tickAmount: 3,
-//       tickPlacement: 'on',
-//       labels: {
-//         formatter: (value) => {
-//           if (value) {
-//             const date = new Date(value);
-//             const startDate = new Date(selectedData[0].date); // 시작일
-//             const endDate = new Date(
-//               selectedData[selectedData.length - 1].date
-//             ); // 끝일
-
-//             if (date.getTime() === startDate.getTime()) {
-//               return selectedData[0].date; // 시작일 표시
-//             } else if (date.getTime() === endDate.getTime()) {
-//               return selectedData[selectedData.length - 1].date; // 끝일 표시
-//             } else {
-//               return ''; // 시작일과 끝일 외에는 빈 문자열 반환
-//             }
-//           }
-//           return ''; // value가 없으면 빈 문자열 반환
-//         },
-//         style: {
-//           fontSize: '6px', // 폰트 크기 줄이기
-//           cssClass: 'asd',
-//         },
-//       },
-//     },
-//     tooltip: {
-//       x: {
-//         formatter: (value) => {
-//           const date = new Date(value);
-//           return `${date.getMonth() + 1}월 ${date.getDate()}일`; // 툴팁에서 날짜 표시
-//         },
-//       },
-//     },
-//     stroke: {
-//       curve: 'straight',
-//     },
-//   };
-
-//   const handleRangeChange = (range: '1M' | '3M' | '6M') => {
-//     setSelectedData(range === '1M' ? data1M : range === '3M' ? data3M : data6M);
-//   };
-
-//   return (
-//     <div>
-//       <div>
-//         <button onClick={() => handleRangeChange('1M')}>1개월</button>
-//         <button onClick={() => handleRangeChange('3M')}>3개월</button>
-//         <button onClick={() => handleRangeChange('6M')}>6개월</button>
-//       </div>
-//       <Chart
-//         options={options}
-//         series={[
-//           {
-//             name: 'Price',
-//             data: selectedData.map(({ date, price }) => [
-//               new Date(date).getTime(),
-//               price,
-//             ]),
-//           },
-//         ]}
-//         type="line"
-//       />
-//     </div>
-//   );
-// }
-
 import {
   LineChart,
   Line,
@@ -112,8 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { COLORS } from '../../constant/theme';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { useState } from 'react';
 
 interface PriceData {
@@ -135,6 +29,8 @@ export default function PriceChart({
   data1Y,
 }: PriceChartProps) {
   const [selectedData, setSelectedData] = useState(data1M);
+  const theme = useTheme();
+
   return (
     <ChartWrapper>
       <ButtonGroup>
@@ -167,10 +63,10 @@ export default function PriceChart({
           <Line
             type="linear"
             dataKey="price"
-            stroke={`${COLORS.yellow}`}
+            stroke={theme.colors.yellow}
             strokeWidth={'1.5px'}
             width={400}
-            dot={{ fill: `${COLORS.yellow}`, r: 4 }}
+            dot={{ fill: theme.colors.yellow, r: 4 }}
             animationDuration={100}
           />
         </LineChart>
