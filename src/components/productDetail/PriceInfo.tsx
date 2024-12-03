@@ -82,7 +82,7 @@ const Fluctuation = styled.div<{ $isPriceUp: boolean }>`
 `;
 
 const Price = styled.div`
-  width: 44.64%;
+  width: 45.64%;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
