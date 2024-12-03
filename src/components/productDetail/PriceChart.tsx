@@ -99,9 +99,10 @@ const ButtonGroup = styled.div`
     font-size: 7px;
     box-sizing: border-box;
     font-weight: bold;
-    padding: 2px 4px;
+    padding: 1px 3px;
     cursor: pointer;
     background-color: white;
+    color: ${({ theme }) => theme.colors.font_black};
 
     &:hover {
       border: 1px solid ${({ theme }) => theme.colors.yellow};

@@ -89,9 +89,9 @@ const Price = styled.div`
 
   span:first-child {
     font-weight: bold;
-    font-size: 10px;
+    font-size: 2.49vw;
     color: rgba(12, 12, 12, 0.5);
-    letter-spacing: 1px;
+    letter-spacing: 0.09px;
   }
 
   div:last-child {
@@ -109,7 +109,7 @@ const Price = styled.div`
     }
 
     span:last-child {
-      font-size: 23.64px;
+      font-size: 5.88vw;
       font-weight: 900;
     }
   }
