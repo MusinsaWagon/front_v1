@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { COLORS } from '../../constant/theme';
+import styled, { useTheme } from 'styled-components';
 
 interface PriceCardProps {
   aspectRatio: string;
@@ -18,21 +17,23 @@ export default function PriceCard({
   marginBottom,
   priceList,
 }: PriceCardProps) {
+  const theme = useTheme();
+
   const cards = [
     {
       type: '역대 최저가',
       src: '/images/lowestPrice.png',
-      color: COLORS.red,
+      color: theme.colors.red,
     },
     {
       type: '평균가',
       src: '/images/currentPrice.png',
-      color: COLORS.font_black,
+      color: theme.colors.black,
     },
     {
       type: '역대 최고가',
       src: '/images/highestPrice.png',
-      color: COLORS.green,
+      color: theme.colors.green,
     },
   ];
 
@@ -49,7 +50,11 @@ export default function PriceCard({
               <img src={card.src} />
               <span>{card.type}</span>
             </CardHeader>
-            <span style={{ color: card.color }}>
+            <span
+              style={{
+                color: card.color,
+              }}
+            >
               ￦{' '}
               {priceList[index].toLocaleString('ko-KR', {
                 minimumFractionDigits: 0,
