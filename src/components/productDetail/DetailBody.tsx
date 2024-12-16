@@ -9,7 +9,44 @@ import bell from '../../assets/images/bell.png';
 import Modal from '../common/Modal';
 import { useState } from 'react';
 
-export default function DetailBody() {
+interface DetailBodyProps {
+  basicProductInfo: {
+    brand: string;
+    name: string;
+    starScore: number;
+    likeCount: number;
+    reviewCount: number;
+    previousPrice: number;
+    currentPrice: number;
+  };
+  parentAndChildCategoryDTO: {
+    parentCategory: {
+      categoryName: string;
+    };
+    childCategory: {
+      categoryName: string;
+    };
+  };
+  productDetail: {
+    lowPrice: number;
+    highPrice: number;
+    middlePrice: number;
+    productUrl: string;
+  };
+  productHistoryList: [
+    {
+      createdAt: string;
+      price: number;
+    }
+  ];
+}
+
+export default function DetailBody({
+  basicProductInfo,
+  parentAndChildCategoryDTO,
+  productDetail,
+  productHistoryList,
+}: DetailBodyProps) {
   const [showModal, setShowModal] = useState(false);
   const data1M = [
     { date: '2024-10-01', price: 29900 },
@@ -59,17 +96,27 @@ export default function DetailBody() {
   return (
     <BodyWrapper>
       <Category>
-        <h6>상의 &gt; 맨투맨/스웨트</h6>
+        <h6>
+          {parentAndChildCategoryDTO.parentCategory.categoryName} &gt;{' '}
+          {parentAndChildCategoryDTO.childCategory.categoryName}
+        </h6>
       </Category>
       <LineHeader
         width="100%"
         lineWidth="100%"
         padding="0"
-        msg="PRENDA"
-        msg2="PRDA DENIM PATCH CREWNECK SHIRT"
-        review={[4.8, 234, 185]}
+        msg={basicProductInfo.brand}
+        msg2={basicProductInfo.name}
+        review={[
+          basicProductInfo.starScore,
+          basicProductInfo.likeCount,
+          basicProductInfo.reviewCount,
+        ]}
       />
-      <PriceInfo prevPrice={39900} curPrice={24150} />
+      <PriceInfo
+        prevPrice={basicProductInfo.previousPrice}
+        curPrice={basicProductInfo.currentPrice}
+      />
       <Line />
       <BtnWrapper>
         <Button
@@ -95,10 +142,17 @@ export default function DetailBody() {
         aspectRatio="359/82"
         marginTop="11px"
         marginBottom="7px"
-        priceList={[24150, 34000, 40000]}
+        priceList={[
+          productDetail.lowPrice,
+          productDetail.middlePrice,
+          productDetail.highPrice,
+        ]}
       />
       <FluctDate>
-        <figcaption>최근 가격 변동: 2024-09-07</figcaption>
+        <figcaption>
+          최근 가격 변동:{' '}
+          {productHistoryList[productHistoryList.length - 1].createdAt}
+        </figcaption>
       </FluctDate>
       <ChartWrapper>
         <PriceChart
@@ -115,7 +169,11 @@ export default function DetailBody() {
           onClose={() => {
             setShowModal(false);
           }}
-          priceList={[24150, 34000, 40000]}
+          priceList={[
+            productDetail.lowPrice,
+            productDetail.middlePrice,
+            productDetail.highPrice,
+          ]}
         />
       )}
     </BodyWrapper>
