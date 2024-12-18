@@ -3,7 +3,11 @@ import Image from '../common/Image';
 import heartIcon from '../../assets/images/heartIcon.png';
 import { useState } from 'react';
 
-export default function ProductImage() {
+interface ProductImageProps {
+  url: string;
+}
+
+export default function ProductImage({ url }: ProductImageProps) {
   const [isHeart, setIsHeart] = useState(false);
 
   const handleHeartClick = () => {
@@ -12,7 +16,12 @@ export default function ProductImage() {
 
   return (
     <ImageWrapper>
-      <Image width="100%" aspectRatio="402/431" src="" borderRadius="20px" />
+      <Image
+        width="100%"
+        aspectRatio="402/431"
+        src={'https://image.msscdn.net' + url}
+        borderRadius="20px"
+      />
       <Heart onClick={handleHeartClick} $isHeart={isHeart}>
         <img src={heartIcon} />
       </Heart>
