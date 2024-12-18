@@ -105,6 +105,7 @@ const PriceWrapper = styled.div<{
 const SaleInfo = styled.div`
   width: 62px;
   height: 16px;
+
   background-color: ${({ theme }) => theme.colors.red};
   border-radius: 9px;
   display: flex;
