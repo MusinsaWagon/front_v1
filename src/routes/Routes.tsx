@@ -8,6 +8,7 @@ import MainPage from '../pages/Main';
 import EnrollProd from '../pages/enrollProd/EnrollProd';
 import ProductDetail from '../pages/product/ProductDetail';
 import SignUp from '../pages/signUp/SignUp';
+import SignIn from '../pages/signIn/SignIn';
 const Routes = () => {
   return (
     <ReactRouters>
@@ -16,6 +17,7 @@ const Routes = () => {
         <Route path="enroll" element={<EnrollProd type="product" />} />
         <Route path="product/:id" element={<ProductDetail />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="login" element={<SignIn />} />
       </Route>
     </ReactRouters>
   );
