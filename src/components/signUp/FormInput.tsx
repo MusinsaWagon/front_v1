@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { UseFormRegister } from 'react-hook-form';
+import Loading from '../common/Loading';
 
 interface FormData {
   id: string;
@@ -20,6 +21,7 @@ interface FormInputProps {
   errMsg?: string | undefined;
   checkMsg?: string | undefined;
   isValidated: boolean;
+  sendLoading?: boolean;
 }
 
 export default function FormInput({
@@ -34,6 +36,7 @@ export default function FormInput({
   checkMsg,
   errMsg,
   isValidated,
+  sendLoading,
 }: FormInputProps) {
   return (
     <InputContainer>
@@ -76,6 +79,7 @@ export default function FormInput({
           ? checkMsg
           : error}
       </Message>
+      {sendLoading && <Loading />}
     </InputContainer>
   );
 }
@@ -114,8 +118,12 @@ const Input = styled.div<{ $error?: boolean }>`
     }
 
     &:disabled {
-      background-color: #f5f5f5;
+      box-shadow: 0 0 0px 1000px #f5f5f5 inset !important;
       cursor: not-allowed;
+    }
+
+    &:-webkit-autofill {
+      box-shadow: 0 0 0px 1000px white inset;
     }
   }
 
