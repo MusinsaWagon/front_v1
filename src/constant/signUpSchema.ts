@@ -19,3 +19,14 @@ export const schema = z
     path: ['passwordCheck'],
     message: '비밀번호가 일치하지 않습니다',
   });
+
+export type FormData = z.infer<typeof schema>;
+
+// 액션 타입 정의
+export type InputAction =
+  | { type: 'SET_CHECK_ID'; payload: { errMsg: string; checkMsg: string } }
+  | {
+      type: 'SET_CHECK_EMAIL';
+      payload: { errMsg: string; checkMsg: string; sendLoading: boolean };
+    }
+  | { type: 'SET_CHECK_CODE'; payload: { errMsg: string; checkMsg: string } };

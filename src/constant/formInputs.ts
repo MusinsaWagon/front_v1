@@ -1,6 +1,7 @@
 import { UseFormWatch, FieldErrorsImpl } from 'react-hook-form';
-import { schema } from './signUpSchema';
+import { InputAction, schema } from './signUpSchema';
 import { z } from 'zod';
+import { checkDupId, sendEmail } from '../hooks/signUp/useSignUp';
 type FormData = z.infer<typeof schema>;
 
 export type FormInputType = {
@@ -14,19 +15,18 @@ export type FormInputType = {
   checkMsg?: string;
   onClick?: () => void;
   isValidated: boolean;
+  sendLoading?: boolean;
 };
 
 export const getFormInputs = (
   watch: UseFormWatch<FormData>,
   errors: FieldErrorsImpl<FormData>,
   checkId: { errMsg: string; checkMsg: string },
-  setCheckId: React.Dispatch<
-    React.SetStateAction<{ errMsg: string; checkMsg: string }>
-  >,
-  checkEmail: { errMsg: string; checkMsg: string },
-  setCheckEmail: React.Dispatch<
-    React.SetStateAction<{ errMsg: string; checkMsg: string }>
-  >
+  dispatch: React.Dispatch<InputAction>,
+  checkEmail: { errMsg: string; checkMsg: string; sendLoading: boolean },
+  checkCode: { errMsg: string; checkMsg: string },
+  dispatchCode: (code: number) => void,
+  validateCode: number | null
 ): Array<FormInputType> => [
   {
     name: 'id',
@@ -37,15 +37,19 @@ export const getFormInputs = (
     error: errors.id?.message || checkId.errMsg,
     errMsg: checkId.errMsg,
     checkMsg: checkId.checkMsg,
-    onClick: () => {
-      if (!watch('id')) {
-        alert('아이디를 입력해주세요');
-        return;
+    onClick: async () => {
+      const isDuplicated = await checkDupId(watch(`id`));
+      if (isDuplicated) {
+        dispatch({
+          type: 'SET_CHECK_ID',
+          payload: { errMsg: '사용 불가능한 아이디입니다.', checkMsg: '' },
+        });
+      } else {
+        dispatch({
+          type: 'SET_CHECK_ID',
+          payload: { errMsg: '', checkMsg: '사용 가능한 아이디입니다.' },
+        });
       }
-      setCheckId({
-        errMsg: '사용 불가능한 아이디입니다.',
-        checkMsg: '',
-      });
     },
     isValidated: watch('id') && !errors.id?.message ? true : false,
   },
@@ -58,17 +62,36 @@ export const getFormInputs = (
     error: errors.email?.message || checkEmail.errMsg,
     errMsg: checkEmail.errMsg,
     checkMsg: checkEmail.checkMsg,
-    onClick: () => {
-      if (!watch('email')) {
-        alert('이메일을 입력해주세요');
-        return;
-      }
-      setCheckEmail({
-        ...checkEmail,
-        checkMsg: '인증번호를 확인해주세요',
+    onClick: async () => {
+      dispatch({
+        type: 'SET_CHECK_EMAIL',
+        payload: { ...checkEmail, sendLoading: true },
       });
+      const data = await sendEmail(watch('email'));
+
+      if (data?.validCode) {
+        dispatchCode(data.validCode);
+        dispatch({
+          type: 'SET_CHECK_EMAIL',
+          payload: {
+            errMsg: '',
+            checkMsg: '인증번호를 확인해주세요.',
+            sendLoading: false,
+          },
+        });
+      } else {
+        dispatch({
+          type: 'SET_CHECK_EMAIL',
+          payload: {
+            errMsg: '다시 시도해주세요',
+            checkMsg: '',
+            sendLoading: false,
+          },
+        });
+      }
     },
     isValidated: watch('email') && !errors.email?.message ? true : false,
+    sendLoading: checkEmail.sendLoading,
   },
   {
     name: 'authNumber',
@@ -77,6 +100,22 @@ export const getFormInputs = (
     placeholder: '인증번호 6자리',
     btnMsg: '인증하기',
     error: errors.authNumber?.message,
+    errMsg: checkCode.errMsg,
+    checkMsg: checkCode.checkMsg,
+    onClick: () => {
+      const inputCode = watch('authNumber');
+      if (parseInt(inputCode) === validateCode) {
+        dispatch({
+          type: 'SET_CHECK_CODE',
+          payload: { errMsg: '', checkMsg: '인증이 완료되었습니다.' },
+        });
+      } else {
+        dispatch({
+          type: 'SET_CHECK_CODE',
+          payload: { errMsg: '인증번호가 다릅니다.', checkMsg: '' },
+        });
+      }
+    },
     isValidated:
       watch('authNumber') && !errors.authNumber?.message ? true : false,
   },
