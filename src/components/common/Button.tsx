@@ -58,6 +58,7 @@ const ButtonWrapper = styled.div<ButtonWrapperProps>`
     font-size: 10px;
     font-weight: 800;
     background: ${({ theme }) => theme.colors.yellow};
+
     ${({ $borderRadius }) => `border-radius: ${$borderRadius};`}
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
     color: ${({ theme }) => theme.colors.font_black};

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import home from '../../assets/images/homeIcon.png';
 import heart from '../../assets/images/heartIcon.png';
 import upload from '../../assets/images/uploadIcon.png';
