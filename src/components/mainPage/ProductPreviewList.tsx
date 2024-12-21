@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ProductSection from '..//../components/mainPage/products/ProductSection';
-import { getData } from '../../apis/axios';
+import { getData } from '../../apis/goodsData/axios';
 import { useEffect, useState } from 'react';
 
 const ProductPreviewList = () => {

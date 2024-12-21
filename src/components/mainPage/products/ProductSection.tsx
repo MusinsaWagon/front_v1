@@ -27,7 +27,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
   const navigate = useNavigate();
 
   const handleArrowClick = () => {
-    navigate('/main', { state: { showEntire: true } });
+    navigate('/entire');
   };
   return (
     <Container>

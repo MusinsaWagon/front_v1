@@ -3,10 +3,8 @@ import styled from 'styled-components';
 //component
 import Item from './products/Item';
 import Category from './Category';
-
 import { useEffect, useState } from 'react';
-
-import { getData } from '../../apis/axios';
+import { getData } from '../../apis/goodsData/axios';
 
 interface Product {
   productNumber: number;
@@ -36,7 +34,7 @@ const EntireProductList = () => {
       <Category />
       <ItemsContainer>
         {datas?.map((data) => (
-          <Item info={data} />
+          <Item key={data.productNumber} info={data} />
         ))}
       </ItemsContainer>
       <More>
