@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-const LoginHandler = (props) => {
+const LoginHandler = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get('code');
   console.log('code:', code);
@@ -25,7 +25,7 @@ const LoginHandler = (props) => {
       });
     };
     kakaoLogin();
-  }, [props.history]);
+  }, [code]);
   return (
     <MainContainer>
       <div className="LoginHandeler">
