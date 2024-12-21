@@ -22,17 +22,16 @@ interface ChangeRateProps {
   $isPositive: boolean;
 }
 const Item: React.FC<DataProps> = ({ info }) => {
-  const location = useLocation();
-  const state = location.state;
+  const location = useLocation().pathname;
   const priceDifference = info.currentPrice - info.previousPrice;
   const priceChangeRate = (
     (priceDifference / info.previousPrice) *
     100
   ).toFixed(1);
-
+  console.log(location);
   return (
-    <Container $isEntire={state?.showEntire}>
-      <ImgBox $isEntire={state?.showEntire}>
+    <Container $isEntire={location === '/entire'}>
+      <ImgBox $isEntire={location === '/entire'}>
         <Image
           borderRadius="11.86px"
           width="100%"
@@ -58,6 +57,7 @@ const Item: React.FC<DataProps> = ({ info }) => {
     </Container>
   );
 };
+
 const Container = styled.div<{ $isEntire: boolean }>`
   display: flex;
   flex-direction: column;
@@ -65,8 +65,8 @@ const Container = styled.div<{ $isEntire: boolean }>`
   width: 100%;
 `;
 const ImgBox = styled.div<{ $isEntire: boolean }>`
-  width: ${(props) => (props.$isEntire ? null : '136.39px')};
-  height: ${(props) => (props.$isEntire ? null : '129.27px')};
+  width: ${(props) => (props.$isEntire ? '100%' : '100px')};
+  aspect-ratio: 1/1;
   background-color: #e6e6e6;
   border-radius: 11.86px;
   position: relative;
@@ -93,7 +93,6 @@ const LikeImg = styled.img`
 `;
 const ContBox = styled.div`
   display: grid;
-  /* flex-direction: column; */
   row-gap: 7px;
 `;
 const Brand = styled.span`

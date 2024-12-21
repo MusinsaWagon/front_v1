@@ -11,23 +11,22 @@ export const getData = async () => {
     console.error('Error sending data:', error);
   }
 };
-const pageable = {
-  page: 0,
-  size: 15,
-  sort: ['string'],
-};
+
 export const getCategoryData = async (index: number) => {
+  const size = 12;
+  const page = 0;
   try {
     const response = await axiosInstance.get(
       `/products/MUSINSA/category/${index}`,
       {
         params: {
-          pageable: JSON.stringify(pageable),
+          size,
+          page,
         },
       }
     );
-    console.log('detail Response:', response.data);
-    return response.data;
+    console.log('detail Response:', response.data.data);
+    return response.data.data;
   } catch (error) {
     console.error('Error sending data:', error);
   }

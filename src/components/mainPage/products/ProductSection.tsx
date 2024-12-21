@@ -94,6 +94,5 @@ const ItemsContainer = styled.div`
   overflow-x: scroll;
   gap: 15.35px;
   padding: 20px 0;
-  width: 100%;
 `;
 export default ProductSection;
