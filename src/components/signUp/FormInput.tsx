@@ -38,6 +38,8 @@ export default function FormInput({
   isValidated,
   sendLoading,
 }: FormInputProps) {
+  console.log(name, checkMsg);
+
   return (
     <InputContainer>
       <InputLabel>
@@ -55,7 +57,10 @@ export default function FormInput({
           alt="Valid"
         />
       </InputLabel>
-      <Input $error={!checkMsg ? !!error : !!errMsg}>
+      <Input
+        $error={!checkMsg ? !!error : !!errMsg}
+        $disabled={!!checkMsg && !!btnMsg}
+      >
         <input
           {...register(name)}
           type={type}
@@ -98,13 +103,15 @@ const InputLabel = styled.div`
 
 const CheckValid = styled.img``;
 
-const Input = styled.div<{ $error?: boolean }>`
+const Input = styled.div<{ $error?: boolean; $disabled: boolean }>`
   margin-top: 13px;
   width: 100%;
+  height: 35px;
   display: flex;
   border-bottom: 1px solid
     ${({ theme, $error }) => ($error ? theme.colors.red : 'rgba(0, 0, 0, 0.5)')};
-  padding-bottom: 6px;
+  border: ${({ $disabled }) => $disabled && 'none'};
+  background-color: ${({ $disabled }) => ($disabled ? '#E9E9E9' : 'white')};
 
   input {
     padding-left: 3.94%;
@@ -118,7 +125,7 @@ const Input = styled.div<{ $error?: boolean }>`
     }
 
     &:disabled {
-      box-shadow: 0 0 0px 1000px #f5f5f5 inset !important;
+      box-shadow: 0 0 0px 1000px #e9e9e9 inset !important;
       cursor: not-allowed;
     }
 
@@ -128,6 +135,7 @@ const Input = styled.div<{ $error?: boolean }>`
   }
 
   button {
+    margin: 6px 4px;
     font-size: 1.99vw;
     color: #8f8f8f;
     background-color: ${({ theme }) => theme.colors.yellow};
