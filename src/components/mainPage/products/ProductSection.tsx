@@ -27,7 +27,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
   const navigate = useNavigate();
 
   const handleArrowClick = () => {
-    navigate('/main', { state: { showEntire: true } });
+    navigate('/entire');
   };
   return (
     <Container>
@@ -94,6 +94,5 @@ const ItemsContainer = styled.div`
   overflow-x: scroll;
   gap: 15.35px;
   padding: 20px 0;
-  width: 100%;
 `;
 export default ProductSection;

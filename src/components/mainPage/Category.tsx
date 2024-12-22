@@ -1,36 +1,28 @@
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { setActiveCategory } from '../../store/categories/categories.slice';
-import { useEffect } from 'react';
-
-import { RootState } from '../../store/store';
+import { useNavigate } from 'react-router-dom';
 const Category = () => {
-  const category = useSelector((state: RootState) => state.categories);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const categories = [
     '전체',
     '상의',
-    '팬츠',
-    '원피스',
     '아우터',
-    '스커트',
-    '슈즈',
+    '바지',
+    '원피스/스커트',
+    '신발',
     '가방',
-    '이너웨어/잠옷',
-    '주얼리',
+    '패션소품',
+    '뷰티',
   ];
-  const getActiveCategory = (category: string) => {
-    dispatch(setActiveCategory(category));
+  const getActiveCategory = (index: number) => {
+    navigate(`/entire?category=${index}`);
   };
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
+
   return (
     <Container>
       <Title>CostFlower</Title>
       <StyledTable>
         {categories.map((category, index) => (
-          <CellBtn key={index} onClick={() => getActiveCategory(category)}>
+          <CellBtn key={index} onClick={() => getActiveCategory(index)}>
             {category}
           </CellBtn>
         ))}

@@ -19,20 +19,19 @@ interface DataProps {
 }
 
 interface ChangeRateProps {
-  isPositive: boolean;
+  $isPositive: boolean;
 }
 const Item: React.FC<DataProps> = ({ info }) => {
-  const location = useLocation();
-  const state = location.state;
+  const location = useLocation().pathname;
   const priceDifference = info.currentPrice - info.previousPrice;
   const priceChangeRate = (
     (priceDifference / info.previousPrice) *
     100
   ).toFixed(1);
-
+  console.log(location);
   return (
-    <Container isEntire={state?.showEntire}>
-      <ImgBox isEntire={state?.showEntire}>
+    <Container $isEntire={location === '/entire'}>
+      <ImgBox $isEntire={location === '/entire'}>
         <Image
           borderRadius="11.86px"
           width="100%"
@@ -48,7 +47,7 @@ const Item: React.FC<DataProps> = ({ info }) => {
         <Brand>{info.brand}</Brand>
         <Name>{info.name}</Name>
         <Price>₩ {info.currentPrice.toLocaleString()}</Price>
-        <ChangeRate isPositive={priceDifference >= 0}>
+        <ChangeRate $isPositive={priceDifference >= 0}>
           {priceDifference >= 0 ? '▲' : '▼'} ₩
           {' ' + Math.abs(priceDifference).toLocaleString()} (
           {priceDifference >= 0 ? '+' : '-'}
@@ -58,15 +57,16 @@ const Item: React.FC<DataProps> = ({ info }) => {
     </Container>
   );
 };
-const Container = styled.div<{ isEntire: boolean }>`
+
+const Container = styled.div<{ $isEntire: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: ${(props) => (props.isEntire ? '9.43px' : '20px')};
+  gap: ${(props) => (props.$isEntire ? '9.43px' : '20px')};
   width: 100%;
 `;
-const ImgBox = styled.div<{ isEntire: boolean }>`
-  width: ${(props) => (props.isEntire ? null : '136.39px')};
-  height: ${(props) => (props.isEntire ? null : '129.27px')};
+const ImgBox = styled.div<{ $isEntire: boolean }>`
+  width: ${(props) => (props.$isEntire ? '100%' : '100px')};
+  aspect-ratio: 1/1;
   background-color: #e6e6e6;
   border-radius: 11.86px;
   position: relative;
@@ -93,7 +93,6 @@ const LikeImg = styled.img`
 `;
 const ContBox = styled.div`
   display: grid;
-  /* flex-direction: column; */
   row-gap: 7px;
 `;
 const Brand = styled.span`
@@ -118,6 +117,6 @@ const ChangeRate = styled.span<ChangeRateProps>`
   font-weight: 700;
   font-size: 9.49px;
   color: ${(props) =>
-    props.isPositive ? props.theme.colors.green : props.theme.colors.red};
+    props.$isPositive ? props.theme.colors.green : props.theme.colors.red};
 `;
 export default Item;

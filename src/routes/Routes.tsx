@@ -9,15 +9,25 @@ import EnrollProd from '../pages/enrollProd/EnrollProd';
 import ProductDetail from '../pages/product/ProductDetail';
 import SignUp from '../pages/signUp/SignUp';
 import SignIn from '../pages/signIn/SignIn';
+import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
 const Routes = () => {
   return (
     <ReactRouters>
       <Route path="/" element={<Layout />}>
         <Route path="/main" element={<MainPage />} />
+        <Route path="/entire" element={<MainPage />} />
         <Route path="enroll" element={<EnrollProd type="product" />} />
         <Route path="product/:id" element={<ProductDetail />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<SignIn />} />
+        <Route
+          path="/api/v1/users/auth/login/kakao"
+          element={<LoginHandler />}
+        />
+        <Route
+          path="/api/v1/users/auth/login/naver"
+          element={<LoginHandler />}
+        />
       </Route>
     </ReactRouters>
   );

@@ -3,11 +3,9 @@ import styled from 'styled-components';
 //component
 import Item from './products/Item';
 import Category from './Category';
-
 import { useEffect, useState } from 'react';
-
-import { getData } from '../../apis/axios';
-
+import { getCategoryData } from '../../apis/goodsData/axios';
+import { useSearchParams } from 'react-router-dom';
 interface Product {
   productNumber: number;
   name: string;
@@ -23,25 +21,25 @@ interface Product {
 
 const EntireProductList = () => {
   const [datas, setDatas] = useState<Product[] | null>(null);
+  const [searchParams] = useSearchParams();
+  const category = Number(searchParams.get('category')) || 0;
+
   useEffect(() => {
     async function fetchData() {
-      const response = await getData();
+      const response = await getCategoryData(category);
       console.log('red:', response);
       setDatas(response);
     }
     fetchData();
-  }, []);
+  }, [category]);
   return (
     <Container>
       <Category />
       <ItemsContainer>
         {datas?.map((data) => (
-          <Item info={data} />
+          <Item key={data.productNumber} info={data} />
         ))}
       </ItemsContainer>
-      <More>
-        <Arrow />
-      </More>
     </Container>
   );
 };
@@ -55,6 +53,5 @@ const ItemsContainer = styled.div`
   gap: 16px;
   width: 100%;
 `;
-const More = styled.button``;
-const Arrow = styled.img``;
+
 export default EntireProductList;

@@ -35,6 +35,8 @@ const HeaderContainer = styled.div<{ $bottom?: string }>`
   height: 79px;
   justify-content: space-between;
   position: relative;
+  position: fixed;
+  top: 0;
   bottom: ${(props) => props.$bottom || 'initial'};
   margin-bottom: ${(props) => '-' + props.$bottom};
 `;

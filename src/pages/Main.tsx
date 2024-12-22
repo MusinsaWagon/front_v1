@@ -15,30 +15,38 @@ import zigzag from '../assets/images/zigzag.png';
 //axios
 import Inquiry from '../components/mainPage/Inquiry';
 
+import { MainContainer } from '../styles/mainContainer';
 const MainPage = () => {
-  const location = useLocation();
-  const state = location.state;
+  const location = useLocation().pathname;
   return (
-    <Container>
-      <TopBox>
-        <SearchBox />
-        <BrandsContainer>
-          <BrandsBox imgSrc={musinsa} name="ALL" />
-          <BrandsBox imgSrc={musinsa} name="MUSINSA" />
-          <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
-          <BrandsBox imgSrc={ably} name="ABLY" />
-        </BrandsContainer>
-      </TopBox>
-      <InnerContainer>
-        {state?.showEntire ? <EntireProductList /> : <ProductPreviewList />}
-      </InnerContainer>
-      <Inquiry />
-    </Container>
+    <MainContainer>
+      <Container>
+        <TopBox>
+          <SearchBox />
+          <BrandsContainer>
+            <BrandsBox imgSrc={musinsa} name="ALL" />
+            <BrandsBox imgSrc={musinsa} name="MUSINSA" />
+            <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
+            <BrandsBox imgSrc={ably} name="ABLY" />
+          </BrandsContainer>
+        </TopBox>
+        <InnerContainer>
+          {location === '/entire' ? (
+            <EntireProductList />
+          ) : (
+            <ProductPreviewList />
+          )}
+        </InnerContainer>
+        <Inquiry />
+      </Container>
+    </MainContainer>
   );
 };
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
   position: relative;
+  padding-top: 20px;
+  height: 100dvh;
 `;
 const TopBox = styled.div`
   padding: 13px 22px;
@@ -53,7 +61,7 @@ const InnerContainer = styled.div`
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 23px 23px 0 0;
-  padding: 25px 22px 72px 22px;
+  padding: 25px 22px 50px 22px;
   box-sizing: border-box;
 `;
 

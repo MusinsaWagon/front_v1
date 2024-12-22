@@ -18,7 +18,7 @@ const Container = styled.div`
   justify-content: center;
   padding-bottom: 17px;
   border-bottom: 1px solid #4f4f4f;
-  position: sticky;
+  position: fixed;
   z-index: 100;
   top: 0;
 `;
