@@ -33,12 +33,13 @@ export default function Image({
       $aspectRatio={aspectRatio}
       $borderRadius={borderRadius}
     >
-      {!isLoaded && <Placeholder />}
+      <Placeholder $isLoaded={isLoaded} />
       <StyledImg
         src={src}
         onLoad={handleImageLoad}
         loading="lazy"
         $isLoaded={isLoaded}
+        alt="상품 이미지"
       />
     </ImageWrapper>
   );
@@ -65,7 +66,7 @@ const StyledImg = styled.img<{ $isLoaded: boolean }>`
   border-radius: inherit;
 `;
 
-const Placeholder = styled.div`
+const Placeholder = styled.div<{ $isLoaded: boolean }>`
   background-color: #c0c0c0;
   width: 100%;
   height: 100%;
