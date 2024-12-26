@@ -6,7 +6,7 @@ import PriceChart from './PriceChart';
 import PriceInfo from './PriceInfo';
 import basket from '../../assets/images/basket.png';
 import bell from '../../assets/images/bell.png';
-import Modal from '../common/Modal';
+import EnrollModal from './EnrollModal';
 import { useState } from 'react';
 
 interface DetailBodyProps {
@@ -163,7 +163,7 @@ export default function DetailBody({
         />
       </ChartWrapper>
       {showModal && (
-        <Modal
+        <EnrollModal
           type="price"
           onClick={() => {}}
           onClose={() => {

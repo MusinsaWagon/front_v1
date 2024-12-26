@@ -59,6 +59,11 @@ export const signup = async (userData: UserData) => {
       const errorMessage =
         error.response?.data?.data?.message || '오류가 발생했습니다.';
       alert(errorMessage);
-    } else alert('네트워크 오류가 발생했습니다.');
+      throw new Error(errorMessage);
+    } else {
+      const networkError = '네트워크 오류가 발생했습니다.';
+      alert(networkError);
+      throw new Error(networkError); // 에러를 다시 throw
+    }
   }
 };

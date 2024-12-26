@@ -4,10 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../common/Button';
 import { schema, FormData } from '../../constant/signUpSchema';
 import UserInputContainer from './UserInputContainer';
-import { useMutate } from '../../hooks/useMutation';
 import { signup, UserData } from '../../hooks/signUp/useSignUp';
+import { useState } from 'react';
+import Modal from '../common/Modal';
+import { useMutate } from '../../hooks/useMutation';
 
 export default function FormWrapper() {
+  const [showModal, setShowModal] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,23 +21,13 @@ export default function FormWrapper() {
     mode: 'onChange',
   });
 
-  const mutation = useMutate(
-    signup,
-    () => {
-      console.log('회원가입 성공!');
-      alert('회원가입이 완료됐습니다.');
-    },
-    () => {
-      console.error('회원가입 실패:');
-    }
-  );
+  const mutation = useMutate(signup, () => setShowModal(true));
 
   const onSubmit = (data: UserData) => {
     mutation.mutate({
       email: data.email,
       password: data.password,
     });
-    console.log(data);
   };
 
   return (
@@ -47,6 +40,14 @@ export default function FormWrapper() {
         aspectRatio="332/36"
         msg="가입하기"
       />
+      {showModal && (
+        <Modal
+          msg="회원가입 성공"
+          setShowModal={setShowModal}
+          showModal={showModal}
+          src="/images/logo2.png"
+        />
+      )}
     </SignUpForm>
   );
 }
