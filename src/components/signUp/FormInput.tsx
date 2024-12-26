@@ -38,8 +38,6 @@ export default function FormInput({
   isValidated,
   sendLoading,
 }: FormInputProps) {
-  console.log(name, checkMsg);
-
   return (
     <InputContainer>
       <InputLabel>
