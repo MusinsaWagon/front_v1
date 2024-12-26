@@ -38,7 +38,12 @@ export const requestNotificationPermission = async () => {
   const currentPermission = Notification.permission;
 
   if (currentPermission === 'granted') {
+    const token = await getToken(messaging, {
+      vapidKey:
+        'BB6Xxmxhebp9JasaO5jvzIjLssA9LjcHWAUPAZKm388rpVzIxquoM1Ar988UiuhDp3rS-vZEmgoyj6lib01dVTc',
+    });
     console.log('알림 권한이 이미 승인되었습니다.');
+    console.log(token);
     return null; // 이미 승인된 경우 추가 요청하지 않음
   }
 
@@ -59,6 +64,7 @@ export const requestNotificationPermission = async () => {
             'BB6Xxmxhebp9JasaO5jvzIjLssA9LjcHWAUPAZKm388rpVzIxquoM1Ar988UiuhDp3rS-vZEmgoyj6lib01dVTc',
         });
         console.log('알림 권한이 승인되었습니다.');
+        console.log('FCM Token:', token);
         return token; // 알림 권한 승인
       } else {
         console.log('사용자가 알림 권한 요청을 거부했습니다.');
