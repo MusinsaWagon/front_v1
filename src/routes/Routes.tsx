@@ -2,7 +2,7 @@ import { Routes as ReactRouters, Route, Outlet } from 'react-router-dom';
 
 import Header from '../components/common/NavBar';
 import TabBar from '../components/common/Footer';
-
+import { MainContainer } from '../styles/mainContainer';
 //pages
 import MainPage from '../pages/Main';
 import EnrollProd from '../pages/enrollProd/EnrollProd';
@@ -37,7 +37,10 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <MainContainer>
+        <Outlet />
+      </MainContainer>
+
       <TabBar />
     </>
   );

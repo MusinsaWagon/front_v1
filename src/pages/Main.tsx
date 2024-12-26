@@ -15,31 +15,28 @@ import zigzag from '../assets/images/zigzag.png';
 //axios
 import Inquiry from '../components/mainPage/Inquiry';
 
-import { MainContainer } from '../styles/mainContainer';
 const MainPage = () => {
   const location = useLocation().pathname;
   return (
-    <MainContainer>
-      <Container>
-        <TopBox>
-          <SearchBox />
-          <BrandsContainer>
-            <BrandsBox imgSrc={musinsa} name="ALL" />
-            <BrandsBox imgSrc={musinsa} name="MUSINSA" />
-            <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
-            <BrandsBox imgSrc={ably} name="ABLY" />
-          </BrandsContainer>
-        </TopBox>
-        <InnerContainer>
-          {location === '/entire' ? (
-            <EntireProductList />
-          ) : (
-            <ProductPreviewList />
-          )}
-        </InnerContainer>
-        <Inquiry />
-      </Container>
-    </MainContainer>
+    <Container>
+      <TopBox>
+        <SearchBox />
+        <BrandsContainer>
+          <BrandsBox imgSrc={musinsa} name="ALL" />
+          <BrandsBox imgSrc={musinsa} name="MUSINSA" />
+          <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
+          <BrandsBox imgSrc={ably} name="ABLY" />
+        </BrandsContainer>
+      </TopBox>
+      <InnerContainer>
+        {location === '/entire' ? (
+          <EntireProductList />
+        ) : (
+          <ProductPreviewList />
+        )}
+      </InnerContainer>
+      <Inquiry />
+    </Container>
   );
 };
 const Container = styled.div`
