@@ -7,9 +7,15 @@ interface ModalProps {
   msg: string;
   setShowModal: (isShow: boolean) => void;
   showModal: boolean;
+  src: string;
 }
 
-export default function Modal({ msg, setShowModal, showModal }: ModalProps) {
+export default function Modal({
+  msg,
+  setShowModal,
+  showModal,
+  src,
+}: ModalProps) {
   const navigate = useNavigate();
 
   const customModalStyles: ReactModal.Styles = {
@@ -47,7 +53,7 @@ export default function Modal({ msg, setShowModal, showModal }: ModalProps) {
         contentLabel="Example Modal"
         shouldCloseOnOverlayClick={false}
       >
-        <ModalImg src="/images/logo2.png" alt="logo" />
+        <ModalImg src={src} alt="logo" />
         <ModalMsg>{msg}</ModalMsg>
         <Button
           msg="로그인하기"
