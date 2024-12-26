@@ -1,4 +1,3 @@
-import { MainContainer } from '../../../styles/mainContainer';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -27,15 +26,13 @@ const LoginHandler = () => {
     kakaoLogin();
   }, [code]);
   return (
-    <MainContainer>
-      <div className="LoginHandeler">
-        <div className="notice">
-          <p>로그인 중입니다.</p>
-          <p>잠시만 기다려주세요.</p>
-          <div className="spinner"></div>
-        </div>
+    <div className="LoginHandeler">
+      <div className="notice">
+        <p>로그인 중입니다.</p>
+        <p>잠시만 기다려주세요.</p>
+        <div className="spinner"></div>
       </div>
-    </MainContainer>
+    </div>
   );
 };
 

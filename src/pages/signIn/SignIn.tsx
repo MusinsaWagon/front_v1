@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
 import SocialLogin from '../../components/signIn/socialLogin/SocialLogin';
-import { MainContainer } from '../../styles/mainContainer';
 
 import { loginUser } from '../../apis/login/axios';
 import { useState } from 'react';
@@ -30,63 +29,61 @@ const SignIn = () => {
   };
 
   return (
-    <MainContainer>
-      <Container>
-        <TopContainer>
-          <LogoBox>
-            <span>LOGIN</span>
-          </LogoBox>
-          <ImgBox>
-            <img className="login__main-logo" alt="logo" />
-          </ImgBox>
-          <InputBox onSubmit={handleSubmit}>
-            <Input
-              type="text"
-              placeholder="아이디 또는 이메일을 입력해주세요"
-              value={account}
-              onChange={(e) => setAccount(e.target.value)} // 계정 업데이트
-            />
-            <Input
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} // 비밀번호 업데이트
-            />
-            <CheckBoxContainer>
-              <CheckBox>
-                <CheckBoxInput type="checkbox" />
-                <span>아이디 저장</span>
-              </CheckBox>
-              <CheckBox>
-                <CheckBoxInput type="checkbox" />
-                <span>자동 로그인</span>
-              </CheckBox>
-            </CheckBoxContainer>
-            <Button type="submit">Login</Button>
-          </InputBox>
-          <FindBox>
-            <span>
-              계정을 잊으셨나요?{' '}
-              <Link to={`/`} style={{ color: '#6e99c0' }}>
-                ID찾기
-              </Link>
-              또는{' '}
-              <Link to={`/`} style={{ color: '#6e99c0' }}>
-                비밀번호 찾기
-              </Link>
-            </span>
-          </FindBox>
-          <span className="login__social-msg">SNS로 로그인하기</span>
-        </TopContainer>
-        <BottomContainer>
-          <SocialLogin />
-          <p>
-            가입하고 알림받기{' '}
-            <button className="signupBtn">회원가입하러가기 {'>'}</button>
-          </p>
-        </BottomContainer>
-      </Container>
-    </MainContainer>
+    <Container>
+      <TopContainer>
+        <LogoBox>
+          <span>LOGIN</span>
+        </LogoBox>
+        <ImgBox>
+          <img className="login__main-logo" alt="logo" />
+        </ImgBox>
+        <InputBox onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            placeholder="아이디 또는 이메일을 입력해주세요"
+            value={account}
+            onChange={(e) => setAccount(e.target.value)} // 계정 업데이트
+          />
+          <Input
+            type="password"
+            placeholder="비밀번호를 입력해주세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} // 비밀번호 업데이트
+          />
+          <CheckBoxContainer>
+            <CheckBox>
+              <CheckBoxInput type="checkbox" />
+              <span>아이디 저장</span>
+            </CheckBox>
+            <CheckBox>
+              <CheckBoxInput type="checkbox" />
+              <span>자동 로그인</span>
+            </CheckBox>
+          </CheckBoxContainer>
+          <Button type="submit">Login</Button>
+        </InputBox>
+        <FindBox>
+          <span>
+            계정을 잊으셨나요?{' '}
+            <Link to={`/`} style={{ color: '#6e99c0' }}>
+              ID찾기
+            </Link>
+            또는{' '}
+            <Link to={`/`} style={{ color: '#6e99c0' }}>
+              비밀번호 찾기
+            </Link>
+          </span>
+        </FindBox>
+        <span className="login__social-msg">SNS로 로그인하기</span>
+      </TopContainer>
+      <BottomContainer>
+        <SocialLogin />
+        <p>
+          가입하고 알림받기{' '}
+          <button className="signupBtn">회원가입하러가기 {'>'}</button>
+        </p>
+      </BottomContainer>
+    </Container>
   );
 };
 
