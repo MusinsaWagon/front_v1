@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import heartIcon from '../../../assets/images/heartIcon.png';
 import { useLocation } from 'react-router-dom';
 import Image from '../../common/Image';
+import { useNavigate } from 'react-router-dom';
 interface ProductProps {
   productNumber: number;
   name: string;
@@ -28,9 +29,13 @@ const Item: React.FC<DataProps> = ({ info }) => {
     (priceDifference / info.previousPrice) *
     100
   ).toFixed(1);
+  const navigate = useNavigate();
   console.log(location);
+  const handleClick = () => {
+    navigate(`/product/${info.productNumber}?site=MUSINSA`);
+  };
   return (
-    <Container $isEntire={location === '/entire'}>
+    <Container $isEntire={location === '/entire'} onClick={handleClick}>
       <ImgBox $isEntire={location === '/entire'}>
         <Image
           borderRadius="11.86px"

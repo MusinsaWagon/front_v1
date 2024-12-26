@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import logo from '../../assets/images/Logo.png';
-
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/');
+  };
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <Logo src={logo} />
     </Container>
   );
