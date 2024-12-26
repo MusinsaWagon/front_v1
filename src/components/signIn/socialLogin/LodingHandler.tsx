@@ -21,7 +21,7 @@ const LoginHandler = () => {
         },
       }).then((res) => {
         console.log(res);
-        navigate('/main');
+        navigate('/');
       });
     };
     kakaoLogin();

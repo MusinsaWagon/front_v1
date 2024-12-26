@@ -14,7 +14,7 @@ const Routes = () => {
   return (
     <ReactRouters>
       <Route path="/" element={<Layout />}>
-        <Route path="/main" element={<MainPage />} />
+        <Route index element={<MainPage />} />
         <Route path="/entire" element={<MainPage />} />
         <Route path="enroll" element={<EnrollProd type="product" />} />
         <Route path="product/:id" element={<ProductDetail />} />
