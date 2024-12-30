@@ -32,7 +32,7 @@ const HeaderContainer = styled.div<{ $bottom?: string }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 79px;
+  height: 40px;
   justify-content: space-between;
   position: relative;
   bottom: ${(props) => props.$bottom || 'initial'};
