@@ -5,14 +5,24 @@ import LineHeader from './LineHeader';
 interface ProductCardProps {
   label?: string;
   saleRate?: number;
+  src: string | undefined;
 }
 
-export default function ProductCard({ label, saleRate }: ProductCardProps) {
+export default function ProductCard({
+  label,
+  saleRate,
+  src,
+}: ProductCardProps) {
   return (
     <CardWrapper>
       {label && <label>{label}</label>}
       <Card>
-        <Image borderRadius="5px" width="29.69%" aspectRatio="95/90" src="" />
+        <Image
+          borderRadius="5px"
+          width="29.69%"
+          aspectRatio="95/90"
+          src={'https://image.msscdn.net' + src}
+        />
         <LineHeader
           width="62.28%"
           lineWidth="100%"

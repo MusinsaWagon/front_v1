@@ -12,6 +12,7 @@ interface ModalProps {
   onClick: () => void;
   priceList: number[];
   onClose: () => void;
+  imgSrc: string | undefined;
 }
 
 export default function EnrollModal({
@@ -19,6 +20,7 @@ export default function EnrollModal({
   onClick,
   priceList,
   onClose,
+  imgSrc,
 }: ModalProps) {
   const inputInfo = getInputInfos(type);
 
@@ -30,7 +32,7 @@ export default function EnrollModal({
             <CloseBtn width="5.3%" ratio="1/1" onClick={onClose} />
           </M.CloseBtnWrapper>
           <HeaderSection type={type} />
-          <ProductCard label="알림 원하는 상품" />
+          <ProductCard src={imgSrc} label="알림 원하는 상품" />
           <PriceCard
             priceList={priceList}
             aspectRatio="334/64"
