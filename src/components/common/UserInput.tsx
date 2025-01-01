@@ -59,7 +59,7 @@ interface UserInputProps {
   label: string;
   type: string;
   list?: string[];
-  refer: React.RefObject<HTMLInputElement>;
+  refer?: React.RefObject<HTMLInputElement>;
 }
 
 const Container = styled.div`
