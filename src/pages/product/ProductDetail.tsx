@@ -29,6 +29,7 @@ export default function ProductDetail() {
         parentAndChildCategoryDTO={data.parentAndChildCategoryDTO}
         basicProductInfo={data.basicProductInfo}
         productHistoryList={data.productHistoryList}
+        imgSrc={data.basicProductInfo.imgUrl}
       />
     </PageWrapper>
   );

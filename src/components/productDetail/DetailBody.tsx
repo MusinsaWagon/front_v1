@@ -5,7 +5,7 @@ import PriceCard from '../common/PriceCard';
 import PriceChart from './PriceChart';
 import PriceInfo from './PriceInfo';
 import basket from '../../assets/images/basket.png';
-import bell from '../../assets/images/bell.png';
+import bell from '/images/bell.png';
 import EnrollModal from './EnrollModal';
 import { useState } from 'react';
 
@@ -39,6 +39,7 @@ interface DetailBodyProps {
       price: number;
     }
   ];
+  imgSrc: string | undefined;
 }
 
 export default function DetailBody({
@@ -46,6 +47,7 @@ export default function DetailBody({
   parentAndChildCategoryDTO,
   productDetail,
   productHistoryList,
+  imgSrc,
 }: DetailBodyProps) {
   const [showModal, setShowModal] = useState(false);
   const data1M = [
@@ -165,7 +167,6 @@ export default function DetailBody({
       {showModal && (
         <EnrollModal
           type="price"
-          onClick={() => {}}
           onClose={() => {
             setShowModal(false);
           }}
@@ -174,6 +175,7 @@ export default function DetailBody({
             productDetail.middlePrice,
             productDetail.highPrice,
           ]}
+          imgSrc={imgSrc}
         />
       )}
     </BodyWrapper>

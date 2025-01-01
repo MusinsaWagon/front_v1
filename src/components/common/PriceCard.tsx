@@ -1,41 +1,14 @@
-import styled, { useTheme } from 'styled-components';
-
-interface PriceCardProps {
-  aspectRatio: string;
-  marginTop?: string;
-  marginBottom?: string;
-  priceList: number[];
-}
-
-type CardWrapperProps = {
-  [K in keyof Omit<PriceCardProps, 'priceList'> as `$${K}`]: PriceCardProps[K];
-};
+import styled from 'styled-components';
+import PriceCardsData from '@/constant/priceCardsData.ts';
 
 export default function PriceCard({
   aspectRatio,
   marginTop,
   marginBottom,
   priceList,
+  onChange,
 }: PriceCardProps) {
-  const theme = useTheme();
-
-  const cards = [
-    {
-      type: '역대 최저가',
-      src: '/images/lowestPrice.png',
-      color: theme.colors.red,
-    },
-    {
-      type: '평균가',
-      src: '/images/currentPrice.png',
-      color: theme.colors.black,
-    },
-    {
-      type: '역대 최고가',
-      src: '/images/highestPrice.png',
-      color: theme.colors.green,
-    },
-  ];
+  const cards = PriceCardsData();
 
   return (
     <CardWrapper
@@ -44,8 +17,11 @@ export default function PriceCard({
       $aspectRatio={aspectRatio}
     >
       <Cards>
-        {cards.map((card, index) => (
-          <Card key={index}>
+        {cards.map((card: CardData, index: number) => (
+          <Card
+            key={index}
+            onClick={() => onChange && onChange(priceList[index])}
+          >
             <CardHeader>
               <img src={card.src} />
               <span>{card.type}</span>
@@ -66,6 +42,24 @@ export default function PriceCard({
     </CardWrapper>
   );
 }
+
+interface PriceCardProps {
+  aspectRatio: string;
+  marginTop?: string;
+  marginBottom?: string;
+  priceList: number[];
+  onChange?: (price: number) => void;
+}
+
+interface CardData {
+  type: string;
+  src: string;
+  color: string;
+}
+
+type CardWrapperProps = {
+  [K in keyof Omit<PriceCardProps, 'priceList'> as `$${K}`]: PriceCardProps[K];
+};
 
 const CardWrapper = styled.div<CardWrapperProps>`
   width: 100%;

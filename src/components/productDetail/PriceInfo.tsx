@@ -25,7 +25,6 @@ export default function PriceInfo({ prevPrice, curPrice }: PriceInfoProps) {
         </div>
       </Fluctuation>
       <Price>
-        <span>현재가</span>
         <div>
           <span>
             ￦ {prevPrice.toLocaleString('ko-KR', { minimumFractionDigits: 0 })}
@@ -82,10 +81,10 @@ const Fluctuation = styled.div<{ $isPriceUp: boolean }>`
 `;
 
 const Price = styled.div`
-  width: 45.64%;
+  width: 50.64%;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   span:first-child {
     font-weight: bold;
