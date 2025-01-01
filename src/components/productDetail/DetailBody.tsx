@@ -167,7 +167,6 @@ export default function DetailBody({
       {showModal && (
         <EnrollModal
           type="price"
-          onClick={() => {}}
           onClose={() => {
             setShowModal(false);
           }}
