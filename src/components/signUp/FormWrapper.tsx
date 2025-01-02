@@ -46,6 +46,7 @@ export default function FormWrapper() {
           setShowModal={setShowModal}
           showModal={showModal}
           src="/images/logo2.png"
+          url="/login"
         />
       )}
     </SignUpForm>
