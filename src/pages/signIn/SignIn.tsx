@@ -5,14 +5,28 @@ import SocialLogin from '../../components/signIn/socialLogin/SocialLogin';
 
 import { loginUser } from '../../apis/login/axios';
 import { useState } from 'react';
+import ChecksBox from '../../components/signIn/checkbox/ChecksBox';
 
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { schema, FormData } from '../../constant/loginSchema';
 const SignIn = () => {
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+  });
+
+  const handleLoginSubmit = async () => {
+    // e.preventDefault();
     try {
       const userData = await loginUser({ account, password });
       console.log('로그인 성공:', userData);
@@ -35,31 +49,33 @@ const SignIn = () => {
           <span>LOGIN</span>
         </LogoBox>
         <ImgBox>
-          <img className="login__main-logo" alt="logo" />
+          <img
+            className="login__main-logo"
+            alt="logo"
+            src="../../../public/images/logo.png"
+          />
         </ImgBox>
-        <InputBox onSubmit={handleSubmit}>
+        <InputBox onSubmit={handleSubmit(handleLoginSubmit)}>
           <Input
             type="text"
             placeholder="아이디 또는 이메일을 입력해주세요"
-            value={account}
-            onChange={(e) => setAccount(e.target.value)} // 계정 업데이트
+            {...register('account')}
+            style={{
+              borderColor: errors.account ? 'red' : '#ededed', // 에러 발생 시 테두리 색상 변경
+            }}
           />
+          {errors.account && <ErrorMsg>{errors.account.message}</ErrorMsg>}
+
           <Input
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // 비밀번호 업데이트
+            {...register('password')}
+            style={{
+              borderColor: errors.password ? 'red' : '#ededed', // 에러 발생 시 테두리 색상 변경
+            }}
           />
-          <CheckBoxContainer>
-            <CheckBox>
-              <CheckBoxInput type="checkbox" />
-              <span>아이디 저장</span>
-            </CheckBox>
-            <CheckBox>
-              <CheckBoxInput type="checkbox" />
-              <span>자동 로그인</span>
-            </CheckBox>
-          </CheckBoxContainer>
+          {errors.password && <ErrorMsg>{errors.password.message}</ErrorMsg>}
+
           <Button type="submit">Login</Button>
         </InputBox>
         <FindBox>
@@ -80,7 +96,9 @@ const SignIn = () => {
         <SocialLogin />
         <p>
           가입하고 알림받기{' '}
-          <button className="signupBtn">회원가입하러가기 {'>'}</button>
+          <button className="signupBtn" onClick={() => navigate('/signup')}>
+            회원가입하러가기 {'>'}
+          </button>
         </p>
       </BottomContainer>
     </Container>
@@ -117,6 +135,7 @@ const TopContainer = styled.div`
 const LogoBox = styled.div`
   display: flex;
   align-items: flex-start;
+  width: 80vw;
   span {
     font-size: 16px;
     color: #8f8f8f;
@@ -128,7 +147,6 @@ const ImgBox = styled.div`
   img {
     width: 40vw;
     aspect-ratio: 1.3/1;
-    background-color: gray;
   }
 `;
 
@@ -151,17 +169,6 @@ const Input = styled.input`
     color: #bcbcbc;
   }
 `;
-
-const CheckBoxContainer = styled.div``;
-
-const CheckBox = styled.label`
-  span {
-    font-size: 12px;
-    color: #727272;
-  }
-`;
-
-const CheckBoxInput = styled.input``;
 
 const FindBox = styled.div`
   margin: 5% 0 20% 0;
@@ -200,4 +207,12 @@ const Button = styled.button`
   font-weight: 800;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
 `;
+
+const ErrorMsg = styled.span`
+  font-size: 12px;
+  color: red;
+  margin-top: -8px;
+  margin-bottom: 10px;
+`;
+
 export default SignIn;

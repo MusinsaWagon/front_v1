@@ -16,7 +16,7 @@ const Header = () => {
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
   height: 79px;
-  width: calc(100vw);
+  width: 100vw;
   display: flex;
   align-items: end;
   justify-content: center;
