@@ -4,15 +4,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../../components/signIn/socialLogin/SocialLogin';
 
 import { loginUser } from '../../apis/login/axios';
-import { useState } from 'react';
+import ChecksBox from '../../components/signIn/checkbox/ChecksBox';
 
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { schema, FormData } from '../../constant/loginSchema';
 const SignIn = () => {
-  const [account, setAccount] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: 'onChange',
+  });
+
+  const handleLoginSubmit = async (data: FormData) => {
+    const { account, password } = data;
+
     try {
       const userData = await loginUser({ account, password });
       console.log('로그인 성공:', userData);
@@ -35,32 +46,36 @@ const SignIn = () => {
           <span>LOGIN</span>
         </LogoBox>
         <ImgBox>
-          <img className="login__main-logo" alt="logo" />
+          <img
+            className="login__main-logo"
+            alt="logo"
+            src="../../../public/images/logo.png"
+          />
         </ImgBox>
-        <InputBox onSubmit={handleSubmit}>
+        <InputBox onSubmit={handleSubmit(handleLoginSubmit)}>
+          {errors.account && <ErrorMsg>{errors.account.message}</ErrorMsg>}
+
           <Input
             type="text"
             placeholder="아이디 또는 이메일을 입력해주세요"
-            value={account}
-            onChange={(e) => setAccount(e.target.value)} // 계정 업데이트
+            {...register('account')}
+            style={{
+              borderColor: errors.account ? 'red' : '#ededed',
+            }}
           />
+          {errors.password && <ErrorMsg>{errors.password.message}</ErrorMsg>}
+
           <Input
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // 비밀번호 업데이트
+            {...register('password')}
+            style={{
+              borderColor: errors.password ? 'red' : '#ededed',
+            }}
           />
-          <CheckBoxContainer>
-            <CheckBox>
-              <CheckBoxInput type="checkbox" />
-              <span>아이디 저장</span>
-            </CheckBox>
-            <CheckBox>
-              <CheckBoxInput type="checkbox" />
-              <span>자동 로그인</span>
-            </CheckBox>
-          </CheckBoxContainer>
+
           <Button type="submit">Login</Button>
+          <ChecksBox />
         </InputBox>
         <FindBox>
           <span>
@@ -80,7 +95,9 @@ const SignIn = () => {
         <SocialLogin />
         <p>
           가입하고 알림받기{' '}
-          <button className="signupBtn">회원가입하러가기 {'>'}</button>
+          <button className="signupBtn" onClick={() => navigate('/signup')}>
+            회원가입하러가기 {'>'}
+          </button>
         </p>
       </BottomContainer>
     </Container>
@@ -117,6 +134,7 @@ const TopContainer = styled.div`
 const LogoBox = styled.div`
   display: flex;
   align-items: flex-start;
+  width: 80vw;
   span {
     font-size: 16px;
     color: #8f8f8f;
@@ -128,14 +146,13 @@ const ImgBox = styled.div`
   img {
     width: 40vw;
     aspect-ratio: 1.3/1;
-    background-color: gray;
   }
 `;
 
 const InputBox = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 5px;
 `;
 
 const Input = styled.input`
@@ -152,19 +169,8 @@ const Input = styled.input`
   }
 `;
 
-const CheckBoxContainer = styled.div``;
-
-const CheckBox = styled.label`
-  span {
-    font-size: 12px;
-    color: #727272;
-  }
-`;
-
-const CheckBoxInput = styled.input``;
-
 const FindBox = styled.div`
-  margin: 5% 0 20% 0;
+  margin: 5% 0 10% 0;
   span {
     font-size: 12px;
     color: #a0a0a0;
@@ -176,6 +182,7 @@ const FindBox = styled.div`
 
 const BottomContainer = styled.div`
   margin-top: 10px;
+  padding: 0 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -188,6 +195,7 @@ const BottomContainer = styled.div`
   .signupBtn {
     color: #6e99c0;
     background-color: transparent;
+    margin-left: 5px;
   }
 `;
 const Button = styled.button`
@@ -200,4 +208,13 @@ const Button = styled.button`
   font-weight: 800;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
 `;
+
+const ErrorMsg = styled.span`
+  font-size: 0.6rem;
+  color: red;
+  display: flex;
+  justify-content: start;
+  margin-top: 5px;
+`;
+
 export default SignIn;

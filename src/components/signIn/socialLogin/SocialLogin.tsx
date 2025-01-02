@@ -4,10 +4,10 @@ const SocialLogin = () => {
   return (
     <Container>
       <Btn href={KAKAO_AUTH_URL}>
-        <img />
+        <img src="../../../../public/images/kakaoIcon.png" />
       </Btn>
       <Btn href={NAVER_AUTH_URL}>
-        <img />
+        <img src="../../../../public/images/naverIcon.png" />
       </Btn>
     </Container>
   );
@@ -23,6 +23,8 @@ const Btn = styled.a`
   width: 50px;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  background-color: #4e6172;
+  img {
+    width: 100%;
+  }
 `;
 export default SocialLogin;
