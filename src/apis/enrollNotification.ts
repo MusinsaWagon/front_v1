@@ -8,7 +8,7 @@ interface ProductData {
 
 export const enrollNotification = async (productData: ProductData) => {
   try {
-    const res = await axiosInstance.post('/users/join', {
+    const res = await axiosInstance.post('/alarm/register', {
       price: productData.price,
       productId: productData.productId,
       fcmToken: localStorage.getItem('fcmToken'),
