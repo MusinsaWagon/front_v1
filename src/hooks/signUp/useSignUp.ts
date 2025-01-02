@@ -17,7 +17,7 @@ export const checkDupId = async (
     const res = await axiosInstance.post(`/users/checkEmail`, {
       email,
     });
-    const data = await res.data.duplicated;
+    const data = await res.data.data.duplicated;
     console.log('중복 확인');
     return data;
   } catch (error) {
