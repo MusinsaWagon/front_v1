@@ -4,16 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../../components/signIn/socialLogin/SocialLogin';
 
 import { loginUser } from '../../apis/login/axios';
-import { useState } from 'react';
 import ChecksBox from '../../components/signIn/checkbox/ChecksBox';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { schema, FormData } from '../../constant/loginSchema';
 const SignIn = () => {
-  const [account, setAccount] = useState('');
-  const [password, setPassword] = useState('');
-
   const navigate = useNavigate();
 
   const {
@@ -25,8 +21,9 @@ const SignIn = () => {
     mode: 'onChange',
   });
 
-  const handleLoginSubmit = async () => {
-    // e.preventDefault();
+  const handleLoginSubmit = async (data: FormData) => {
+    const { account, password } = data;
+
     try {
       const userData = await loginUser({ account, password });
       console.log('로그인 성공:', userData);
@@ -56,27 +53,29 @@ const SignIn = () => {
           />
         </ImgBox>
         <InputBox onSubmit={handleSubmit(handleLoginSubmit)}>
+          {errors.account && <ErrorMsg>{errors.account.message}</ErrorMsg>}
+
           <Input
             type="text"
             placeholder="아이디 또는 이메일을 입력해주세요"
             {...register('account')}
             style={{
-              borderColor: errors.account ? 'red' : '#ededed', // 에러 발생 시 테두리 색상 변경
+              borderColor: errors.account ? 'red' : '#ededed',
             }}
           />
-          {errors.account && <ErrorMsg>{errors.account.message}</ErrorMsg>}
+          {errors.password && <ErrorMsg>{errors.password.message}</ErrorMsg>}
 
           <Input
             type="password"
             placeholder="비밀번호를 입력해주세요"
             {...register('password')}
             style={{
-              borderColor: errors.password ? 'red' : '#ededed', // 에러 발생 시 테두리 색상 변경
+              borderColor: errors.password ? 'red' : '#ededed',
             }}
           />
-          {errors.password && <ErrorMsg>{errors.password.message}</ErrorMsg>}
 
           <Button type="submit">Login</Button>
+          <ChecksBox />
         </InputBox>
         <FindBox>
           <span>
@@ -153,7 +152,7 @@ const ImgBox = styled.div`
 const InputBox = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 5px;
 `;
 
 const Input = styled.input`
@@ -171,7 +170,7 @@ const Input = styled.input`
 `;
 
 const FindBox = styled.div`
-  margin: 5% 0 20% 0;
+  margin: 5% 0 10% 0;
   span {
     font-size: 12px;
     color: #a0a0a0;
@@ -183,6 +182,7 @@ const FindBox = styled.div`
 
 const BottomContainer = styled.div`
   margin-top: 10px;
+  padding: 0 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -195,6 +195,7 @@ const BottomContainer = styled.div`
   .signupBtn {
     color: #6e99c0;
     background-color: transparent;
+    margin-left: 5px;
   }
 `;
 const Button = styled.button`
@@ -209,10 +210,11 @@ const Button = styled.button`
 `;
 
 const ErrorMsg = styled.span`
-  font-size: 12px;
+  font-size: 0.6rem;
   color: red;
-  margin-top: -8px;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  margin-top: 5px;
 `;
 
 export default SignIn;

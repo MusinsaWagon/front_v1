@@ -37,6 +37,7 @@ const CheckBoxContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 4px;
 `;
 
 const CheckBox = styled.span`
