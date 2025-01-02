@@ -8,6 +8,7 @@ interface ModalProps {
   setShowModal: (isShow: boolean) => void;
   showModal: boolean;
   src: string;
+  url: string;
 }
 
 export default function Modal({
@@ -15,6 +16,7 @@ export default function Modal({
   setShowModal,
   showModal,
   src,
+  url,
 }: ModalProps) {
   const navigate = useNavigate();
 
@@ -59,7 +61,7 @@ export default function Modal({
           msg="로그인하기"
           width="80.6%"
           borderRadius="100px"
-          onClick={() => navigate('/login')}
+          onClick={() => navigate(url)}
           aspectRatio="324/40"
         />
       </ReactModal>

@@ -6,10 +6,11 @@ import ProductCard from '../common/ProductCard';
 import PriceCard from '../common/PriceCard';
 import UserInput from '../common/UserInput';
 import Button from '../common/Button';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useMutate } from '../../hooks/useMutation';
 import { enrollNotification } from '../../apis/enrollNotification';
 import { useParams } from 'react-router-dom';
+import Modal from '../common/Modal';
 
 export default function EnrollModal({
   type,
@@ -20,7 +21,10 @@ export default function EnrollModal({
   const inputInfo = getInputInfos(type);
   const priceRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
-  const enrollNotificationMutate = useMutate(enrollNotification, () => {});
+  const [showModal, setShowModal] = useState(false);
+  const enrollNotificationMutate = useMutate(enrollNotification, () => {
+    setShowModal(true);
+  });
 
   const selectPrice = (price: number) => {
     priceRef.current!.value = price.toString();
@@ -64,6 +68,15 @@ export default function EnrollModal({
             msg="알림 등록하기"
           />
         </Content>
+        {showModal && (
+          <Modal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            msg="알림 등록이 완료되었습니다."
+            src="/images/logo2.png"
+            url=""
+          />
+        )}
       </Wrapper>
     </Background>
   );
