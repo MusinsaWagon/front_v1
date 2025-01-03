@@ -1,5 +1,5 @@
 import axios from 'axios';
-import axiosInstance from './axiosInstance';
+import { APIService } from '../axiosInstance';
 
 interface ProductData {
   price: number;
@@ -8,12 +8,12 @@ interface ProductData {
 
 export const enrollNotification = async (productData: ProductData) => {
   try {
-    const res = await axiosInstance.post('/alarm/register', {
+    const res = await APIService.private.post('/alarm/register', {
       price: productData.price,
       productId: productData.productId,
       fcmToken: localStorage.getItem('fcmToken'),
     });
-    return res.data;
+    return res;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const errorMessage =

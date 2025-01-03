@@ -8,7 +8,7 @@ import UserInput from '../common/UserInput';
 import Button from '../common/Button';
 import { useRef, useState } from 'react';
 import { useMutate } from '../../hooks/useMutation';
-import { enrollNotification } from '../../apis/enrollNotification';
+import { enrollNotification } from '../../apis/productDetail/enrollNotification';
 import { useParams } from 'react-router-dom';
 import Modal from '../common/Modal';
 
@@ -75,6 +75,7 @@ export default function EnrollModal({
             msg="알림 등록이 완료되었습니다."
             src="/images/logo2.png"
             url=""
+            btnMsg="확인"
           />
         )}
       </Wrapper>
