@@ -2,17 +2,23 @@ import styled from 'styled-components';
 import Image from '../common/Image';
 import heartIcon from '../../assets/images/heartIcon.png';
 import { useState } from 'react';
+import { useMutate } from '../../hooks/useMutation';
+import {
+  likeProduct,
+  unlikeProduct,
+} from '../../apis/productDetail/getProductDetail';
 
-interface ProductImageProps {
-  url: string;
-}
-
-export default function ProductImage({ url }: ProductImageProps) {
+export default function ProductImage({ url, id }: ProductImageProps) {
   const [isHeart, setIsHeart] = useState(false);
 
   const handleHeartClick = () => {
+    mutation.mutate(id || '');
     setIsHeart(!isHeart);
   };
+
+  const mutation = useMutate(!isHeart ? likeProduct : unlikeProduct, () =>
+    setIsHeart(true)
+  );
 
   return (
     <ImageWrapper>
@@ -55,3 +61,8 @@ const Heart = styled.button<{ $isHeart: boolean }>`
     aspect-ratio: 26/23;
   }
 `;
+
+interface ProductImageProps {
+  url: string;
+  id: string | undefined;
+}
