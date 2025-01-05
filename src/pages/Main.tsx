@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 //components
 import SearchBox from '../components/mainPage/SearchBox';
 import BrandsBox from '../components/mainPage/BrandsBox';
 import ProductPreviewList from '../components/mainPage/ProductPreviewList';
 import EntireProductList from '../components/mainPage/EntireProductList';
+
+//drawer
+import CategoryDrawer from '../components/mainPage/categorys/CategoryDrawer';
 
 //imgs
 import musinsa from '../assets/images/musinsa.png';
@@ -15,30 +19,59 @@ import zigzag from '../assets/images/zigzag.png';
 //axios
 import Inquiry from '../components/mainPage/Inquiry';
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   const location = useLocation().pathname;
+  const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
+
+  // Disable/Enable scrolling
+  useEffect(() => {
+    if (isDrawerVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cleanup to reset on unmount
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isDrawerVisible]);
+
   return (
-    <Container>
-      <TopBox>
-        <SearchBox />
-        <BrandsContainer>
-          <BrandsBox imgSrc={musinsa} name="ALL" />
-          <BrandsBox imgSrc={musinsa} name="MUSINSA" />
-          <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
-          <BrandsBox imgSrc={ably} name="ABLY" />
-        </BrandsContainer>
-      </TopBox>
-      <InnerContainer>
-        {location === '/entire' ? (
-          <EntireProductList />
-        ) : (
-          <ProductPreviewList />
-        )}
-      </InnerContainer>
-      <Inquiry />
-    </Container>
+    <Outer>
+      <Container>
+        <TopBox>
+          <SearchBox setIsDrawerVisible={setIsDrawerVisible} />
+          <BrandsContainer>
+            <BrandsBox imgSrc={musinsa} name="ALL" />
+            <BrandsBox imgSrc={musinsa} name="MUSINSA" />
+            <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
+            <BrandsBox imgSrc={ably} name="ABLY" />
+          </BrandsContainer>
+        </TopBox>
+        <InnerContainer>
+          {location === '/entire' ? (
+            <EntireProductList />
+          ) : (
+            <ProductPreviewList />
+          )}
+        </InnerContainer>
+        <Inquiry />
+      </Container>
+      {isDrawerVisible && (
+        <CategoryDrawer
+          $isVisible={isDrawerVisible}
+          setIsDrawerVisible={setIsDrawerVisible}
+        />
+      )}
+    </Outer>
   );
 };
+
+const Outer = styled.div`
+  position: relative;
+`;
+
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
   position: relative;

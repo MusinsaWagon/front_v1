@@ -44,8 +44,8 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
         <Arrow onClick={handleArrowClick}>〉</Arrow>
       </TitleBox>
       <ItemsContainer>
-        {datas?.map((data) => (
-          <Item info={data} />
+        {datas?.map((data, index) => (
+          <Item key={index} info={data} />
         ))}
       </ItemsContainer>
     </Container>

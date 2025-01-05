@@ -2,14 +2,18 @@ import styled from 'styled-components';
 
 import searchIcon from '../../assets/images/searchIcon.png';
 import hamburger from '../../assets/images/hamburger.png';
-const SearchBox = () => {
+
+interface SearchBoxProps {
+  setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const SearchBox: React.FC<SearchBoxProps> = ({ setIsDrawerVisible }) => {
   return (
     <Container>
       <SearchContainer>
         <Icon src={searchIcon} />
         <InputBox placeholder="원하는 상품, 브랜드 검색" />
       </SearchContainer>
-      <BurgerBtn>
+      <BurgerBtn onClick={() => setIsDrawerVisible((pro) => !pro)}>
         <Icon src={hamburger} />
       </BurgerBtn>
     </Container>
