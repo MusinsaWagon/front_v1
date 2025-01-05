@@ -8,39 +8,7 @@ import basket from '../../assets/images/basket.png';
 import bell from '/images/bell.png';
 import EnrollModal from './EnrollModal';
 import { useState } from 'react';
-
-interface DetailBodyProps {
-  basicProductInfo: {
-    brand: string;
-    name: string;
-    starScore: number;
-    likeCount: number;
-    reviewCount: number;
-    previousPrice: number;
-    currentPrice: number;
-  };
-  parentAndChildCategoryDTO: {
-    parentCategory: {
-      categoryName: string;
-    };
-    childCategory: {
-      categoryName: string;
-    };
-  };
-  productDetail: {
-    lowPrice: number;
-    highPrice: number;
-    middlePrice: number;
-    productUrl: string;
-  };
-  productHistoryList: [
-    {
-      createdAt: string;
-      price: number;
-    }
-  ];
-  imgSrc: string | undefined;
-}
+import Modal from '../common/Modal';
 
 export default function DetailBody({
   basicProductInfo,
@@ -49,7 +17,20 @@ export default function DetailBody({
   productHistoryList,
   imgSrc,
 }: DetailBodyProps) {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); // 알림 등록 모달
+  const [showModal2, setShowModal2] = useState(false); // 미로그인 상태로 알림 등록 눌렀을 때
+
+  const checkLogin = () => {
+    if (
+      localStorage.getItem('accessToken') &&
+      localStorage.getItem('accessToken') !== 'null'
+    ) {
+      setShowModal(true);
+    } else {
+      setShowModal2(true);
+    }
+  };
+
   const data1M = [
     { date: '2024-10-01', price: 29900 },
     { date: '2024-10-03', price: 31000 },
@@ -134,9 +115,7 @@ export default function DetailBody({
           aspectRatio="176/35"
           borderRadius="7px"
           src={bell}
-          onClick={() => {
-            setShowModal(true);
-          }}
+          onClick={checkLogin}
           msg="알림 등록"
         />
       </BtnWrapper>
@@ -176,6 +155,16 @@ export default function DetailBody({
             productDetail.highPrice,
           ]}
           imgSrc={imgSrc}
+        />
+      )}
+      {showModal2 && (
+        <Modal
+          msg="로그인이 필요한 서비스입니다."
+          showModal={showModal2}
+          setShowModal={setShowModal2}
+          url="/login"
+          src="/images/logo2.png"
+          btnMsg="로그인하러 가기"
         />
       )}
     </BodyWrapper>
@@ -235,3 +224,36 @@ const ChartWrapper = styled.div`
   padding-top: 11px;
   margin-top: 7px;
 `;
+
+interface DetailBodyProps {
+  basicProductInfo: {
+    brand: string;
+    name: string;
+    starScore: number;
+    likeCount: number;
+    reviewCount: number;
+    previousPrice: number;
+    currentPrice: number;
+  };
+  parentAndChildCategoryDTO: {
+    parentCategory: {
+      categoryName: string;
+    };
+    childCategory: {
+      categoryName: string;
+    };
+  };
+  productDetail: {
+    lowPrice: number;
+    highPrice: number;
+    middlePrice: number;
+    productUrl: string;
+  };
+  productHistoryList: [
+    {
+      createdAt: string;
+      price: number;
+    }
+  ];
+  imgSrc: string | undefined;
+}
