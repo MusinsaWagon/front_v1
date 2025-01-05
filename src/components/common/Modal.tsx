@@ -9,6 +9,7 @@ interface ModalProps {
   showModal: boolean;
   src: string;
   url: string;
+  btnMsg: string;
 }
 
 export default function Modal({
@@ -17,6 +18,7 @@ export default function Modal({
   showModal,
   src,
   url,
+  btnMsg,
 }: ModalProps) {
   const navigate = useNavigate();
 
@@ -58,7 +60,7 @@ export default function Modal({
         <ModalImg src={src} alt="logo" />
         <ModalMsg>{msg}</ModalMsg>
         <Button
-          msg="로그인하기"
+          msg={btnMsg}
           width="80.6%"
           borderRadius="100px"
           onClick={() => navigate(url)}

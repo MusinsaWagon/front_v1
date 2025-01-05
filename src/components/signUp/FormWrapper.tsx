@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../common/Button';
 import { schema, FormData } from '../../constant/signUpSchema';
 import UserInputContainer from './UserInputContainer';
-import { signup, UserData } from '../../hooks/signUp/useSignUp';
+import { signup, UserData } from '../../apis/signUp/useSignUp';
 import { useState } from 'react';
 import Modal from '../common/Modal';
 import { useMutate } from '../../hooks/useMutation';
@@ -42,6 +42,7 @@ export default function FormWrapper() {
       />
       {showModal && (
         <Modal
+          btnMsg="로그인하러 가기"
           msg="회원가입 성공"
           setShowModal={setShowModal}
           showModal={showModal}

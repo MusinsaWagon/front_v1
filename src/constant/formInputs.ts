@@ -1,7 +1,7 @@
 import { UseFormWatch, FieldErrorsImpl } from 'react-hook-form';
 import { InputAction, schema } from './signUpSchema';
 import { z } from 'zod';
-import { checkDupId, sendEmail } from '../hooks/signUp/useSignUp';
+import { checkDupId, sendEmail } from '../apis/signUp/useSignUp';
 type FormData = z.infer<typeof schema>;
 
 export type FormInputType = {
