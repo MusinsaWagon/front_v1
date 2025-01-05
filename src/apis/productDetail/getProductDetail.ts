@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { APIService } from '../axiosInstance';
 
 export const getProduct = async (shopType: string, id: string | undefined) => {
@@ -11,8 +12,15 @@ export const getProduct = async (shopType: string, id: string | undefined) => {
     );
     const data = await res.data;
     return data;
-  } catch {
-    alert('상품을 불러오는 중 오류가 발생했습니다.');
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.response?.data?.data?.message || '오류가 발생했습니다.';
+      alert(errorMessage);
+      throw new Error(errorMessage);
+    } else {
+      alert('상품을 불러오는 중 오류가 발생했습니다.');
+    }
   }
 };
 
