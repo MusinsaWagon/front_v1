@@ -3,7 +3,7 @@ import DetailBody from '../../components/productDetail/DetailBody';
 import ProductImage from '../../components/productDetail/ProductImage';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useParams } from 'react-router-dom';
-import { getProduct } from '../../hooks/productDetail/getProductDetail';
+import { getProduct } from '../../apis/productDetail/getProductDetail';
 import Loading from '../../components/common/Loading';
 
 export default function ProductDetail() {
@@ -15,6 +15,7 @@ export default function ProductDetail() {
     queryKey: ['product', id],
     queryFn: () => getProduct(site, id),
     staleTime: 1000 * 5 * 60,
+    refetchOnWindowFocus: false,
   });
 
   return isLoading ? (
@@ -23,7 +24,7 @@ export default function ProductDetail() {
     <div>Error loading product</div>
   ) : (
     <PageWrapper>
-      <ProductImage url={data.basicProductInfo.imgUrl} />
+      <ProductImage url={data.basicProductInfo.imgUrl} id={id} />
       <DetailBody
         productDetail={data.productDetail}
         parentAndChildCategoryDTO={data.parentAndChildCategoryDTO}
