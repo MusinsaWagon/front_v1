@@ -1,5 +1,4 @@
-import axiosInstance from '../axiosInstance';
-
+import { APIService } from '../axiosInstance';
 interface LoginDatas {
   account: string;
   password: string;
@@ -16,7 +15,7 @@ export const loginUser = async ({
 }: LoginDatas): Promise<LoginResponse | undefined> => {
   const data = { account, password };
   try {
-    const response = await axiosInstance.post('/users/login', data);
+    const response = await APIService.public.post('/users/login', data);
     console.log('Response:', response.data.data);
     return response.data.data;
   } catch (error) {

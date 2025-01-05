@@ -20,7 +20,8 @@ const Btn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 80;
 `;
 const Img = styled.img`
   height: 18.29px;
