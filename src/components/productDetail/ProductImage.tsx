@@ -3,9 +3,18 @@ import Image from '../common/Image';
 import heartIcon from '../../assets/images/heartIcon.png';
 import { useMutate } from '../../hooks/useMutation';
 import { likeProduct } from '../../apis/productDetail/getProductDetail';
+import { useState } from 'react';
+import Modal from '../common/Modal';
 
 export default function ProductImage({ url, id, isLiked }: ProductImageProps) {
+  const [showModal, setShowModal] = useState(false);
+
   const handleHeartClick = () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token || token === 'null') {
+      setShowModal(true);
+      return;
+    }
     mutation.mutate(id || '');
   };
 
@@ -22,6 +31,16 @@ export default function ProductImage({ url, id, isLiked }: ProductImageProps) {
       <Heart onClick={handleHeartClick} $isLiked={isLiked}>
         <img src={heartIcon} />
       </Heart>
+      {showModal && (
+        <Modal
+          msg="로그인이 필요한 서비스입니다."
+          setShowModal={setShowModal}
+          showModal={showModal}
+          btnMsg="로그인하기"
+          src="/images/logo2.png"
+          url="/login"
+        />
+      )}
     </ImageWrapper>
   );
 }
