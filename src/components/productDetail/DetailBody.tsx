@@ -130,10 +130,7 @@ export default function DetailBody({
         ]}
       />
       <FluctDate>
-        <figcaption>
-          최근 가격 변동:{' '}
-          {productHistoryList[productHistoryList.length - 1].createdAt}
-        </figcaption>
+        <figcaption>최근 가격 변동: {productHistoryList.recentDate}</figcaption>
       </FluctDate>
       <ChartWrapper>
         <PriceChart
@@ -249,11 +246,11 @@ interface DetailBodyProps {
     middlePrice: number;
     productUrl: string;
   };
-  productHistoryList: [
-    {
-      createdAt: string;
-      price: number;
-    }
-  ];
+  productHistoryList: {
+    oneWeekList: [];
+    oneMonthList: [];
+    threeMonthList: [];
+    recentDate: string;
+  };
   imgSrc: string | undefined;
 }
