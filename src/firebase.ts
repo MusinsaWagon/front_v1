@@ -39,8 +39,7 @@ export const requestNotificationPermission = async (): Promise<void> => {
 
   if (currentPermission === 'granted') {
     const token = await getToken(messaging, {
-      vapidKey:
-        'BB6Xxmxhebp9JasaO5jvzIjLssA9LjcHWAUPAZKm388rpVzIxquoM1Ar988UiuhDp3rS-vZEmgoyj6lib01dVTc',
+      vapidKey: process.env.VITE_FCM_KEY,
     });
     console.log('알림 권한이 이미 승인되었습니다.');
     localStorage.setItem('fcmToken', token);
