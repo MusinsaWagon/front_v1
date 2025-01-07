@@ -7,7 +7,7 @@ export const getProduct = async (shopType: string, id: string | undefined) => {
     return;
   }
   try {
-    const res = await APIService.public.get(
+    const res = await APIService.private.get(
       `/products/${shopType}/${parseInt(id)}`
     );
     const data = await res.data;
@@ -17,6 +17,7 @@ export const getProduct = async (shopType: string, id: string | undefined) => {
       const errorMessage =
         error.response?.data?.data?.message || '오류가 발생했습니다.';
       alert(errorMessage);
+      window.location.href = '/';
       throw new Error(errorMessage);
     } else {
       alert('상품을 불러오는 중 오류가 발생했습니다.');

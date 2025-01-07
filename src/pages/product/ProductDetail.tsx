@@ -24,12 +24,16 @@ export default function ProductDetail() {
     <div>Error loading product</div>
   ) : (
     <PageWrapper>
-      <ProductImage url={data.basicProductInfo.imgUrl} id={id} />
+      <ProductImage
+        isLiked={data.basicProductInfo.isLiked}
+        url={data.basicProductInfo.imgUrl}
+        id={id}
+      />
       <DetailBody
         productDetail={data.productDetail}
         parentAndChildCategoryDTO={data.parentAndChildCategoryDTO}
         basicProductInfo={data.basicProductInfo}
-        productHistoryList={data.productHistoryList}
+        productHistoryList={data.productHistoryLists}
         imgSrc={data.basicProductInfo.imgUrl}
       />
     </PageWrapper>

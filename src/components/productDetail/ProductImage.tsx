@@ -1,24 +1,24 @@
 import styled from 'styled-components';
 import Image from '../common/Image';
 import heartIcon from '../../assets/images/heartIcon.png';
-import { useState } from 'react';
 import { useMutate } from '../../hooks/useMutation';
-import {
-  likeProduct,
-  unlikeProduct,
-} from '../../apis/productDetail/getProductDetail';
+import { likeProduct } from '../../apis/productDetail/getProductDetail';
+import { useState } from 'react';
+import Modal from '../common/Modal';
 
-export default function ProductImage({ url, id }: ProductImageProps) {
-  const [isHeart, setIsHeart] = useState(false);
+export default function ProductImage({ url, id, isLiked }: ProductImageProps) {
+  const [showModal, setShowModal] = useState(false);
 
   const handleHeartClick = () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token || token === 'null') {
+      setShowModal(true);
+      return;
+    }
     mutation.mutate(id || '');
-    setIsHeart(!isHeart);
   };
 
-  const mutation = useMutate(!isHeart ? likeProduct : unlikeProduct, () =>
-    setIsHeart(true)
-  );
+  const mutation = useMutate(likeProduct);
 
   return (
     <ImageWrapper>
@@ -28,9 +28,19 @@ export default function ProductImage({ url, id }: ProductImageProps) {
         src={'https://image.msscdn.net' + url}
         borderRadius="20px"
       />
-      <Heart onClick={handleHeartClick} $isHeart={isHeart}>
+      <Heart onClick={handleHeartClick} $isLiked={isLiked}>
         <img src={heartIcon} />
       </Heart>
+      {showModal && (
+        <Modal
+          msg="로그인이 필요한 서비스입니다."
+          setShowModal={setShowModal}
+          showModal={showModal}
+          btnMsg="로그인하기"
+          src="/images/logo2.png"
+          url="/login"
+        />
+      )}
     </ImageWrapper>
   );
 }
@@ -42,15 +52,15 @@ const ImageWrapper = styled.div`
   margin-bottom: -20px;
 `;
 
-const Heart = styled.button<{ $isHeart: boolean }>`
+const Heart = styled.button<{ $isLiked: boolean }>`
   width: 9.45%;
   aspect-ratio: 1/1;
   border-radius: 5px;
   position: absolute;
   bottom: 20px;
   right: 20px;
-  background-color: ${({ $isHeart, theme }) =>
-    $isHeart ? theme.colors.yellow : 'rgba(0, 0, 0, 0.3)'};
+  background-color: ${({ $isLiked, theme }) =>
+    $isLiked ? theme.colors.yellow : 'rgba(0, 0, 0, 0.3)'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,4 +75,5 @@ const Heart = styled.button<{ $isHeart: boolean }>`
 interface ProductImageProps {
   url: string;
   id: string | undefined;
+  isLiked: boolean;
 }
