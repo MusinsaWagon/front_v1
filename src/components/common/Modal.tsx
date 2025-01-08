@@ -63,7 +63,10 @@ export default function Modal({
           msg={btnMsg}
           width="80.6%"
           borderRadius="100px"
-          onClick={() => navigate(url)}
+          onClick={() => {
+            if (url === '') window.location.reload();
+            navigate(url);
+          }}
           aspectRatio="324/40"
         />
       </ReactModal>
