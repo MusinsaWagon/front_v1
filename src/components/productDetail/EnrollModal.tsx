@@ -16,6 +16,9 @@ export default function EnrollModal({
   type,
   priceList,
   onClose,
+  name,
+  brand,
+  currentPrice,
   imgSrc,
 }: ModalProps) {
   const inputInfo = getInputInfos(type);
@@ -45,7 +48,13 @@ export default function EnrollModal({
             <CloseBtn width="5.3%" ratio="1/1" onClick={onClose} />
           </CloseBtnWrapper>
           <HeaderSection type={type} />
-          <ProductCard src={imgSrc} label="알림 원하는 상품" />
+          <ProductCard
+            name={name}
+            brand={brand}
+            currentPrice={currentPrice}
+            src={imgSrc}
+            label="알림 원하는 상품"
+          />
           <PriceCard
             priceList={priceList}
             aspectRatio="334/64"
@@ -87,6 +96,9 @@ interface ModalProps {
   type: string;
   priceList: number[];
   onClose: () => void;
+  name: string;
+  brand: string;
+  currentPrice: number;
   imgSrc: string | undefined;
 }
 
