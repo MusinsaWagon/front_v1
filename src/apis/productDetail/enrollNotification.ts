@@ -10,7 +10,7 @@ export const enrollNotification = async (productData: ProductData) => {
   try {
     const res = await APIService.private.post('/alarm/register', {
       price: productData.price,
-      productId: productData.productId,
+      productNumber: productData.productId,
       fcmToken: localStorage.getItem('fcmToken'),
     });
     return res;
