@@ -5,13 +5,32 @@ import hamburger from '../../assets/images/hamburger.png';
 
 interface SearchBoxProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  renderedPage: string;
+  onClick?: () => void;
+  setSearchCont?: React.Dispatch<React.SetStateAction<string>>;
 }
-const SearchBox: React.FC<SearchBoxProps> = ({ setIsDrawerVisible }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({
+  setIsDrawerVisible,
+  onClick,
+  renderedPage,
+  setSearchCont,
+}) => {
   return (
     <Container>
       <SearchContainer>
         <Icon src={searchIcon} />
-        <InputBox placeholder="원하는 상품, 브랜드 검색" />
+        {renderedPage === 'main' ? (
+          <InputBox placeholder="원하는 상품, 브랜드 검색" onClick={onClick} />
+        ) : (
+          <InputBox
+            placeholder="원하는 상품, 브랜드 검색"
+            onChange={(e) => {
+              if (setSearchCont) {
+                setSearchCont(e.target.value);
+              }
+            }}
+          />
+        )}
       </SearchContainer>
       <BurgerBtn onClick={() => setIsDrawerVisible((pro) => !pro)}>
         <Icon src={hamburger} />
@@ -24,8 +43,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   gap: 12px;
+  width: 100%;
 `;
 const SearchContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.gray};
@@ -42,6 +61,7 @@ const SearchContainer = styled.div`
 
 const InputBox = styled.input`
   background-color: transparent;
+  width: 100%;
   border: none;
   color: #ffffff;
   font-size: 10px;

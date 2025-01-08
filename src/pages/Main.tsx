@@ -11,6 +11,9 @@ import EntireProductList from '../components/mainPage/EntireProductList';
 //drawer
 import CategoryDrawer from '../components/mainPage/categorys/CategoryDrawer';
 
+//SearchModal
+import SearchModal from '../components/search/SearchModal';
+
 //imgs
 import musinsa from '../assets/images/musinsa.png';
 import ably from '../assets/images/ably.png';
@@ -22,10 +25,10 @@ import Inquiry from '../components/mainPage/Inquiry';
 const MainPage: React.FC = () => {
   const location = useLocation().pathname;
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
-
+  const [isSearchVisible, setIsSearchVisible] = useState(true);
   // Disable/Enable scrolling
   useEffect(() => {
-    if (isDrawerVisible) {
+    if (isDrawerVisible || isSearchVisible) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -35,13 +38,20 @@ const MainPage: React.FC = () => {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isDrawerVisible]);
+  }, [isDrawerVisible, isSearchVisible]);
 
+  useEffect(() => {
+    console.log();
+  }, [isDrawerVisible]);
   return (
     <Outer>
       <Container>
         <TopBox>
-          <SearchBox setIsDrawerVisible={setIsDrawerVisible} />
+          <SearchBox
+            setIsDrawerVisible={setIsDrawerVisible}
+            renderedPage="main"
+            onClick={() => setIsSearchVisible(true)}
+          />
           <BrandsContainer>
             <BrandsBox imgSrc={musinsa} name="ALL" />
             <BrandsBox imgSrc={musinsa} name="MUSINSA" />
@@ -58,10 +68,16 @@ const MainPage: React.FC = () => {
         </InnerContainer>
         <Inquiry />
       </Container>
-      {isDrawerVisible && (
-        <CategoryDrawer
-          $isVisible={isDrawerVisible}
+      {/* {isDrawerVisible && ( */}
+      <CategoryDrawer
+        $isVisible={isDrawerVisible}
+        setIsDrawerVisible={setIsDrawerVisible}
+      />
+      {/* )} */}
+      {isSearchVisible && (
+        <SearchModal
           setIsDrawerVisible={setIsDrawerVisible}
+          setIsSearchVisible={setIsSearchVisible}
         />
       )}
     </Outer>
