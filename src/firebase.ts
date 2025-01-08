@@ -50,6 +50,7 @@ export const requestNotificationPermission = async (): Promise<void> => {
     console.log(
       '알림 권한이 거부되었습니다. 사용자가 직접 설정을 변경해야 합니다.'
     );
+    alert('알림 승인 필요');
   }
 
   // "default" 상태일 때만 요청
