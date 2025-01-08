@@ -32,9 +32,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({
           />
         )}
       </SearchContainer>
-      <BurgerBtn onClick={() => setIsDrawerVisible((pro) => !pro)}>
-        <Icon src={hamburger} />
-      </BurgerBtn>
+      {renderedPage === 'main' && (
+        <BurgerBtn onClick={() => setIsDrawerVisible((pro) => !pro)}>
+          <Icon src={hamburger} />
+        </BurgerBtn>
+      )}
     </Container>
   );
 };
@@ -48,7 +50,7 @@ const Container = styled.div`
 `;
 const SearchContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.gray};
-  width: 85%;
+  width: 100%;
   height: 38px;
   box-sizing: border-box;
   border-radius: 45px;

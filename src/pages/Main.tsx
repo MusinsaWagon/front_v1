@@ -12,7 +12,7 @@ import EntireProductList from '../components/mainPage/EntireProductList';
 import CategoryDrawer from '../components/mainPage/categorys/CategoryDrawer';
 
 //SearchModal
-// import SearchModal from '../components/search/SearchModal';
+import SearchModal from '../components/search/SearchModal';
 
 //imgs
 import musinsa from '../assets/images/musinsa.png';
@@ -74,12 +74,12 @@ const MainPage: React.FC = () => {
         setIsDrawerVisible={setIsDrawerVisible}
       />
       {/* )} */}
-      {/* {isSearchVisible && (
+      {isSearchVisible && (
         <SearchModal
           setIsDrawerVisible={setIsDrawerVisible}
           setIsSearchVisible={setIsSearchVisible}
         />
-      )} */}
+      )}
     </Outer>
   );
 };
