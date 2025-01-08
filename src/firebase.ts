@@ -41,6 +41,7 @@ export const requestNotificationPermission = async (): Promise<void> => {
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_FCM_KEY,
     });
+    alert(token);
     console.log('알림 권한이 이미 승인되었습니다.');
     localStorage.setItem('fcmToken', token);
   }
@@ -59,6 +60,7 @@ export const requestNotificationPermission = async (): Promise<void> => {
         const token = await getToken(messaging, {
           vapidKey: import.meta.env.VITE_FCM_KEY,
         });
+        alert(token);
         console.log('알림 권한이 승인되었습니다.');
         console.log('FCM Token:', token);
         localStorage.setItem('fcmToken', token);
