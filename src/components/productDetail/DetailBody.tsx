@@ -151,6 +151,9 @@ export default function DetailBody({
             productDetail.middlePrice,
             productDetail.highPrice,
           ]}
+          name={basicProductInfo.name}
+          brand={basicProductInfo.brand}
+          currentPrice={basicProductInfo.currentPrice}
           imgSrc={imgSrc}
         />
       )}

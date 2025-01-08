@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import Image from './Image';
 import LineHeader from './LineHeader';
 
-interface ProductCardProps {
-  label?: string;
-  saleRate?: number;
-  src: string | undefined;
-}
-
 export default function ProductCard({
   label,
   saleRate,
   src,
+  brand,
+  name,
+  currentPrice,
 }: ProductCardProps) {
   return (
     <CardWrapper>
@@ -26,9 +23,9 @@ export default function ProductCard({
         <LineHeader
           width="62.28%"
           lineWidth="100%"
-          msg="PRENDA"
-          msg2="PRDA DENIM PATCH CREWNECK SHIRT"
-          price={39800}
+          msg={brand}
+          msg2={name}
+          price={currentPrice}
           saleRate={saleRate || null}
         />
       </Card>
@@ -65,3 +62,12 @@ const Card = styled.div`
   gap: 5.31%;
   align-items: center;
 `;
+
+interface ProductCardProps {
+  label?: string;
+  saleRate?: number;
+  src: string | undefined;
+  name: string;
+  brand: string;
+  currentPrice: number;
+}
