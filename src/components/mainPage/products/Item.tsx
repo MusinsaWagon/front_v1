@@ -30,7 +30,7 @@ const Item: React.FC<DataProps> = ({ info }) => {
     100
   ).toFixed(1);
   const navigate = useNavigate();
-  console.log(location);
+  // console.log(location);
   const handleClick = () => {
     navigate(`/product/${info.productNumber}?site=MUSINSA`);
   };
