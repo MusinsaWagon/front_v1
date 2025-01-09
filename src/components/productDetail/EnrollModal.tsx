@@ -11,6 +11,7 @@ import { useMutate } from '../../hooks/useMutation';
 import { enrollNotification } from '../../apis/productDetail/enrollNotification';
 import { useParams } from 'react-router-dom';
 import Modal from '../common/Modal';
+import { requestNotificationPermission } from '../../firebase';
 
 export default function EnrollModal({
   type,
@@ -25,6 +26,7 @@ export default function EnrollModal({
   const priceRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
   const enrollNotificationMutate = useMutate(enrollNotification, () => {
     setShowModal(true);
   });
@@ -33,7 +35,13 @@ export default function EnrollModal({
     priceRef.current!.value = price.toString();
   };
 
-  const handleEnroll = () => {
+  const handleEnroll = async () => {
+    const permission = await requestNotificationPermission();
+    if (permission !== 'granted') {
+      setShowModal2(true);
+      return;
+    }
+
     enrollNotificationMutate.mutate({
       price: parseInt(priceRef.current?.value || '0'),
       productId: parseInt(id || '0'),
@@ -82,6 +90,16 @@ export default function EnrollModal({
             showModal={showModal}
             setShowModal={setShowModal}
             msg="알림 등록이 완료되었습니다."
+            src="/images/logo2.png"
+            url=""
+            btnMsg="확인"
+          />
+        )}
+        {showModal2 && (
+          <Modal
+            showModal={showModal2}
+            setShowModal={setShowModal2}
+            msg="알림 등록이 필요한 기능입니다."
             src="/images/logo2.png"
             url=""
             btnMsg="확인"

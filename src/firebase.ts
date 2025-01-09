@@ -33,43 +33,50 @@ export const messaging = getMessaging(app);
 //   }
 // };
 
-export const requestNotificationPermission = async (): Promise<void> => {
+export const requestNotificationPermission = async (): Promise<
+  void | string
+> => {
   // 현재 알림 권한 상태 확인
-  const currentPermission = Notification.permission;
 
-  if (currentPermission === 'granted') {
-    const token = await getToken(messaging, {
-      vapidKey: import.meta.env.VITE_FCM_KEY,
-    });
-    alert(token);
-    console.log('알림 권한이 이미 승인되었습니다.');
-    localStorage.setItem('fcmToken', token);
-  }
+  const permission = await Notification.requestPermission();
+  const token = await getToken(messaging, {
+    vapidKey: import.meta.env.VITE_FCM_KEY,
+  });
+  localStorage.setItem('fcmToken', token);
+  return permission;
 
-  if (currentPermission === 'denied') {
-    console.log(
-      '알림 권한이 거부되었습니다. 사용자가 직접 설정을 변경해야 합니다.'
-    );
-    alert('알림 승인 필요');
-  }
+  // const currentPermission = Notification.permission;
 
-  // "default" 상태일 때만 요청
-  if (currentPermission === 'default') {
-    try {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        const token = await getToken(messaging, {
-          vapidKey: import.meta.env.VITE_FCM_KEY,
-        });
-        alert(token);
-        console.log('알림 권한이 승인되었습니다.');
-        console.log('FCM Token:', token);
-        localStorage.setItem('fcmToken', token);
-      } else {
-        console.log('사용자가 알림 권한 요청을 거부했습니다.');
-      }
-    } catch (error) {
-      console.error('알림 권한 요청 중 오류 발생:', error);
-    }
-  }
+  // if (currentPermission === 'granted') {
+  //   const token = await getToken(messaging, {
+  //     vapidKey: import.meta.env.VITE_FCM_KEY,
+  //   });
+  //   console.log('알림 권한이 이미 승인되었습니다.');
+  //   localStorage.setItem('fcmToken', token);
+  // }
+
+  // if (currentPermission === 'denied') {
+  //   console.log(
+  //     '알림 권한이 거부되었습니다. 사용자가 직접 설정을 변경해야 합니다.'
+  //   );
+  // }
+
+  // // "default" 상태일 때만 요청
+  // if (currentPermission === 'default') {
+  //   try {
+  //     const permission = await Notification.requestPermission();
+  //     if (permission === 'granted') {
+  //       const token = await getToken(messaging, {
+  //         vapidKey: import.meta.env.VITE_FCM_KEY,
+  //       });
+  //       alert(token);
+  //       console.log('알림 권한이 승인되었습니다.');
+  //       localStorage.setItem('fcmToken', token);
+  //     } else {
+  //       console.log('사용자가 알림 권한 요청을 거부했습니다.');
+  //     }
+  //   } catch (error) {
+  //     console.error('알림 권한 요청 중 오류 발생:', error);
+  //   }
+  // }
 };
