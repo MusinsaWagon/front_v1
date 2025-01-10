@@ -4,6 +4,10 @@ import UserInput from '../common/UserInput';
 import Image from '../common/Image';
 import Button from '../common/Button';
 import LineHeader from '../common/LineHeader';
+import { useRef, useState } from 'react';
+import { useMutate } from '../../hooks/useMutation';
+import { enrollProduct } from '../../apis/productDetail/enrollProduct';
+import Modal from '../common/Modal';
 
 interface BodySectionProps {
   type: string;
@@ -12,8 +16,22 @@ interface BodySectionProps {
 export default function BodySection({ type }: BodySectionProps) {
   const inputInfos = getInputInfos(type);
   const list = ['MUSINSA', 'ZIGZAG', 'ABLY'];
+  const urlRef = useRef<HTMLInputElement>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectContent, setSelectContent] = useState<string | undefined>('');
+  const enrollProdMutate = useMutate(enrollProduct, () => setShowModal(true));
 
-  const handleEnroll = () => {}; //등록 로직 구현
+  const handleEnroll = () => {
+    if (!urlRef.current || !selectContent) {
+      alert('모든 정보를 입력해주세요');
+      return;
+    }
+
+    enrollProdMutate.mutate({
+      url: urlRef.current?.value,
+      shopType: selectContent,
+    });
+  };
 
   return (
     <>
@@ -23,8 +41,11 @@ export default function BodySection({ type }: BodySectionProps) {
           placeholder={inputInfos.placeholder}
           label={inputInfos.label}
           list={list}
+          selectContent={selectContent}
+          setSelectContent={setSelectContent}
         />
         <UserInput
+          refer={urlRef}
           type={inputInfos.type2}
           placeholder={inputInfos.placeholder2}
           label={inputInfos.label2}
@@ -61,6 +82,16 @@ export default function BodySection({ type }: BodySectionProps) {
         width="100%"
         aspectRatio="358/32"
       />
+      {showModal && (
+        <Modal
+          msg="상품등록이 완료되었습니다."
+          btnMsg="확인"
+          showModal={showModal}
+          setShowModal={setShowModal}
+          src="/images/logo2.png"
+          url=""
+        />
+      )}
     </>
   );
 }

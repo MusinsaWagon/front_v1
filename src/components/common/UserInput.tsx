@@ -9,9 +9,10 @@ export default function UserInput({
   type,
   list,
   refer,
+  selectContent,
+  setSelectContent,
 }: UserInputProps) {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectContent, setSelectContent] = useState<string | undefined>('');
   const [firstClick, setFirstClick] = useState(false);
 
   const handleSelectClick = () => {
@@ -39,7 +40,7 @@ export default function UserInput({
               $click={firstClick.toString()}
             />
           </Select>
-          {showDropdown && (
+          {showDropdown && setSelectContent && (
             <Dropdown
               setSelected={setSelectContent}
               setShow={setShowDropdown}
@@ -52,14 +53,6 @@ export default function UserInput({
       )}
     </Container>
   );
-}
-
-interface UserInputProps {
-  placeholder: string;
-  label: string;
-  type: string;
-  list?: string[];
-  refer?: React.RefObject<HTMLInputElement>;
 }
 
 const Container = styled.div`
@@ -168,3 +161,13 @@ const DropdownBtn = styled.img<{ $rotate: string; $click: string }>`
 `;
 
 const CalendarWrapper = styled.div``;
+
+interface UserInputProps {
+  placeholder: string;
+  label: string;
+  type: string;
+  list?: string[];
+  refer?: React.RefObject<HTMLInputElement>;
+  selectContent?: string;
+  setSelectContent?: (content: string) => void;
+}
