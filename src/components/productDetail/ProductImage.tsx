@@ -26,7 +26,7 @@ export default function ProductImage({ url, id, isLiked }: ProductImageProps) {
         width="100%"
         aspectRatio="402/431"
         src={'https://image.msscdn.net' + url}
-        borderRadius="20px"
+        borderRadius="inherit"
       />
       <Heart onClick={handleHeartClick} $isLiked={isLiked}>
         <img src={heartIcon} />
@@ -46,10 +46,10 @@ export default function ProductImage({ url, id, isLiked }: ProductImageProps) {
 }
 
 const ImageWrapper = styled.div`
-  bottom: 20px;
   width: 100%;
   position: relative;
   margin-bottom: -20px;
+  border-radius: 0 0 20px 20px;
 `;
 
 const Heart = styled.button<{ $isLiked: boolean }>`
