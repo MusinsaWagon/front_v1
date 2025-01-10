@@ -42,5 +42,8 @@ export default function ProductDetail() {
 
 const PageWrapper = styled.div`
   height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   overflow-y: scroll;
 `;

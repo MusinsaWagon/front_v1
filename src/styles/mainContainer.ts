@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.div`
-  padding: 79px 0;
+  padding-top: 96px;
+  padding-bottom: 79px;
 `;
