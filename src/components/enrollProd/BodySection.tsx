@@ -22,7 +22,7 @@ export default function BodySection({ type }: BodySectionProps) {
   const enrollProdMutate = useMutate(enrollProduct, () => setShowModal(true));
 
   const handleEnroll = () => {
-    if (!urlRef.current || !selectContent) {
+    if (urlRef.current?.value !== null || !selectContent) {
       alert('모든 정보를 입력해주세요');
       return;
     }
