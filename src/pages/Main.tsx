@@ -26,7 +26,7 @@ const MainPage: React.FC = () => {
   const location = useLocation().pathname;
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
   const [isSearchVisible, setIsSearchVisible] = useState(true);
-  // Disable/Enable scrolling
+
   useEffect(() => {
     if (isDrawerVisible || isSearchVisible) {
       document.body.style.overflow = 'hidden';
@@ -34,7 +34,6 @@ const MainPage: React.FC = () => {
       document.body.style.overflow = 'auto';
     }
 
-    // Cleanup to reset on unmount
     return () => {
       document.body.style.overflow = 'auto';
     };
@@ -86,6 +85,7 @@ const MainPage: React.FC = () => {
 
 const Outer = styled.div`
   position: relative;
+  overflow-x: hidden;
 `;
 
 const Container = styled.div`
