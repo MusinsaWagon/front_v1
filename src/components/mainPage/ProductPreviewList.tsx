@@ -8,7 +8,6 @@ const ProductPreviewList = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await getData();
-      console.log('red:', response);
       setData(response);
     }
     fetchData();
