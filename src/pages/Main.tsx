@@ -40,11 +40,11 @@ const MainPage: React.FC = () => {
   }, [isDrawerVisible, isSearchVisible]);
 
   useEffect(() => {
-    console.log();
+    console.log('');
   }, [isDrawerVisible]);
   return (
     <Outer>
-      <Container>
+      <Container isScrollable={!isDrawerVisible && !isSearchVisible}>
         <TopBox>
           <SearchBox
             setIsDrawerVisible={setIsDrawerVisible}
@@ -88,11 +88,11 @@ const Outer = styled.div`
   overflow-x: hidden;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isScrollable: boolean }>`
   background-color: ${({ theme }) => theme.colors.black};
   position: relative;
-  padding-top: 20px;
   height: 100dvh;
+  overflow-y: ${({ isScrollable }) => (isScrollable ? 'auto' : 'hidden')};
 `;
 const TopBox = styled.div`
   padding: 13px 22px;

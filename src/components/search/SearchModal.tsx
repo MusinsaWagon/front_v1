@@ -50,6 +50,7 @@ const SearchModal: React.FC<DrawerProps> = ({
     console.log('brands:', brands);
     console.log('keword:', kewords);
   }, [brands, kewords]);
+
   return (
     <MainContainer>
       <Container>
@@ -108,7 +109,6 @@ const Container = styled.div`
   left: 0;
   padding: 20px 0 30px 0;
   box-sizing: border-box;
-  overflow: auto;
 `;
 const TopBox = styled.div`
   padding: 13px 22px;
@@ -128,6 +128,8 @@ const Back = styled.button`
 const BottomBox = styled.div`
   padding: 10px;
   color: white;
+  height: 50vh;
+  overflow: auto;
 `;
 const ContsBox = styled.div`
   display: flex;

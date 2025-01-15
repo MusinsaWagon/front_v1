@@ -36,13 +36,14 @@ const TopCategory: React.FC<TopCategoryProps> = ({
 export default TopCategory;
 
 interface CategoryProps {
-  $selected: boolean; // $selected 타입 정의
+  $selected: boolean;
 }
 const Container = styled.div`
-  height: 100%;
   width: 30%;
   color: white;
   overflow-y: auto;
+  padding-bottom: 100px;
+  background-color: ${({ theme }) => theme.colors.dark_black};
 `;
 const Cagetory = styled.div<CategoryProps>`
   height: 8vh;

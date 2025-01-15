@@ -75,7 +75,8 @@ const Container = styled.div`
   width: auto;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.black};
-  padding: 0 5px;
+  padding: 0 5px 100px 5px;
+  overflow-y: auto;
 `;
 const TopCategory = styled.div`
   color: white;
@@ -96,6 +97,7 @@ const BottomCategoryList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  overflow-y: scroll;
 `;
 const Category = styled.div`
   height: 8vh;
