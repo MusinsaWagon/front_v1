@@ -17,7 +17,6 @@ const SearchModal: React.FC<DrawerProps> = ({
 }) => {
   const [searchCont, setSearchCont] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
   const [brands, setBrands] = useState([]);
   const [kewords, setKewords] = useState([]);
   useEffect(() => {
@@ -33,8 +32,6 @@ const SearchModal: React.FC<DrawerProps> = ({
       if (debouncedValue) {
         try {
           const data = await searchListHandler({ name: debouncedValue });
-          setSearchResults(data);
-          console.log('data:', data);
           setKewords(data.relatedKeywords);
           setBrands(data.relatedBrands);
         } catch (error) {
