@@ -27,7 +27,6 @@ const EntireProductList = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await getCategoryData(category);
-      console.log('red:', response);
       setDatas(response);
     }
     fetchData();

@@ -12,7 +12,7 @@ import EntireProductList from '../components/mainPage/EntireProductList';
 import CategoryDrawer from '../components/mainPage/categorys/CategoryDrawer';
 
 //SearchModal
-// import SearchModal from '../components/search/SearchModal';
+import SearchModal from '../components/search/SearchModal';
 
 //imgs
 import musinsa from '../assets/images/musinsa.png';
@@ -26,7 +26,7 @@ const MainPage: React.FC = () => {
   const location = useLocation().pathname;
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
   const [isSearchVisible, setIsSearchVisible] = useState(true);
-  // Disable/Enable scrolling
+
   useEffect(() => {
     if (isDrawerVisible || isSearchVisible) {
       document.body.style.overflow = 'hidden';
@@ -34,18 +34,17 @@ const MainPage: React.FC = () => {
       document.body.style.overflow = 'auto';
     }
 
-    // Cleanup to reset on unmount
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [isDrawerVisible, isSearchVisible]);
 
   useEffect(() => {
-    console.log();
+    console.log('');
   }, [isDrawerVisible]);
   return (
     <Outer>
-      <Container>
+      <Container isScrollable={!isDrawerVisible && !isSearchVisible}>
         <TopBox>
           <SearchBox
             setIsDrawerVisible={setIsDrawerVisible}
@@ -74,25 +73,26 @@ const MainPage: React.FC = () => {
         setIsDrawerVisible={setIsDrawerVisible}
       />
       {/* )} */}
-      {/* {isSearchVisible && (
+      {isSearchVisible && (
         <SearchModal
           setIsDrawerVisible={setIsDrawerVisible}
           setIsSearchVisible={setIsSearchVisible}
         />
-      )} */}
+      )}
     </Outer>
   );
 };
 
 const Outer = styled.div`
   position: relative;
+  overflow-x: hidden;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isScrollable: boolean }>`
   background-color: ${({ theme }) => theme.colors.black};
   position: relative;
-  padding-top: 20px;
   height: 100dvh;
+  overflow-y: ${({ isScrollable }) => (isScrollable ? 'auto' : 'hidden')};
 `;
 const TopBox = styled.div`
   padding: 13px 22px;

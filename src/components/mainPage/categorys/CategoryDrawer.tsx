@@ -22,7 +22,7 @@ const CategoryDrawer: React.FC<DrawerProps> = ({
   useEffect(() => {
     const fetchCategories = async () => {
       const data: TopCategoryType[] | undefined = await getTopCategory();
-
+      console.log('category:', data);
       if (data) {
         setCategories(data);
       }
@@ -49,15 +49,14 @@ export default CategoryDrawer;
 
 const Container = styled.div<{ $isVisible: boolean }>`
   display: flex;
-  height: 100vh;
   width: 100%;
   position: absolute;
   z-index: 50;
   background-color: ${({ theme }) => theme.colors.black};
   top: 0;
   left: 0;
-  padding: 20px 0;
   transform: ${({ $isVisible }) =>
     $isVisible ? 'translateX(0)' : 'translateX(100%)'};
   transition: transform 0.3s ease-in-out;
+  height: calc(100dvh - 96px);
 `;
