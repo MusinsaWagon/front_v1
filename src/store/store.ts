@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categoryReducer from './categories/categories.slice';
 import signupReducer from './signup/signupSlice';
+
 export const store = configureStore({
   reducer: {
     categories: categoryReducer,

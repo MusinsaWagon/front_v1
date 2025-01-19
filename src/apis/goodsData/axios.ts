@@ -1,9 +1,17 @@
 import { APIService } from '../axiosInstance';
-export const getData = async () => {
+export const getData = async (getType?: string) => {
   try {
-    const response = await APIService.private.get(
-      `/products/MUSINSA?lastId=${0}&size=${15}`
-    );
+    let response;
+    if (getType) {
+      response = await APIService.private.get(
+        `/products/${getType}/MUSINSA?lastId=${0}&size=${15}`
+      );
+    } else {
+      response = await APIService.private.get(
+        `/products/MUSINSA?lastId=${0}&size=${15}`
+      );
+    }
+
     console.log('Response:', response.data);
     return response.data;
   } catch (error) {
@@ -24,7 +32,6 @@ export const getCategoryData = async (index: number) => {
         },
       }
     );
-    console.log('detail Response:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error sending data:', error);

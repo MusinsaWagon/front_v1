@@ -38,6 +38,7 @@ const Container = styled.div`
   margin-bottom: 15px;
   position: relative;
   right: 22px;
+  padding: 0 22px;
 `;
 
 const Title = styled.div`

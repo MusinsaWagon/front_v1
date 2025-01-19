@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { TopCategoryType } from '../types/categories';
 import { useState, useEffect } from 'react';
-import { getBottomCategories } from '../../../apis/drawer/axios';
+import { getBottomCategories } from '../../../apis/category/axios';
 import { IoIosArrowForward } from 'react-icons/io';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 interface BottomCategoryProps {

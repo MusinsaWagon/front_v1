@@ -125,7 +125,7 @@ const Back = styled.button`
 const BottomBox = styled.div`
   padding: 10px;
   color: white;
-  height: 50vh;
+  height: 53vh;
   overflow: auto;
 `;
 const ContsBox = styled.div`

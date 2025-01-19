@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 //component
 import Item from './products/Item';
 import Category from './Category';
-import { useEffect, useState } from 'react';
+import CategoryList from './categorys/subCategoryDrawer/CategoryList';
+
+//데이터 fetch
 import { getCategoryData } from '../../apis/goodsData/axios';
-import { useSearchParams } from 'react-router-dom';
+
+//아이콘
+import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowDropup } from 'react-icons/io';
+
 interface Product {
   productNumber: number;
   name: string;
@@ -22,7 +31,9 @@ interface Product {
 const EntireProductList = () => {
   const [datas, setDatas] = useState<Product[] | null>(null);
   const [searchParams] = useSearchParams();
-  const category = Number(searchParams.get('category')) || 0;
+  const [categoryName, setCategoryName] = useState('전체');
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const category = Number(searchParams.get('category'));
 
   useEffect(() => {
     async function fetchData() {
@@ -31,9 +42,41 @@ const EntireProductList = () => {
     }
     fetchData();
   }, [category]);
+
+  useEffect(() => {
+    console.log(isDrawerOpen);
+  }, [isDrawerOpen]);
+
   return (
     <Container>
-      <Category />
+      {category ? (
+        <CategoryBox>
+          <Title>
+            프라이스웨건
+            <Icon>
+              <IoIosArrowForward />
+            </Icon>
+            의류
+            <Icon>
+              <IoIosArrowForward />
+            </Icon>
+            <span>{categoryName}</span>
+            {isDrawerOpen && (
+              <button onClick={() => setIsDrawerOpen(false)}>
+                <IoIosArrowDropup />
+              </button>
+            )}
+          </Title>
+          <CategoryList
+            setCategoryName={setCategoryName}
+            setIsDrawerOpen={setIsDrawerOpen}
+            isDrawerOpen={isDrawerOpen}
+          />
+        </CategoryBox>
+      ) : (
+        <Category />
+      )}
+
       <ItemsContainer>
         {datas?.map((data) => (
           <Item key={data.productNumber} info={data} />
@@ -50,7 +93,29 @@ const ItemsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  width: 100%;
+  padding: 25px 22px 0 22px;
 `;
 
+const CategoryBox = styled.div``;
+
+const Title = styled.h1`
+  padding: 0 22px 12px 22px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  color: #888888;
+  gap: 3px;
+  span {
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.dark_black};
+  }
+`;
+const Icon = styled.span`
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  * {
+    color: #888888;
+  }
+`;
 export default EntireProductList;

@@ -40,7 +40,6 @@ const Layout = () => {
       <MainContainer>
         <Outlet />
       </MainContainer>
-
       <TabBar />
     </>
   );
