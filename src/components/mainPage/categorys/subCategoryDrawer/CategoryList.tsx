@@ -1,60 +1,45 @@
-import { useEffect, useState } from 'react';
-import { getTopCategory } from '../../../../apis/\bcategory/axios';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDropdown } from 'react-icons/io';
-import { Dispatch, SetStateAction } from 'react';
 import SubCategoryDrawer from './SubCategoryDrawer';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setChoicedIdx,
+  setCategoryId,
+  openDrawer,
+} from '../../../../store/drawer/categoyDrawer.slice';
+import { RootState } from '../../../../store/store';
 type CategoryListProps = {
-  setCategoryName: (name: string) => void;
-  setIsDrawerOpen: Dispatch<SetStateAction<boolean>>;
-  isDrawerOpen: boolean;
+  categories: CategoryType[];
 };
 type CategoryType = {
   id: number;
   categoryName: string;
 };
-const CategoryList = ({
-  setCategoryName,
-  setIsDrawerOpen,
-  isDrawerOpen,
-}: CategoryListProps) => {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [choicedIdx, setChoicedIdx] = useState(0);
-  const navigate = useNavigate();
+const CategoryList = ({ categories }: CategoryListProps) => {
+  const dispatch = useDispatch();
+  const choicedIdx = useSelector(
+    (state: RootState) => state.categoryDrawer.choicedIdx
+  );
 
-  //데이터 fetch
-  useEffect(() => {
-    const getCategory = async () => {
-      const res: CategoryType[] = await getTopCategory();
-      console.log('상위 카테고리:', res);
-      setCategories([{ id: 0, categoryName: '전체' }, ...res]);
-    };
-    getCategory();
-  }, []);
-
-  const getActiveCategory = (index: number, name: string) => {
-    navigate(`/entire?category=${index}`);
-    setChoicedIdx(index);
-    setCategoryName(name);
+  const getActiveCategory = (index: number) => {
+    dispatch(setChoicedIdx(index));
+    dispatch(setCategoryId(categories[index].id));
   };
   return (
     <Container>
-      <SubCategoryDrawer isDrawerOpen={isDrawerOpen} />
+      <SubCategoryDrawer categories={categories} />
       <List>
-        {categories.map((category: CategoryType) => (
+        {categories.map((category: CategoryType, idx) => (
           <Category
             key={category.id}
-            choiced={choicedIdx === category.id}
-            onClick={() =>
-              getActiveCategory(category.id, category.categoryName)
-            }
+            choiced={choicedIdx === idx}
+            onClick={() => getActiveCategory(idx)}
           >
             {category.categoryName}
           </Category>
         ))}
       </List>
-      <button onClick={() => setIsDrawerOpen(true)}>
+      <button onClick={() => dispatch(openDrawer())}>
         <IoIosArrowDropdown />
       </button>
     </Container>
