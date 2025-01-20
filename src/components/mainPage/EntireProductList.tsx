@@ -83,6 +83,7 @@ const EntireProductList = () => {
 
   const handleBackBtn = () => {
     dispatch(setChoicedIdx(0));
+    dispatch(closeDrawer());
     navigate('/entire');
   };
   return (
