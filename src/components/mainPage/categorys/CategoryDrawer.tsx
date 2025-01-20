@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import BottomCategory from './BottomCategory';
 import TopCategory from './TopCategory';
-import { MainContainer } from '../../../styles/mainContainer';
-import { getTopCategory } from '../../../apis/drawer/axios';
+import { getTopCategory } from '../../../apis/category/axios';
 import { useState, useEffect } from 'react';
 import { TopCategoryType } from '../types/categories';
 
@@ -32,16 +31,14 @@ const CategoryDrawer: React.FC<DrawerProps> = ({
   }, []);
 
   return (
-    <MainContainer>
-      <Container $isVisible={$isVisible}>
-        <TopCategory categories={categories} setSelectedId={setSelectedId} />
-        <BottomCategory
-          categories={categories}
-          selectedId={selectedId}
-          setIsDrawerVisible={setIsDrawerVisible}
-        />
-      </Container>
-    </MainContainer>
+    <Container $isVisible={$isVisible}>
+      <TopCategory categories={categories} setSelectedId={setSelectedId} />
+      <BottomCategory
+        categories={categories}
+        selectedId={selectedId}
+        setIsDrawerVisible={setIsDrawerVisible}
+      />
+    </Container>
   );
 };
 

@@ -5,10 +5,16 @@ import { useEffect, useState } from 'react';
 
 const ProductPreviewList = () => {
   const [data, setData] = useState(null);
+  // const [alarmData, setAlarmData] = useState(null);
+  // const [popularData, setPopularData] = useState(null);
   useEffect(() => {
     async function fetchData() {
       const response = await getData();
+      // const alarmResponse = await getData('alarm');
+      // const pupularRes = await getData('popular');
       setData(response);
+      // setAlarmData(alarmResponse);
+      // setPopularData(pupularRes);
     }
     fetchData();
   }, []);
@@ -23,6 +29,7 @@ const ProductPreviewList = () => {
 };
 const Container = styled.div`
   text-align: left;
+  padding: 0 22px;
 `;
 
 export default ProductPreviewList;

@@ -1,5 +1,6 @@
 import { APIService } from '../axiosInstance';
 
+//hamburger 버튼 요소
 export const getTopCategory = async () => {
   try {
     const response = await APIService.public.get(`/category/parents`);

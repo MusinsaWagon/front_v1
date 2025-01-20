@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import { Dispatch, SetStateAction } from 'react';
+
 import { useNavigate } from 'react-router-dom';
-const Category = () => {
+type CategoryProps = {
+  setCategoryName: Dispatch<SetStateAction<string>>;
+};
+
+const Category = ({ setCategoryName }: CategoryProps) => {
   const navigate = useNavigate();
   const categories = [
     '전체',
@@ -13,7 +19,9 @@ const Category = () => {
     '패션소품',
     '뷰티',
   ];
-  const getActiveCategory = (index: number) => {
+  const getActiveCategory = (index: number, name: string) => {
+    setCategoryName(name);
+
     navigate(`/entire?category=${index}`);
   };
 
@@ -22,7 +30,10 @@ const Category = () => {
       <Title>CostFlower</Title>
       <StyledTable>
         {categories.map((category, index) => (
-          <CellBtn key={index} onClick={() => getActiveCategory(index)}>
+          <CellBtn
+            key={index}
+            onClick={() => getActiveCategory(index, category)}
+          >
             {category}
           </CellBtn>
         ))}
@@ -38,6 +49,7 @@ const Container = styled.div`
   margin-bottom: 15px;
   position: relative;
   right: 22px;
+  padding: 0 22px;
 `;
 
 const Title = styled.div`

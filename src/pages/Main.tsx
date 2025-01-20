@@ -25,7 +25,7 @@ import Inquiry from '../components/mainPage/Inquiry';
 const MainPage: React.FC = () => {
   const location = useLocation().pathname;
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
-  const [isSearchVisible, setIsSearchVisible] = useState(true);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
 
   useEffect(() => {
     if (isDrawerVisible || isSearchVisible) {
@@ -39,9 +39,6 @@ const MainPage: React.FC = () => {
     };
   }, [isDrawerVisible, isSearchVisible]);
 
-  useEffect(() => {
-    console.log('');
-  }, [isDrawerVisible]);
   return (
     <Outer>
       <Container isScrollable={!isDrawerVisible && !isSearchVisible}>
@@ -67,12 +64,10 @@ const MainPage: React.FC = () => {
         </InnerContainer>
         <Inquiry />
       </Container>
-      {/* {isDrawerVisible && ( */}
       <CategoryDrawer
         $isVisible={isDrawerVisible}
         setIsDrawerVisible={setIsDrawerVisible}
       />
-      {/* )} */}
       {isSearchVisible && (
         <SearchModal
           setIsDrawerVisible={setIsDrawerVisible}
@@ -86,12 +81,12 @@ const MainPage: React.FC = () => {
 const Outer = styled.div`
   position: relative;
   overflow-x: hidden;
+  height: 100%;
 `;
 
 const Container = styled.div<{ isScrollable: boolean }>`
   background-color: ${({ theme }) => theme.colors.black};
   position: relative;
-  height: 100dvh;
   overflow-y: ${({ isScrollable }) => (isScrollable ? 'auto' : 'hidden')};
 `;
 const TopBox = styled.div`
@@ -107,8 +102,10 @@ const InnerContainer = styled.div`
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 23px 23px 0 0;
-  padding: 25px 22px 50px 22px;
+  padding-top: 25px;
   box-sizing: border-box;
+  overflow-y: auto;
+  /* background-color: rgba(30, 30, 30, 0.6); */
 `;
 
 export default MainPage;
