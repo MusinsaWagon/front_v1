@@ -3,6 +3,14 @@
         {
             "source": "/(.*)",
             "destination": "/index.html"
+        },
+        {
+            "source": "/musinsa/:path*",
+            "destination": "https://www.musinsa.com/:path*"
+        },
+        {
+            "source": "/zigzag/:path*",
+            "destination": "https://zigzag.kr/:path*"
         }
     ]
 }
