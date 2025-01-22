@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { getInputInfos } from '../../hooks/modal/getModalInfo';
 import UserInput from '../common/UserInput';
-import Image from '../common/Image';
 import Button from '../common/Button';
-import LineHeader from '../common/LineHeader';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useMutate } from '../../hooks/useMutation';
 import { enrollProduct } from '../../apis/productDetail/enrollProduct';
 import Modal from '../common/Modal';
+import LinkPreview from './LinkPreview';
 
 interface BodySectionProps {
   type: string;
@@ -16,19 +15,19 @@ interface BodySectionProps {
 export default function BodySection({ type }: BodySectionProps) {
   const inputInfos = getInputInfos(type);
   const list = ['MUSINSA', 'ZIGZAG', 'ABLY'];
-  const urlRef = useRef<HTMLInputElement>(null);
+  const [url, setUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectContent, setSelectContent] = useState<string | undefined>('');
   const enrollProdMutate = useMutate(enrollProduct, () => setShowModal(true));
 
   const handleEnroll = () => {
-    if (!urlRef.current || !urlRef.current.value || !selectContent) {
+    if (!url || !selectContent) {
       alert('모든 정보를 입력해주세요');
       return;
     }
 
     enrollProdMutate.mutate({
-      url: urlRef.current?.value,
+      url,
       shopType: selectContent,
     });
   };
@@ -45,7 +44,7 @@ export default function BodySection({ type }: BodySectionProps) {
           setSelectContent={setSelectContent}
         />
         <UserInput
-          refer={urlRef}
+          onChange={(e) => setUrl(e.target.value)}
           type={inputInfos.type2}
           placeholder={inputInfos.placeholder2}
           label={inputInfos.label2}
@@ -53,27 +52,8 @@ export default function BodySection({ type }: BodySectionProps) {
       </InputWrapper>
       <ProdWrapper>
         <label>등록하려는 상품 정보</label>
-        <ProdInfo>
-          <LineHeader
-            lineWidth="100%"
-            width="100%"
-            msg="PRENDA"
-            msg2="PRDA DENIM PATCH CREWNECK SHIRT"
-            price={39900}
-          />
-          <ImageWrapper>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <Image
-                src=""
-                key={index}
-                width="31.61%"
-                aspectRatio="1/1"
-                borderRadius="4.09px"
-              />
-            ))}
-          </ImageWrapper>
-        </ProdInfo>
-        <span>등록 후 업데이트까지 시간이 소요될 수 있습니다.</span>
+        <LinkPreview url={url} brand={selectContent} />
+        <span>등록 상품은 매일 오전 7시에 업데이트됩니다.</span>
       </ProdWrapper>
       <Button
         msg="상품 등록하기"
@@ -127,11 +107,6 @@ export const ProdWrapper = styled.div`
     line-height: 8px;
     letter-spacing: 0.24px;
   }
-`;
-
-export const ProdInfo = styled.div`
-  box-shadow: inset 0 0 0 1.07px #cfcfcf;
-  padding: 18px 3.35% 11.07px 3.35%;
 `;
 
 export const ImageWrapper = styled.div`

@@ -11,6 +11,7 @@ export default function UserInput({
   refer,
   selectContent,
   setSelectContent,
+  onChange,
 }: UserInputProps) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [firstClick, setFirstClick] = useState(false);
@@ -29,7 +30,8 @@ export default function UserInput({
           type={label === '원하는 최소 가격' ? 'number' : undefined}
           inputMode={label === '원하는 최소 가격' ? 'numeric' : undefined}
           placeholder={placeholder}
-        ></input>
+          onChange={onChange}
+        />
       ) : list ? (
         <SelectWrapper>
           <Select onClick={handleSelectClick}>
@@ -170,4 +172,5 @@ interface UserInputProps {
   refer?: React.RefObject<HTMLInputElement>;
   selectContent?: string;
   setSelectContent?: (content: string) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
