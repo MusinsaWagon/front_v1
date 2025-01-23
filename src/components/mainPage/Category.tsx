@@ -21,7 +21,6 @@ const Category = ({ setCategoryName }: CategoryProps) => {
   ];
   const getActiveCategory = (index: number, name: string) => {
     setCategoryName(name);
-
     navigate(`/entire?category=${index}`);
   };
 
