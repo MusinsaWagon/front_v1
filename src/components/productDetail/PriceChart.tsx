@@ -8,47 +8,44 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { useState } from 'react';
-
-interface PriceData {
-  date: string;
-  price: number;
-}
-
-interface PriceChartProps {
-  data1M: PriceData[];
-  data3M: PriceData[];
-  data6M: PriceData[];
-  data1Y: PriceData[];
-}
+import { useState, useEffect } from 'react';
 
 export default function PriceChart({
+  data1W,
   data1M,
   data3M,
-  data6M,
-  data1Y,
 }: PriceChartProps) {
-  const [selectedData, setSelectedData] = useState(data1M);
+  const [selectedData, setSelectedData] = useState(data1W);
+  const [processedData, setProcessedData] = useState<PriceData[]>([]);
   const theme = useTheme();
+
+  useEffect(() => {
+    // 크롤링 시작한 지 1일차일 경우에는 한 점이 아니라 양 끝 두 점을 찍어줌
+    if (selectedData.length === 1) {
+      const singleData = selectedData[0];
+      setProcessedData([singleData, { ...singleData }]);
+    } else {
+      setProcessedData(selectedData);
+    }
+  }, [selectedData]);
 
   return (
     <ChartWrapper>
       <ButtonGroup>
+        <button onClick={() => setSelectedData(data1W)}>1주</button>
         <button onClick={() => setSelectedData(data1M)}>1개월</button>
         <button onClick={() => setSelectedData(data3M)}>3개월</button>
-        <button onClick={() => setSelectedData(data6M)}>6개월</button>
-        <button onClick={() => setSelectedData(data1Y)}>1년</button>
       </ButtonGroup>
       <ResponsiveContainer width="96%" height="100%">
-        <LineChart data={selectedData} margin={{ top: 20, right: 30 }}>
+        <LineChart data={processedData} margin={{ top: 20, right: 30 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
-            dataKey="date"
+            dataKey="createdAt"
             axisLine={{ stroke: '#BBB9E3', strokeWidth: 1 }}
             tickLine={false}
             tick={{ fontSize: 6, fill: 'rgba(12, 12, 12, 0.5)' }}
             tickFormatter={(value, index) => {
-              if (index === 0 || index === selectedData.length - 1) {
+              if (index === 0 || index === processedData.length - 1) {
                 return value;
               }
               return '';
@@ -114,3 +111,14 @@ const ButtonGroup = styled.div`
     }
   }
 `;
+
+interface PriceData {
+  createdAt: string;
+  price: number;
+}
+
+interface PriceChartProps {
+  data1W: PriceData[];
+  data1M: PriceData[];
+  data3M: PriceData[];
+}

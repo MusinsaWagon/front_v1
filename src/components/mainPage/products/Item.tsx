@@ -17,12 +17,13 @@ interface ProductProps {
 }
 interface DataProps {
   info: ProductProps;
+  type?: boolean;
 }
 
 interface ChangeRateProps {
   $isPositive: boolean;
 }
-const Item: React.FC<DataProps> = ({ info }) => {
+const Item: React.FC<DataProps> = ({ info, type }) => {
   const location = useLocation().pathname;
   const priceDifference = info.currentPrice - info.previousPrice;
   const priceChangeRate = (
@@ -49,9 +50,11 @@ const Item: React.FC<DataProps> = ({ info }) => {
         </LikeBtn>
       </ImgBox>
       <ContBox>
-        <Brand>{info.brand}</Brand>
-        <Name>{info.name}</Name>
-        <Price>₩ {info.currentPrice.toLocaleString()}</Price>
+        <Brand $type={type || false}>{info.brand}</Brand>
+        <Name $type={type || false}>{info.name}</Name>
+        <Price $type={type || false}>
+          ₩ {info.currentPrice.toLocaleString()}
+        </Price>
         <ChangeRate $isPositive={priceDifference >= 0}>
           {priceDifference >= 0 ? '▲' : '▼'} ₩
           {' ' + Math.abs(priceDifference).toLocaleString()} (
@@ -65,6 +68,7 @@ const Item: React.FC<DataProps> = ({ info }) => {
 
 const Container = styled.div<{ $isEntire: boolean }>`
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: ${(props) => (props.$isEntire ? '9.43px' : '20px')};
   width: 100%;
@@ -100,23 +104,26 @@ const ContBox = styled.div`
   display: grid;
   row-gap: 7px;
 `;
-const Brand = styled.span`
+const Brand = styled.span<{ $type: boolean }>`
   font-weight: 600;
   font-size: 9.49px;
   border-bottom: 0.8px solid rgba(0, 0, 0, 0.3);
   padding-bottom: 6.6px;
+  color: ${(props) => (!props.$type ? 'black' : 'white')};
 `;
-const Name = styled.p`
+const Name = styled.p<{ $type: boolean }>`
   font-weight: 700;
   font-size: 10.19px;
   padding: 0;
   height: 35px;
   display: block;
   line-height: 120%;
+  color: ${(props) => (!props.$type ? 'black' : 'white')};
 `;
-const Price = styled.span`
+const Price = styled.span<{ $type: boolean }>`
   font-weight: 700;
   font-size: 10.19px;
+  color: ${(props) => (!props.$type ? 'black' : 'white')};
 `;
 const ChangeRate = styled.span<ChangeRateProps>`
   font-weight: 700;
