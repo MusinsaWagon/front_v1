@@ -62,7 +62,9 @@ export default function DetailBody({
           aspectRatio="176/35"
           borderRadius="7px"
           src={basket}
-          onClick={() => {}}
+          onClick={() => {
+            window.location.href = productDetail.productUrl;
+          }}
           msg="구매하러 가기"
         />
         <Button
