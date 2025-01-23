@@ -1,6 +1,19 @@
 import axios from 'axios';
 import { APIService } from '../axiosInstance';
 
+export type ProductDetail = {
+  productNumber: number;
+  name: string;
+  brand: string;
+  starScore: number;
+  reviewCount: number;
+  likeCount: number;
+  imgUrl: string;
+  shopType: string;
+  currentPrice: number;
+  previousPrice: number;
+};
+
 export const getProduct = async (shopType: string, id: string | undefined) => {
   if (!id) {
     alert('id가 비어있습니다.');
@@ -11,6 +24,19 @@ export const getProduct = async (shopType: string, id: string | undefined) => {
       `/products/${shopType}/${parseInt(id)}`
     );
     const data = await res.data;
+    const productInfo = data.basicProductInfo;
+    if (productInfo) {
+      const storedData = localStorage.getItem('productBasicInfo');
+      const productArray = storedData ? JSON.parse(storedData) : [];
+
+      const updatedArray = productArray.filter(
+        (item: ProductDetail) => item.name !== productInfo.name
+      );
+
+      updatedArray.unshift(productInfo);
+      localStorage.setItem('productBasicInfo', JSON.stringify(updatedArray));
+    }
+
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

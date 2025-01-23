@@ -11,6 +11,7 @@ import SignUp from '../pages/signUp/SignUp';
 import SignIn from '../pages/signIn/SignIn';
 import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
 import MyList from '../pages/MyList/MyList';
+import MyPage from '../pages/myPage/MyPage';
 
 const Routes = () => {
   return (
@@ -24,6 +25,7 @@ const Routes = () => {
         <Route path="login" element={<SignIn />} />
         <Route path="heartList" element={<MyList />} />
         <Route path="enrollList" element={<MyList />} />
+        <Route path="myPage" element={<MyPage />} />
         <Route
           path="/api/v1/users/auth/login/kakao"
           element={<LoginHandler />}
