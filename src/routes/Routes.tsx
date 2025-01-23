@@ -10,8 +10,13 @@ import ProductDetail from '../pages/product/ProductDetail';
 import SignUp from '../pages/signUp/SignUp';
 import SignIn from '../pages/signIn/SignIn';
 import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
+<<<<<<< HEAD
 
 import SearchDetail from '../pages/searchList/SearchDetail';
+=======
+import MyList from '../pages/MyList/MyList';
+
+>>>>>>> develop
 const Routes = () => {
   return (
     <ReactRouters>
@@ -23,6 +28,8 @@ const Routes = () => {
         <Route path="/search/detail" element={<SearchDetail />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<SignIn />} />
+        <Route path="heartList" element={<MyList />} />
+        <Route path="enrollList" element={<MyList />} />
         <Route
           path="/api/v1/users/auth/login/kakao"
           element={<LoginHandler />}

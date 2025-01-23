@@ -7,28 +7,30 @@ import alarm from '../../assets/images/alarmIcon.png';
 import profile from '../../assets/images/profileIcon.png';
 import { useNavigate } from 'react-router-dom';
 
-interface LogoProps {
-  pos?: 'center';
-}
 const TabBar = () => {
   const navigate = useNavigate();
 
   return (
     <Container>
-      <Item>
+      <Item onClick={() => navigate('/')}>
         <Logo src={home} />
+        <Text>홈</Text>
       </Item>
-      <Item>
+      <Item onClick={() => navigate('/heartList')}>
         <Logo src={heart} />
+        <Text>찜</Text>
       </Item>
       <Item onClick={() => navigate('/enroll')}>
-        <Logo pos="center" src={upload} />
+        <Logo src={upload} />
+        <Text>상품 등록</Text>
       </Item>
-      <Item>
+      <Item onClick={() => navigate('/enrollList')}>
         <Logo src={alarm} />
+        <Text>알림</Text>
       </Item>
       <Item>
         <Logo src={profile} />
+        <Text>마이페이지</Text>
       </Item>
     </Container>
   );
@@ -50,8 +52,14 @@ const Item = styled.button`
   background-color: transparent;
   margin-top: 16px;
 `;
-const Logo = styled.img<LogoProps>`
-  width: ${(props) => (props.pos === 'center' ? '32px' : '25px')};
-  height: ${(props) => (props.pos === 'center' ? '32px' : '25px')};
+const Logo = styled.img`
+  width: 25px;
+  height: 25px;
 `;
+const Text = styled.p`
+  color: white;
+  font-size: 10px;
+  margin-top: 5px;
+`;
+
 export default TabBar;

@@ -31,51 +31,6 @@ export default function DetailBody({
     }
   };
 
-  const data1M = [
-    { date: '2024-10-01', price: 29900 },
-    { date: '2024-10-03', price: 31000 },
-    { date: '2024-10-10', price: 33000 },
-    { date: '2024-10-15', price: 39000 },
-    { date: '2024-10-20', price: 33000 },
-    { date: '2024-10-25', price: 39000 },
-    { date: '2024-10-30', price: 32000 },
-  ];
-
-  const data3M = [
-    { date: '2024-08-01', price: 95 },
-    { date: '2024-08-15', price: 100 },
-    { date: '2024-09-01', price: 105 },
-    { date: '2024-09-15', price: 110 },
-    { date: '2024-10-01', price: 120 },
-    { date: '2024-10-15', price: 125 },
-    { date: '2024-11-01', price: 130 },
-  ];
-
-  const data6M = [
-    { date: '2024-05-01', price: 85 },
-    { date: '2024-06-01', price: 90 },
-    { date: '2024-07-01', price: 92 },
-    { date: '2024-08-01', price: 95 },
-    { date: '2024-09-01', price: 105 },
-    { date: '2024-10-01', price: 120 },
-    { date: '2024-11-01', price: 130 },
-  ];
-
-  const data1Y = [
-    { date: '2024-01-01', price: 75 },
-    { date: '2024-02-01', price: 80 },
-    { date: '2024-03-01', price: 85 },
-    { date: '2024-04-01', price: 88 },
-    { date: '2024-05-01', price: 90 },
-    { date: '2024-06-01', price: 95 },
-    { date: '2024-07-01', price: 100 },
-    { date: '2024-08-01', price: 105 },
-    { date: '2024-09-01', price: 110 },
-    { date: '2024-10-01', price: 120 },
-    { date: '2024-11-01', price: 130 },
-    { date: '2024-12-01', price: 135 },
-  ];
-
   return (
     <BodyWrapper>
       <Category>
@@ -134,10 +89,9 @@ export default function DetailBody({
       </FluctDate>
       <ChartWrapper>
         <PriceChart
-          data1M={data1M}
-          data3M={data3M}
-          data6M={data6M}
-          data1Y={data1Y}
+          data1W={productHistoryList.oneWeekList}
+          data1M={productHistoryList.oneMonthList}
+          data3M={productHistoryList.threeMonthList}
         />
       </ChartWrapper>
       {showModal && (
