@@ -10,13 +10,9 @@ import ProductDetail from '../pages/product/ProductDetail';
 import SignUp from '../pages/signUp/SignUp';
 import SignIn from '../pages/signIn/SignIn';
 import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
-<<<<<<< HEAD
-
 import SearchDetail from '../pages/searchList/SearchDetail';
-=======
 import MyList from '../pages/MyList/MyList';
 
->>>>>>> develop
 const Routes = () => {
   return (
     <ReactRouters>
