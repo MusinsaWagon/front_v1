@@ -6,8 +6,8 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { searchListHandler } from '../../apis/search/axios';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
-
 import { useNavigate } from 'react-router-dom';
+
 interface DrawerProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,6 +57,7 @@ const SearchModal: React.FC<DrawerProps> = ({
       ...(keyword && { keyword }),
     };
     const queryString = new URLSearchParams(queryObject).toString();
+    setIsSearchVisible(false);
     navigate(`/search/detail?${queryString}`);
   };
   return (
@@ -70,6 +71,7 @@ const SearchModal: React.FC<DrawerProps> = ({
             setIsDrawerVisible={setIsDrawerVisible}
             renderedPage="search"
             setSearchCont={setSearchCont}
+            placeholderText="원하는 상품, 브랜드 검색"
           />
         </TopBox>
         <BottomBox>

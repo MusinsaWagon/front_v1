@@ -47,6 +47,7 @@ const MainPage: React.FC = () => {
             setIsDrawerVisible={setIsDrawerVisible}
             renderedPage="main"
             onClick={() => setIsSearchVisible(true)}
+            placeholderText="원하는 상품, 브랜드 검색"
           />
           <BrandsContainer>
             <BrandsBox imgSrc={musinsa} name="ALL" />
