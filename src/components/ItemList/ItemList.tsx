@@ -31,7 +31,7 @@ const ItemsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  padding: 25px 22px 0 22px;
+  padding: 25px 22px 20px 22px;
   min-height: 300px;
   position: relative;
 `;

@@ -8,22 +8,24 @@ interface SearchBoxProps {
   renderedPage: string;
   onClick?: () => void;
   setSearchCont?: React.Dispatch<React.SetStateAction<string>>;
+  placeholderText: string;
 }
 const SearchBox: React.FC<SearchBoxProps> = ({
   setIsDrawerVisible,
   onClick,
   renderedPage,
   setSearchCont,
+  placeholderText,
 }) => {
   return (
     <Container>
       <SearchContainer>
         <Icon src={searchIcon} />
         {renderedPage === 'main' ? (
-          <InputBox placeholder="원하는 상품, 브랜드 검색" onClick={onClick} />
+          <InputBox placeholder={placeholderText} onClick={onClick} />
         ) : (
           <InputBox
-            placeholder="원하는 상품, 브랜드 검색"
+            placeholder={placeholderText}
             onChange={(e) => {
               if (setSearchCont) {
                 setSearchCont(e.target.value);

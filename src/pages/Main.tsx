@@ -47,6 +47,7 @@ const MainPage: React.FC = () => {
             setIsDrawerVisible={setIsDrawerVisible}
             renderedPage="main"
             onClick={() => setIsSearchVisible(true)}
+            placeholderText="원하는 상품, 브랜드 검색"
           />
           <BrandsContainer>
             <BrandsBox imgSrc={musinsa} name="ALL" />
@@ -85,12 +86,12 @@ const Outer = styled.div`
 `;
 
 const Container = styled.div<{ isScrollable: boolean }>`
-  background-color: ${({ theme }) => theme.colors.black};
   position: relative;
   overflow-y: ${({ isScrollable }) => (isScrollable ? 'auto' : 'hidden')};
 `;
 const TopBox = styled.div`
   padding: 13px 22px;
+  background-color: ${({ theme }) => theme.colors.black};
 `;
 const BrandsContainer = styled.div`
   display: flex;
