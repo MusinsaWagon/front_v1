@@ -6,11 +6,16 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { searchListHandler } from '../../apis/search/axios';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
+
+import { useNavigate } from 'react-router-dom';
 interface DrawerProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+type SearchParams = {
+  brand?: string;
+  keyword?: string;
+};
 const SearchModal: React.FC<DrawerProps> = ({
   setIsDrawerVisible,
   setIsSearchVisible,
@@ -18,7 +23,9 @@ const SearchModal: React.FC<DrawerProps> = ({
   const [searchCont, setSearchCont] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
   const [brands, setBrands] = useState([]);
-  const [kewords, setKewords] = useState([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
+
+  const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedValue(searchCont);
@@ -32,7 +39,7 @@ const SearchModal: React.FC<DrawerProps> = ({
       if (debouncedValue) {
         try {
           const data = await searchListHandler({ name: debouncedValue });
-          setKewords(data.relatedKeywords);
+          setKeywords([debouncedValue, ...data.relatedKeywords]);
           setBrands(data.relatedBrands);
         } catch (error) {
           console.error('Error fetching search results:', error);
@@ -43,11 +50,15 @@ const SearchModal: React.FC<DrawerProps> = ({
     fetchSearchResults();
   }, [debouncedValue]);
 
-  useEffect(() => {
-    console.log('brands:', brands);
-    console.log('keword:', kewords);
-  }, [brands, kewords]);
-
+  const handleBtnClick = async (params: SearchParams) => {
+    const { brand, keyword } = params;
+    const queryObject = {
+      ...(brand && { brand }),
+      ...(keyword && { keyword }),
+    };
+    const queryString = new URLSearchParams(queryObject).toString();
+    navigate(`/search/detail?${queryString}`);
+  };
   return (
     <MainContainer>
       <Container>
@@ -64,7 +75,7 @@ const SearchModal: React.FC<DrawerProps> = ({
         <BottomBox>
           <ContsBox className="brands_ContBox">
             {brands.map((brand, idx) => (
-              <BrandBtn key={idx}>
+              <BrandBtn key={idx} onClick={() => handleBtnClick({ brand })}>
                 <LeftBox>
                   <img />
                   <span className="search__brand_name">
@@ -77,12 +88,22 @@ const SearchModal: React.FC<DrawerProps> = ({
             ))}
           </ContsBox>
           <ContsBox>
-            {kewords.map((keword, idx) => (
-              <KeywordBtn key={idx}>
+            {keywords.map((keyword, idx) => (
+              <KeywordBtn
+                key={idx}
+                onClick={() =>
+                  idx === 0
+                    ? handleBtnClick({ keyword: debouncedValue })
+                    : handleBtnClick({
+                        brand: keyword,
+                        keyword: debouncedValue,
+                      })
+                }
+              >
                 <SearchIcon>
                   <IoSearch />
                 </SearchIcon>
-                {keword} {debouncedValue}
+                {idx !== 0 && keyword} {debouncedValue}
               </KeywordBtn>
             ))}
           </ContsBox>

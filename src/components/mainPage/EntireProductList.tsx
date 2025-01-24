@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 //component
-import Item from './products/Item';
 import Category from './Category';
 import CategoryList from './categorys/subCategoryDrawer/CategoryList';
-
+import ItemList from '../ItemList/ItemList';
 //데이터 fetch
 import { getCategoryData } from '../../apis/goodsData/axios';
 import { getBottomCategories } from '../../apis/\bcategory/axios';
@@ -56,6 +55,7 @@ const EntireProductList = () => {
   const dispatch = useDispatch();
   const category = Number(searchParams.get('category'));
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchData() {
       const response = await getCategoryData(category);
@@ -77,6 +77,7 @@ const EntireProductList = () => {
     }
     fetchData();
   }, [categoryId]);
+
   useEffect(() => {
     console.log(isDrawerOpen);
   }, [isDrawerOpen]);
@@ -86,6 +87,7 @@ const EntireProductList = () => {
     dispatch(closeDrawer());
     navigate('/entire');
   };
+
   return (
     <Container>
       {category ? (
@@ -119,27 +121,15 @@ const EntireProductList = () => {
       ) : (
         <Category setCategoryName={setCategoryName} />
       )}
+      {/* 컴포넌트 분리 */}
 
-      <ItemsContainer>
-        {datas?.map((data) => (
-          <Item key={data.productNumber} info={data} />
-        ))}
-        {isDrawerOpen && <Background></Background>}
-      </ItemsContainer>
+      <ItemList datas={datas} isDrawerOpen={isDrawerOpen} />
     </Container>
   );
 };
 const Container = styled.div`
   text-align: left;
   width: 100%;
-`;
-const ItemsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 25px 22px 0 22px;
-  min-height: 300px;
-  position: relative;
 `;
 
 const CategoryBox = styled.div``;
@@ -184,14 +174,6 @@ const Icon = styled.span`
   * {
     color: #888888;
   }
-`;
-
-const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 25;
-  background-color: rgba(30, 30, 30, 0.6);
 `;
 
 export default EntireProductList;

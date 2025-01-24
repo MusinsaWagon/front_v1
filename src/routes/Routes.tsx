@@ -10,6 +10,7 @@ import ProductDetail from '../pages/product/ProductDetail';
 import SignUp from '../pages/signUp/SignUp';
 import SignIn from '../pages/signIn/SignIn';
 import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
+import SearchDetail from '../pages/searchList/SearchDetail';
 import MyList from '../pages/MyList/MyList';
 import MyPage from '../pages/myPage/MyPage';
 
@@ -21,6 +22,7 @@ const Routes = () => {
         <Route path="/entire" element={<MainPage />} />
         <Route path="enroll" element={<EnrollProd type="product" />} />
         <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="/search/detail" element={<SearchDetail />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<SignIn />} />
         <Route path="heartList" element={<MyList />} />
