@@ -96,7 +96,6 @@ const Email = styled.div`
 
 const CurrentView = styled.div`
   width: 100%;
-  min-height: 100px;
   background-color: #434343;
   gap: 10px;
   align-items: center;
@@ -125,6 +124,7 @@ const NoItems = styled.div`
   opacity: 0.6;
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const Notice = styled.div`
