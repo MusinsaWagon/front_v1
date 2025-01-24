@@ -103,6 +103,7 @@ const LikeImg = styled.img`
 const ContBox = styled.div`
   display: grid;
   row-gap: 7px;
+  text-align: left;
 `;
 const Brand = styled.span<{ $type: boolean }>`
   font-weight: 600;
@@ -115,10 +116,14 @@ const Name = styled.p<{ $type: boolean }>`
   font-weight: 700;
   font-size: 10.19px;
   padding: 0;
-  height: 35px;
-  display: block;
+  height: 23.5px;
   line-height: 120%;
   color: ${(props) => (!props.$type ? 'black' : 'white')};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 const Price = styled.span<{ $type: boolean }>`
   font-weight: 700;
@@ -127,7 +132,7 @@ const Price = styled.span<{ $type: boolean }>`
 `;
 const ChangeRate = styled.span<ChangeRateProps>`
   font-weight: 700;
-  font-size: 9.49px;
+  font-size: 8.49px;
   color: ${(props) =>
     props.$isPositive ? props.theme.colors.green : props.theme.colors.red};
 `;

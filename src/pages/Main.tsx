@@ -86,12 +86,12 @@ const Outer = styled.div`
 `;
 
 const Container = styled.div<{ isScrollable: boolean }>`
-  background-color: ${({ theme }) => theme.colors.black};
   position: relative;
   overflow-y: ${({ isScrollable }) => (isScrollable ? 'auto' : 'hidden')};
 `;
 const TopBox = styled.div`
   padding: 13px 22px;
+  background-color: ${({ theme }) => theme.colors.black};
 `;
 const BrandsContainer = styled.div`
   display: flex;
