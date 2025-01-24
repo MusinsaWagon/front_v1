@@ -1,8 +1,5 @@
-import { Routes as ReactRouters, Route, Outlet } from 'react-router-dom';
+import { Routes as ReactRouters, Route } from 'react-router-dom';
 
-import Header from '../components/common/NavBar';
-import TabBar from '../components/common/Footer';
-import { MainContainer } from '../styles/mainContainer';
 //pages
 import MainPage from '../pages/Main';
 import EnrollProd from '../pages/enrollProd/EnrollProd';
@@ -12,6 +9,7 @@ import SignIn from '../pages/signIn/SignIn';
 import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
 import MyList from '../pages/MyList/MyList';
 import MyPage from '../pages/myPage/MyPage';
+import Layout from '../layout/Layout';
 
 const Routes = () => {
   return (
@@ -36,18 +34,6 @@ const Routes = () => {
         />
       </Route>
     </ReactRouters>
-  );
-};
-
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <MainContainer>
-        <Outlet />
-      </MainContainer>
-      <TabBar />
-    </>
   );
 };
 
