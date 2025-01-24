@@ -36,11 +36,17 @@ export default function EnrollModal({
   };
 
   const handleEnroll = async () => {
-    const permission = await requestNotificationPermission();
+    if (priceRef.current?.value === '') {
+      alert('가격을 입력해주세요.');
+      return;
+    }
+    const permission = Notification.permission;
+
     if (permission !== 'granted') {
       setShowModal2(true);
       return;
     }
+    await requestNotificationPermission();
 
     enrollNotificationMutate.mutate({
       price: parseInt(priceRef.current?.value || '0'),
@@ -99,7 +105,7 @@ export default function EnrollModal({
           <Modal
             showModal={showModal2}
             setShowModal={setShowModal2}
-            msg="알림 등록이 필요한 기능입니다."
+            msg="알림 권한이 거부되었습니다. 알림은 재설치를 통해 다시 설정할 수 있습니다."
             src="/images/logo2.png"
             url=""
             btnMsg="확인"

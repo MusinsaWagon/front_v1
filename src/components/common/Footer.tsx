@@ -28,7 +28,7 @@ const TabBar = () => {
         <Logo src={alarm} />
         <Text>알림</Text>
       </Item>
-      <Item>
+      <Item onClick={() => navigate('/myPage')}>
         <Logo src={profile} />
         <Text>마이페이지</Text>
       </Item>
@@ -37,7 +37,7 @@ const TabBar = () => {
 };
 
 const Container = styled.div`
-  height: 72px;
+  height: 90px;
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.black};
   display: flex;
