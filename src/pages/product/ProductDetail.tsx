@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useLocation, useParams } from 'react-router-dom';
 import { getProduct } from '../../apis/productDetail/getProductDetail';
 import Loading from '../../components/common/Loading';
+import PageTransition from '../../components/common/PageAnimation';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -23,20 +24,22 @@ export default function ProductDetail() {
   ) : error ? (
     <div>Error loading product</div>
   ) : (
-    <PageWrapper>
-      <ProductImage
-        isLiked={data.basicProductInfo.isLiked}
-        url={data.basicProductInfo.imgUrl}
-        id={id}
-      />
-      <DetailBody
-        productDetail={data.productDetail}
-        parentAndChildCategoryDTO={data.parentAndChildCategoryDTO}
-        basicProductInfo={data.basicProductInfo}
-        productHistoryList={data.productHistoryLists}
-        imgSrc={data.basicProductInfo.imgUrl}
-      />
-    </PageWrapper>
+    <PageTransition>
+      <PageWrapper>
+        <ProductImage
+          isLiked={data.basicProductInfo.isLiked}
+          url={data.basicProductInfo.imgUrl}
+          id={id}
+        />
+        <DetailBody
+          productDetail={data.productDetail}
+          parentAndChildCategoryDTO={data.parentAndChildCategoryDTO}
+          basicProductInfo={data.basicProductInfo}
+          productHistoryList={data.productHistoryLists}
+          imgSrc={data.basicProductInfo.imgUrl}
+        />
+      </PageWrapper>
+    </PageTransition>
   );
 }
 

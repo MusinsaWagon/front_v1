@@ -33,6 +33,7 @@ const Item: React.FC<DataProps> = ({ info, type }) => {
   const navigate = useNavigate();
   // console.log(location);
   const handleClick = () => {
+    sessionStorage.setItem('isRefresh', 'false');
     navigate(`/product/${info.productNumber}?site=MUSINSA`);
   };
   return (
