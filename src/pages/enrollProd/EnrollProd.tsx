@@ -17,6 +17,8 @@ export default function EnrollProd({ type }: EnrollProdProps) {
 
 export const Wrapper = styled.div`
   width: 100%;
+  height: 80vh;
+  overflow-y: auto;
   padding: 4.15% 5.47%;
   box-sizing: border-box;
 `;
