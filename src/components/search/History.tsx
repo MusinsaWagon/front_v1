@@ -84,7 +84,7 @@ const Item = styled.span`
   flex-shrink: 0;
   display: inline-flex;
   gap: 7px;
-  align-items: center; /* 텍스트 수직 정렬 */
+  align-items: center;
   justify-content: center;
 
   button {
