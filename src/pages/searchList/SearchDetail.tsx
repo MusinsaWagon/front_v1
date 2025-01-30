@@ -10,7 +10,6 @@ import ItemList from '../../components/ItemList/ItemList';
 import SearchBox from '../../components/mainPage/SearchBox';
 import SearchModal from '../../components/search/SearchModal';
 import CategoryDrawer from '../../components/mainPage/categorys/CategoryDrawer';
-
 //icons
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -46,7 +45,6 @@ const SearchDetail = () => {
 
   const text = `${brand || ''} ${keyword || ''}`.trim();
 
-  console.log('text:', text);
   useEffect(() => {
     const fetchData = async (params: SearchParams) => {
       const response = await getSearchDetail(params);
@@ -55,6 +53,7 @@ const SearchDetail = () => {
     };
     fetchData(props);
   }, [brand, keyword]);
+
   return (
     <Container>
       <TopBox>
@@ -72,6 +71,7 @@ const SearchDetail = () => {
             onClick={() => setIsSearchVisible(true)}
             setIsDrawerVisible={setIsDrawerVisible}
             placeholderText={text}
+            setIsSearchVisible={setIsSearchVisible}
           />
         )}
       </TopBox>
@@ -104,7 +104,7 @@ const Container = styled.div`
   position: relative;
 `;
 const TopBox = styled.div`
-  height: 80px;
+  /* height: 80px; */
   display: flex;
   align-items: center;
   padding: 28px 22px;

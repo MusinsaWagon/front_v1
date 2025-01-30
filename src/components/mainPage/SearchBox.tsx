@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-
 import searchIcon from '../../assets/images/searchIcon.png';
-import hamburger from '../../assets/images/hamburger.png';
+import { BiCategory } from 'react-icons/bi';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchBoxProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,34 +10,81 @@ interface SearchBoxProps {
   onClick?: () => void;
   setSearchCont?: React.Dispatch<React.SetStateAction<string>>;
   placeholderText: string;
+  setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
+type Keyword = {
+  id: number;
+  text: string;
+};
 const SearchBox: React.FC<SearchBoxProps> = ({
   setIsDrawerVisible,
   onClick,
   renderedPage,
   setSearchCont,
   placeholderText,
+  setIsSearchVisible,
 }) => {
+  const navigate = useNavigate();
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (searchText.trim() !== '') {
+      const queryString = new URLSearchParams({
+        keyword: searchText,
+      }).toString();
+
+      // 로컬스토리지 검색 기록 가져오기
+      const existingKeywords = JSON.parse(
+        localStorage.getItem('keywords') || '[]'
+      ) as Keyword[];
+
+      console.log('keyword:', existingKeywords);
+
+      const newKeyword = { id: Date.now(), text: searchText };
+
+      const updatedKeywords = [
+        newKeyword,
+        ...existingKeywords.filter((kw: Keyword) => kw.text !== searchText),
+      ].slice(0, 10);
+
+      localStorage.setItem('keywords', JSON.stringify(updatedKeywords));
+      setIsSearchVisible(false);
+      navigate(`/search/detail?${queryString}`);
+    }
+  };
+
   return (
     <Container>
       <SearchContainer>
         <Icon src={searchIcon} />
         {renderedPage === 'main' ? (
-          <InputBox placeholder={placeholderText} onClick={onClick} />
-        ) : (
           <InputBox
             placeholder={placeholderText}
-            onChange={(e) => {
-              if (setSearchCont) {
-                setSearchCont(e.target.value);
-              }
-            }}
+            onClick={onClick}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
+        ) : (
+          <FormContainer onSubmit={handleSearchSubmit}>
+            <InputBox
+              placeholder={placeholderText}
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+                if (setSearchCont) {
+                  setSearchCont(e.target.value);
+                }
+              }}
+            />
+          </FormContainer>
         )}
       </SearchContainer>
+
       {renderedPage === 'main' && (
-        <BurgerBtn onClick={() => setIsDrawerVisible((pro) => !pro)}>
-          <Icon src={hamburger} />
+        <BurgerBtn onClick={() => setIsDrawerVisible((prev) => !prev)}>
+          <BiCategory />
         </BurgerBtn>
       )}
     </Container>
@@ -47,9 +95,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   width: 100%;
 `;
+
+const FormContainer = styled.form`
+  width: 100%;
+`;
+
 const SearchContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.gray};
   width: 100%;
@@ -59,6 +113,7 @@ const SearchContainer = styled.div`
   padding: 8px 19px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5%;
   position: relative;
 `;
@@ -73,6 +128,7 @@ const InputBox = styled.input`
     color: #ffffff;
   }
 `;
+
 const Icon = styled.img`
   width: 25px;
   height: 25px;
@@ -84,5 +140,10 @@ const BurgerBtn = styled.button`
   background-color: ${({ theme }) => theme.colors.gray};
   border: none;
   border-radius: 7px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
 export default SearchBox;

@@ -48,6 +48,7 @@ const MainPage: React.FC = () => {
             renderedPage="main"
             onClick={() => setIsSearchVisible(true)}
             placeholderText="원하는 상품, 브랜드 검색"
+            setIsSearchVisible={setIsSearchVisible}
           />
           <BrandsContainer>
             <BrandsBox imgSrc={musinsa} name="ALL" />
