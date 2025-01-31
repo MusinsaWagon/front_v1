@@ -56,6 +56,7 @@ const EntireProductList = () => {
   const category = Number(searchParams.get('category'));
   const navigate = useNavigate();
 
+  //처음 데이터 및 카테고리 리스트 fetch
   useEffect(() => {
     async function fetchData() {
       const response = await getCategoryData(category);
@@ -70,6 +71,7 @@ const EntireProductList = () => {
     fetchData();
   }, [category]);
 
+  //카테고리 아이디 변경 시 데이터 fetch
   useEffect(() => {
     async function fetchData() {
       const response = await getCategoryData(categoryId);

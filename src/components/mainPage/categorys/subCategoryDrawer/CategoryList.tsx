@@ -24,6 +24,7 @@ const CategoryList = ({ categories }: CategoryListProps) => {
   const getActiveCategory = (index: number) => {
     dispatch(setChoicedIdx(index));
     dispatch(setCategoryId(categories[index].id));
+    console.log('choicedid:', index, 'categoryId:', categories[index].id);
   };
   return (
     <Container>

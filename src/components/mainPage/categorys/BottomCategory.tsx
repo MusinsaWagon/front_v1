@@ -4,6 +4,12 @@ import { useState, useEffect } from 'react';
 import { getBottomCategories } from '../../../apis/category/axios';
 import { IoIosArrowForward } from 'react-icons/io';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {
+  setCategoryId,
+  setChoicedIdx,
+} from '../../../store/drawer/categoyDrawer.slice';
 interface BottomCategoryProps {
   categories: TopCategoryType[];
   selectedId: number;
@@ -26,11 +32,18 @@ const BottomCategory: React.FC<BottomCategoryProps> = ({
   const [bottomCategories, setBottomCategories] = useState<SubCategoryType[]>(
     []
   );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (categories[selectedId - 1]) {
       setTopCategoryName(categories[selectedId - 1].categoryName);
     }
   }, [categories, selectedId]);
+
+  // useEffect(() => {
+  //   console.log('내용:', categories);
+  //   console.log('category:', topCategoryName);
+  // }, [topCategoryName, categories]);
 
   useEffect(() => {
     const fetchBottomCategories = async () => {
@@ -47,17 +60,27 @@ const BottomCategory: React.FC<BottomCategoryProps> = ({
     fetchBottomCategories();
   }, [selectedId]);
 
+  const moveToDeatil = (index: number) => {
+    setIsDrawerVisible(false);
+    dispatch(setChoicedIdx(index + 1));
+
+    if (index >= 0) dispatch(setCategoryId(bottomCategories[index].id));
+    else dispatch(setCategoryId(selectedId));
+
+    navigate(`/entire?category=${selectedId}`);
+  };
+
   return (
     <Container>
       <TopCategory>
-        {topCategoryName}{' '}
+        <span onClick={() => moveToDeatil(-1)}>{topCategoryName}</span>
         <RevertBtn onClick={() => setIsDrawerVisible((visible) => !visible)}>
           <FaArrowRightToBracket />
         </RevertBtn>
       </TopCategory>
       <BottomCategoryList>
-        {bottomCategories.map((category) => (
-          <Category key={category.id}>
+        {bottomCategories.map((category, index) => (
+          <Category key={category.id} onClick={() => moveToDeatil(index)}>
             {category.categoryName}
             <Arrow>
               <IoIosArrowForward />

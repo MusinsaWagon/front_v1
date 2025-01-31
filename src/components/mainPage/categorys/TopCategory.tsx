@@ -16,8 +16,9 @@ const TopCategory: React.FC<TopCategoryProps> = ({
     setSelectedId(categories[idx].id);
   };
   useEffect(() => {
-    console.log(selectedIdx);
+    console.log('idx:', selectedIdx);
   }, [selectedIdx]);
+
   return (
     <Container>
       {categories.map((category, idx) => (

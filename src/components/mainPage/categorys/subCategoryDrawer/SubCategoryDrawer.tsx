@@ -35,9 +35,11 @@ const SubCategoryDrawer = ({ categories }: SubCategoryDrawerProps) => {
     dispatch(setCategoryId(categories[index].id));
     dispatch(closeDrawer());
   };
+
   useEffect(() => {
     console.log('id:', categoryId);
   }, [categoryId]);
+
   return (
     <Container $isDrawerOpen={isDrawerOpen}>
       <TopContainer>

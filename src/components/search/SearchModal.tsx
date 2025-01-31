@@ -7,7 +7,7 @@ import { searchListHandler } from '../../apis/search/axios';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-
+import History from './History';
 interface DrawerProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +16,12 @@ type SearchParams = {
   brand?: string;
   keyword?: string;
 };
+
+//검색기록 타입
+interface Keyword {
+  id: number;
+  text: string;
+}
 const SearchModal: React.FC<DrawerProps> = ({
   setIsDrawerVisible,
   setIsSearchVisible,
@@ -60,19 +66,50 @@ const SearchModal: React.FC<DrawerProps> = ({
     setIsSearchVisible(false);
     navigate(`/search/detail?${queryString}`);
   };
+
+  //검색 기록 핸들러
+  const [beforeKeywords, setbeforeKeywords] = useState<Keyword[]>(
+    JSON.parse(localStorage.getItem('keywords') || '[]')
+  );
+
+  //검색어 삭제
+  const handleRemoveKeyword = (id: number) => {
+    const nextKeyword = beforeKeywords.filter((thisKeyword: Keyword) => {
+      return thisKeyword.id !== id;
+    });
+    setbeforeKeywords(nextKeyword);
+  };
+
+  //검색어 전체 삭제
+  const handleClearKeywords = () => {
+    setbeforeKeywords([]);
+    localStorage.setItem('keywords', JSON.stringify([]));
+  };
+
   return (
     <MainContainer>
       <Container>
         <TopBox>
-          <Back onClick={() => setIsSearchVisible(false)}>
-            <IoIosArrowBack />
-          </Back>
-          <SearchBox
-            setIsDrawerVisible={setIsDrawerVisible}
-            renderedPage="search"
-            setSearchCont={setSearchCont}
-            placeholderText="원하는 상품, 브랜드 검색"
-          />
+          <SearchContainer>
+            <Back onClick={() => setIsSearchVisible(false)}>
+              <IoIosArrowBack />
+            </Back>
+            <SearchBox
+              setIsDrawerVisible={setIsDrawerVisible}
+              renderedPage="search"
+              setSearchCont={setSearchCont}
+              placeholderText="원하는 상품, 브랜드 검색"
+              setIsSearchVisible={setIsSearchVisible}
+            />
+          </SearchContainer>
+          {beforeKeywords.length > 0 && (
+            <History
+              beforeKeywords={beforeKeywords}
+              onClearKeywords={handleClearKeywords}
+              onRemoveKeyword={handleRemoveKeyword}
+              setIsSearchVisible={setIsSearchVisible}
+            />
+          )}
         </TopBox>
         <BottomBox>
           <ContsBox className="brands_ContBox">
@@ -131,6 +168,12 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 const TopBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const SearchContainer = styled.div`
   padding: 13px 22px;
   height: 60px;
   display: flex;
