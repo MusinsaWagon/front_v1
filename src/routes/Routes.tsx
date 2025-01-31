@@ -38,5 +38,4 @@ const Routes = () => {
     </ReactRouters>
   );
 };
-
 export default Routes;

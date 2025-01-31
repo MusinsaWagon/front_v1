@@ -8,6 +8,7 @@ import { CiHeart } from 'react-icons/ci';
 import { PiExportFill } from 'react-icons/pi';
 import { CiBellOn } from 'react-icons/ci';
 import { CgProfile } from 'react-icons/cg';
+
 const TabBar = () => {
   const navigate = useNavigate();
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
@@ -34,7 +35,6 @@ const TabBar = () => {
         <Text>상품 등록</Text>
       </Item>
       <Item onClick={() => navigate('/enrollList')}>
-        {/* <Logo src={alarm} /> */}
         <Logo>
           <CiBellOn />
         </Logo>
