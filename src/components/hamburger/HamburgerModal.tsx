@@ -4,6 +4,7 @@ import { CiHeart } from 'react-icons/ci';
 import { PiExportFill } from 'react-icons/pi';
 import { CiBellOn } from 'react-icons/ci';
 import { CgProfile } from 'react-icons/cg';
+import { MdOutlineLogout } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 interface HamburgerModalProps {
