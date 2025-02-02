@@ -9,8 +9,10 @@ import { useNavigate } from 'react-router-dom';
 
 const TabBar = () => {
   const navigate = useNavigate();
+  // const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  const isStandalone = true;
 
-  return (
+  return isStandalone ? (
     <Container>
       <Item onClick={() => navigate('/')}>
         <Logo src={home} />
@@ -33,10 +35,11 @@ const TabBar = () => {
         <Text>마이페이지</Text>
       </Item>
     </Container>
-  );
+  ) : null;
 };
 
 const Container = styled.div`
+  max-width: 767px;
   height: 90px;
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.black};
