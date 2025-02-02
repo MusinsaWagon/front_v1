@@ -18,10 +18,12 @@ const Header = () => {
   useEffect(() => {
     setIsPWA(isPWAActive());
   }, []);
+  const token = localStorage.getItem('accessToken');
+
   return (
     <Container>
       <Logo src={logo} onClick={handleClick} />
-      {!isPWA && (
+      {!isPWA && token && (
         <HamburgerBtn onClick={() => setIsFold((prev) => !prev)}>
           <RxHamburgerMenu />
         </HamburgerBtn>

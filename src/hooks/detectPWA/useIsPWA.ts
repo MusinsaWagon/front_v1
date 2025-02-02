@@ -1,12 +1,12 @@
 interface NavigatorWithStandalone extends Navigator {
   standalone?: boolean;
 }
-const isPWAActive = () => {
+
+const isPWAActive = (): boolean => {
   return (
     window.matchMedia('(display-mode: standalone)').matches ||
     ('standalone' in navigator &&
-      (navigator as NavigatorWithStandalone).standalone) ||
-    document.referrer === ''
+      Boolean((navigator as NavigatorWithStandalone).standalone))
   );
 };
 

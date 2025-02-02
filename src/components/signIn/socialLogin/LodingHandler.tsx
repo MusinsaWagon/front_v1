@@ -7,7 +7,9 @@ const LoginHandler = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   console.log('code:', code);
   const location = useLocation().pathname.split('/').pop();
-  console.log(location);
+  // console.log(location);
+  if (code) localStorage.setItem('accessToken', code);
+
   useEffect(() => {
     const kakaoLogin = async () => {
       await axios({
