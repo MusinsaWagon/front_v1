@@ -10,6 +10,7 @@ import LoginHandler from '../components/signIn/socialLogin/LodingHandler';
 import SearchDetail from '../pages/searchList/SearchDetail';
 import MyList from '../pages/MyList/MyList';
 import MyPage from '../pages/myPage/MyPage';
+
 import Layout from '../layout/Layout';
 
 const Routes = () => {
