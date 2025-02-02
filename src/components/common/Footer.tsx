@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 
 const TabBar = () => {
   const navigate = useNavigate();
-  // const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-  const isStandalone = true;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  // const isStandalone = true;
 
   return isStandalone ? (
     <Container>

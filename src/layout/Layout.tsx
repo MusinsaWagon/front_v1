@@ -6,6 +6,8 @@ import RefreshingContent from './Refreshing';
 import { Outlet } from 'react-router-dom';
 
 export default function Layout() {
+  const isStandalone = !window.matchMedia('(display-mode: standalone)').matches;
+
   const handleRefresh = () => {
     return new Promise<void>(() => {
       setTimeout(() => {
@@ -17,7 +19,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <MainContainer>
+      <MainContainer $isBrowser={isStandalone}>
         <PullToRefresh
           onRefresh={handleRefresh}
           canFetchMore={true}
