@@ -5,19 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
 import isPWAActive from '../../hooks/detectPWA/useIsPWA';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import HamburgerModal from '../hamburger/HamburgerModal';
 const Header = () => {
-  const [isPWA, setIsPWA] = useState(false);
+  const isPWA = isPWAActive();
+
   const [isFold, setIsFold] = useState(true);
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/');
   };
 
-  useEffect(() => {
-    setIsPWA(isPWAActive());
-  }, []);
   const token = localStorage.getItem('accessToken');
 
   return (
