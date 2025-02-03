@@ -1,90 +1,24 @@
 import styled from 'styled-components';
 import Item from '../../components/mainPage/products/Item';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getMyList } from '../../apis/myList/useMyList';
+import Loading from '../../components/common/Loading';
+import Modal from '../../components/common/Modal';
+import { useState } from 'react';
 
 export default function MyList() {
   const location = useLocation().pathname;
+  const [showModal, setShowModal] = useState(false);
   const type = location === '/heartList' ? 'heart' : 'enroll';
-  const data = [
-    {
-      productNumber: 1,
-      name: 'Essential Oversized Hoodie',
-      brand: 'Nike',
-      starScore: 4.8,
-      reviewCount: 152,
-      likeCount: 230,
-      imgUrl: 'https://example.com/images/hoodie1.jpg',
-      shopType: 'MUSINSA',
-      currentPrice: 89000,
-      previousPrice: 129000,
-      isLiked: true,
-    },
-    {
-      productNumber: 2,
-      name: 'Classic Canvas Sneakers',
-      brand: 'Converse',
-      starScore: 4.5,
-      reviewCount: 310,
-      likeCount: 560,
-      imgUrl: 'https://example.com/images/sneakers1.jpg',
-      shopType: 'MUSINSA',
-      currentPrice: 55000,
-      previousPrice: 65000,
-      isLiked: false,
-    },
-    {
-      productNumber: 3,
-      name: 'Slim Fit Jeans',
-      brand: "Levi's",
-      starScore: 4.3,
-      reviewCount: 98,
-      likeCount: 120,
-      imgUrl: 'https://example.com/images/jeans1.jpg',
-      shopType: 'MUSINSA',
-      currentPrice: 79000,
-      previousPrice: 99000,
-      isLiked: true,
-    },
-    {
-      productNumber: 4,
-      name: 'Essential Oversized Hoodie',
-      brand: 'Nike',
-      starScore: 4.8,
-      reviewCount: 152,
-      likeCount: 230,
-      imgUrl: 'https://example.com/images/hoodie1.jpg',
-      shopType: 'MUSINSA',
-      currentPrice: 89000,
-      previousPrice: 129000,
-      isLiked: true,
-    },
-    {
-      productNumber: 5,
-      name: 'Classic Canvas Sneakers',
-      brand: 'Converse',
-      starScore: 4.5,
-      reviewCount: 310,
-      likeCount: 560,
-      imgUrl: 'https://example.com/images/sneakers1.jpg',
-      shopType: 'MUSINSA',
-      currentPrice: 55000,
-      previousPrice: 65000,
-      isLiked: false,
-    },
-    {
-      productNumber: 6,
-      name: 'Slim Fit Jeans',
-      brand: "Levi's",
-      starScore: 4.3,
-      reviewCount: 98,
-      likeCount: 120,
-      imgUrl: 'https://example.com/images/jeans1.jpg',
-      shopType: 'MUSINSA',
-      currentPrice: 79000,
-      previousPrice: 99000,
-      isLiked: true,
-    },
-  ];
+  const { data, isLoading } = useQuery({
+    queryKey: [type],
+    queryFn: () => getMyList(type, setShowModal),
+    staleTime: 1000 * 5 * 60,
+    refetchOnWindowFocus: false,
+  });
+
+  if (isLoading) return <Loading />;
 
   return (
     <PageWrapper>
@@ -92,10 +26,21 @@ export default function MyList() {
         {type === 'enroll' ? '내가 알림 받는 상품' : '내가 찜한 상품'}
       </Header>
       <ItemWrapper>
-        {data.map((item) => (
-          <Item key={item.productNumber} info={item} type={true} />
-        ))}
+        {data &&
+          data.map((item: Product) => (
+            <Item key={item.productNumber} info={item} type={true} />
+          ))}
       </ItemWrapper>
+      {showModal && (
+        <Modal
+          msg="로그인이 필요한 서비스입니다."
+          showModal={showModal}
+          setShowModal={setShowModal}
+          url="/login"
+          src="/images/logo2.png"
+          btnMsg="로그인하러 가기"
+        />
+      )}
     </PageWrapper>
   );
 }
@@ -122,3 +67,17 @@ const ItemWrapper = styled.div`
   gap: 10px;
   padding: 0 23px;
 `;
+
+interface Product {
+  productNumber: number;
+  name: string;
+  brand: string;
+  starScore: number;
+  reviewCount: number;
+  likeCount: number;
+  imgUrl: string;
+  shopType: string;
+  currentPrice: number;
+  previousPrice: number;
+  isLiked: boolean;
+}

@@ -26,6 +26,7 @@ const SearchModal: React.FC<DrawerProps> = ({
   setIsDrawerVisible,
   setIsSearchVisible,
 }) => {
+  const isStandalone = !window.matchMedia('(display-mode: standalone)').matches;
   const [searchCont, setSearchCont] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
   const [brands, setBrands] = useState([]);
@@ -87,7 +88,7 @@ const SearchModal: React.FC<DrawerProps> = ({
   };
 
   return (
-    <MainContainer>
+    <MainContainer $isBrowser={isStandalone}>
       <Container>
         <TopBox>
           <SearchContainer>

@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 import Item from '../../components/mainPage/products/Item';
 import { ProductDetail } from '../../apis/productDetail/getProductDetail';
+import { useQuery } from '@tanstack/react-query';
+import { getEmail } from '../../apis/myList/useMyList';
 
 export default function MyPage() {
   const storedData = localStorage.getItem('productBasicInfo');
+  const { data: email, isLoading } = useQuery({
+    queryKey: ['myPage'],
+    queryFn: () => getEmail(),
+    staleTime: 1000 * 5 * 60,
+    refetchOnWindowFocus: false,
+  });
   const data = storedData ? JSON.parse(storedData) : [];
 
   return (
@@ -13,12 +21,9 @@ export default function MyPage() {
         <User>
           <img src="/images/userImage.png" />
           <UserInfo>
-            <Name>김예찬</Name>
-            <Email>az20058@naver.com</Email>
+            <Name>{isLoading ? 'loading...' : email}</Name>
           </UserInfo>
         </User>
-        {/* <AlarmToggle /> */}{' '}
-        {/* pwa는 알림권한을 브라우저를 통해서만 변경 가능 */}
       </Header>
       <CurrentView>
         <h2>최근 본 상품</h2>
@@ -34,7 +39,7 @@ export default function MyPage() {
       </CurrentView>
       <Notice>
         <span>
-          * 한 번 거부된 알림설정은 재설치를 통해서만 변경 가능합니다.
+          * 한 번 거부된 알림설정은 기기의 환경설정을 통해서만 변경 가능합니다.
         </span>
       </Notice>
     </PageWrapper>
@@ -86,12 +91,6 @@ const UserInfo = styled.div`
 const Name = styled.div`
   font-size: 10px;
   font-weight: 700;
-`;
-
-const Email = styled.div`
-  font-size: 6px;
-  font-weight: 700;
-  color: #666666;
 `;
 
 const CurrentView = styled.div`

@@ -14,6 +14,7 @@ const Header = () => {
 };
 
 const Container = styled.div`
+  max-width: 767px;
   background-color: ${({ theme }) => theme.colors.black};
   height: 79px;
   width: 100vw;
