@@ -38,7 +38,7 @@ const Item: React.FC<DataProps> = ({ info, type }) => {
   };
   return (
     <Container $isEntire={location === '/entire'} onClick={handleClick}>
-      <ImgBox $isEntire={location === '/entire'}>
+      <ImgBox $isEntire={location === '/'}>
         <Image
           borderRadius="11.86px"
           width="100%"
@@ -75,7 +75,7 @@ const Container = styled.div<{ $isEntire: boolean }>`
   width: 100%;
 `;
 const ImgBox = styled.div<{ $isEntire: boolean }>`
-  width: ${(props) => (props.$isEntire ? '100%' : '100px')};
+  width: ${(props) => (props.$isEntire ? '100px' : '100%')};
   aspect-ratio: 1/1;
   background-color: #e6e6e6;
   border-radius: 11.86px;
