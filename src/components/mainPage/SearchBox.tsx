@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import searchIcon from '../../assets/images/searchIcon.png';
 import { BiCategory } from 'react-icons/bi';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface SearchBoxProps {
@@ -26,7 +26,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 }) => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -55,6 +55,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (renderedPage !== 'main' && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [renderedPage]);
+
   return (
     <Container>
       <SearchContainer>
@@ -69,6 +75,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
         ) : (
           <FormContainer onSubmit={handleSearchSubmit}>
             <InputBox
+              ref={inputRef}
               placeholder={placeholderText}
               value={searchText}
               onChange={(e) => {
