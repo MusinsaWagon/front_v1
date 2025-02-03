@@ -46,11 +46,7 @@ const SignIn = () => {
           <span>LOGIN</span>
         </LogoBox>
         <ImgBox>
-          <img
-            className="login__main-logo"
-            alt="logo"
-            src="../../../public/images/logo.png"
-          />
+          <img className="login__main-logo" alt="logo" src="/images/logo.png" />
         </ImgBox>
         <InputBox onSubmit={handleSubmit(handleLoginSubmit)}>
           {errors.account && <ErrorMsg>{errors.account.message}</ErrorMsg>}
@@ -144,12 +140,13 @@ const LogoBox = styled.div`
 const ImgBox = styled.div`
   margin: 23px 0;
   img {
-    width: 40vw;
+    width: 40%;
     aspect-ratio: 1.3/1;
   }
 `;
 
 const InputBox = styled.form`
+  width: 90%;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -158,7 +155,7 @@ const InputBox = styled.form`
 const Input = styled.input`
   background-color: #ededed;
   border: none;
-  width: 80vw;
+  width: 100%;
   border-radius: 3px;
   box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.25);
   padding: 15px 17px;

@@ -36,7 +36,7 @@ const TabBar = () => {
 };
 
 const Container = styled.div`
-  max-width: 767px;
+  max-width: 600px;
   height: 90px;
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.black};

@@ -74,8 +74,7 @@ export default function PriceChart({
 
 const ChartWrapper = styled.figure`
   position: relative;
-  left: -6.37%;
-  width: 100vw;
+  width: 100%;
   height: 90%;
 `;
 
