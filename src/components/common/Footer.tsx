@@ -1,36 +1,33 @@
 import styled from 'styled-components';
-
 import home from '../../assets/images/homeIcon.png';
 import heart from '../../assets/images/heartIcon.png';
 import upload from '../../assets/images/uploadIcon.png';
 import alarm from '../../assets/images/alarmIcon.png';
 import profile from '../../assets/images/profileIcon.png';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const TabBar = () => {
-  const navigate = useNavigate();
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-  // const isStandalone = true;
 
   return isStandalone ? (
     <Container>
-      <Item onClick={() => navigate('/')}>
+      <Item to="/">
         <Logo src={home} />
         <Text>홈</Text>
       </Item>
-      <Item onClick={() => navigate('/heartList')}>
+      <Item to="/heartList">
         <Logo src={heart} />
         <Text>찜</Text>
       </Item>
-      <Item onClick={() => navigate('/enroll')}>
+      <Item to="/enroll">
         <Logo src={upload} />
         <Text>상품 등록</Text>
       </Item>
-      <Item onClick={() => navigate('/enrollList')}>
+      <Item to="/enrollList">
         <Logo src={alarm} />
         <Text>알림</Text>
       </Item>
-      <Item onClick={() => navigate('/myPage')}>
+      <Item to="/myPage">
         <Logo src={profile} />
         <Text>마이페이지</Text>
       </Item>
@@ -51,7 +48,7 @@ const Container = styled.div`
   z-index: 100;
   bottom: 0;
 `;
-const Item = styled.button`
+const Item = styled(Link)`
   background-color: transparent;
   margin-top: 16px;
 `;
