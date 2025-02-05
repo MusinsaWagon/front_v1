@@ -32,7 +32,15 @@ const History: React.FC<HistoryProps> = ({
       <KeywordList>
         {beforeKeywords.map(({ id, text }: Keyword) => (
           <Item key={id} onClick={() => moveToKeyword(text)}>
-            {text} <button onClick={() => onRemoveKeyword(id)}>{'x'}</button>
+            {text}{' '}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemoveKeyword(id);
+              }}
+            >
+              {'x'}
+            </button>
           </Item>
         ))}
       </KeywordList>
