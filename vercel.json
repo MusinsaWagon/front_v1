@@ -1,0 +1,16 @@
+{
+    "rewrites": [
+        {
+            "source": "/musinsa/:path*",
+            "destination": "https://www.musinsa.com/:path*"
+        },
+        {
+            "source": "/zigzag/:path*",
+            "destination": "https://zigzag.kr/:path*"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}
