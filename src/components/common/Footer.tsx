@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import home from '../../assets/images/homeIcon.png';
-import heart from '../../assets/images/heartIcon.png';
-import upload from '../../assets/images/uploadIcon.png';
-import alarm from '../../assets/images/alarmIcon.png';
-import profile from '../../assets/images/profileIcon.png';
 import { Link } from 'react-router-dom';
+
+//아이콘
+import { TiHome } from 'react-icons/ti';
+import { CiHeart } from 'react-icons/ci';
+import { PiExportFill } from 'react-icons/pi';
+import { CiBellOn } from 'react-icons/ci';
+import { CgProfile } from 'react-icons/cg';
 
 const TabBar = () => {
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
@@ -12,23 +14,33 @@ const TabBar = () => {
   return isStandalone ? (
     <Container>
       <Item to="/">
-        <Logo src={home} />
+        <Logo>
+          <TiHome />
+        </Logo>
         <Text>홈</Text>
       </Item>
       <Item to="/heartList">
-        <Logo src={heart} />
+        <Logo>
+          <CiHeart />
+        </Logo>
         <Text>찜</Text>
       </Item>
       <Item to="/enroll">
-        <Logo src={upload} />
+        <Logo>
+          <PiExportFill />
+        </Logo>
         <Text>상품 등록</Text>
       </Item>
       <Item to="/enrollList">
-        <Logo src={alarm} />
+        <Logo>
+          <CiBellOn />
+        </Logo>
         <Text>알림</Text>
       </Item>
       <Item to="/myPage">
-        <Logo src={profile} />
+        <Logo>
+          <CgProfile />
+        </Logo>
         <Text>마이페이지</Text>
       </Item>
     </Container>
@@ -52,9 +64,10 @@ const Item = styled(Link)`
   background-color: transparent;
   margin-top: 16px;
 `;
-const Logo = styled.img`
-  width: 25px;
-  height: 25px;
+const Logo = styled.button`
+  color: white;
+  background-color: transparent;
+  font-size: 25px;
 `;
 const Text = styled.p`
   color: white;

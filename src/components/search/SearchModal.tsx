@@ -8,6 +8,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import History from './History';
+// import isPWAActive from '../../hooks/detectPWA/useIsPWA';
 interface DrawerProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,6 +32,7 @@ const SearchModal: React.FC<DrawerProps> = ({
   const [debouncedValue, setDebouncedValue] = useState('');
   const [brands, setBrands] = useState([]);
   const [keywords, setKeywords] = useState<string[]>([]);
+  // const isPWA=isPWAActive();
 
   const navigate = useNavigate();
   useEffect(() => {
