@@ -8,12 +8,13 @@ interface ButtonProps {
   src?: string;
   marginTop?: string;
   msg: string;
+  color?: string;
 }
 
 type ButtonWrapperProps = {
   [K in keyof Pick<
     ButtonProps,
-    'width' | 'aspectRatio' | 'borderRadius' | 'marginTop'
+    'width' | 'aspectRatio' | 'borderRadius' | 'marginTop' | 'color'
   > as `$${K}`]: ButtonProps[K];
 };
 
@@ -25,6 +26,7 @@ export default function Button({
   src,
   marginTop,
   msg,
+  color,
 }: ButtonProps) {
   return (
     <ButtonWrapper
@@ -32,6 +34,7 @@ export default function Button({
       $width={width}
       $aspectRatio={aspectRatio}
       $marginTop={marginTop}
+      $color={color}
     >
       <button onClick={onClick}>
         {src && <img src={src} />}
@@ -46,8 +49,6 @@ const ButtonWrapper = styled.div<ButtonWrapperProps>`
   ${({ $aspectRatio }) => `aspect-ratio: ${$aspectRatio};`}
   ${({ $marginTop }) => `margin-top: ${$marginTop};`}
 
-  
-
   button {
     display: flex;
     align-items: center;
@@ -57,7 +58,8 @@ const ButtonWrapper = styled.div<ButtonWrapperProps>`
     height: 100%;
     font-size: 10px;
     font-weight: 800;
-    background: ${({ theme }) => theme.colors.yellow};
+    background: ${({ $color, theme }) =>
+      $color ? $color : theme.colors.yellow};
 
     ${({ $borderRadius }) => `border-radius: ${$borderRadius};`}
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);

@@ -30,13 +30,12 @@ const PageContent = styled.div`
   label {
     color: #8f8f8f;
     font-weight: bold;
-    font-size: 2.74vw;
   }
 `;
 
 const Header = styled.header`
   width: 100%;
-  font-size: 3.98vw;
+  font-size: 16px;
   text-align: left;
   color: #8f8f8f;
   font-weight: 800;

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ interface ModalProps {
   src: string;
   url: string;
   btnMsg: string;
+  closeBtn?: boolean;
 }
 
 export default function Modal({
@@ -19,8 +21,21 @@ export default function Modal({
   src,
   url,
   btnMsg,
+  closeBtn,
 }: ModalProps) {
   const navigate = useNavigate();
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (showModal) {
+      setIsAnimating(true); // 모달이 열릴 때 애니메이션 시작
+    }
+  }, [showModal]);
+
+  const handleClose = () => {
+    setIsAnimating(false); // 닫힐 때 slideUp 애니메이션 실행
+    setTimeout(() => setShowModal(false), 300); // 애니메이션 시간(0.3s) 후 모달 닫기
+  };
 
   const customModalStyles: ReactModal.Styles = {
     overlay: {
@@ -30,8 +45,8 @@ export default function Modal({
     },
     content: {
       width: '360px',
-      marginTop: '297px',
-      height: '67.62%',
+      marginTop: '257px',
+      height: '400px',
       position: 'relative',
       left: '50%',
       transform: 'translate(-50%, -50%)',
@@ -43,33 +58,48 @@ export default function Modal({
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
-      animation: 'slideDown 0.3s ease-out', // 애니메이션 추가
+      animation: isAnimating
+        ? 'slideDown 0.3s ease-out'
+        : 'slideUp 0.3s ease-out',
     },
   };
 
   return (
     <ModalWrapper>
-      <ReactModal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
-        style={customModalStyles}
-        ariaHideApp={false}
-        contentLabel="Example Modal"
-        shouldCloseOnOverlayClick={false}
-      >
-        <ModalImg src={src} alt="logo" />
-        <ModalMsg>{msg}</ModalMsg>
-        <Button
-          msg={btnMsg}
-          width="80.6%"
-          borderRadius="100px"
-          onClick={() => {
-            if (url === '') window.location.reload();
-            navigate(url);
-          }}
-          aspectRatio="324/40"
-        />
-      </ReactModal>
+      {showModal && (
+        <ReactModal
+          isOpen={showModal}
+          onRequestClose={handleClose}
+          style={customModalStyles}
+          ariaHideApp={false}
+          contentLabel="Example Modal"
+          shouldCloseOnOverlayClick={false}
+        >
+          <ModalImg src={src} alt="logo" />
+          <ModalMsg>{msg}</ModalMsg>
+          <Button
+            msg={btnMsg}
+            width="80.6%"
+            borderRadius="100px"
+            onClick={() => {
+              if (url === '') window.location.reload();
+              navigate(url);
+            }}
+            aspectRatio="324/40"
+          />
+          {closeBtn && (
+            <Button
+              msg="닫기"
+              width="80.6%"
+              borderRadius="100px"
+              onClick={handleClose}
+              aspectRatio="324/40"
+              marginTop="20px"
+              color="#e5e5e5"
+            />
+          )}
+        </ReactModal>
+      )}
 
       {/* 애니메이션 정의 */}
       <style>
@@ -82,6 +112,15 @@ export default function Modal({
               transform: translate(-50%, -50%);
             }
           }
+
+          @keyframes slideUp {
+            from {
+              transform: translate(-50%, -50%);
+            }
+            to {
+              transform: translate(-50%, -150%);
+            }
+          }
         `}
       </style>
     </ModalWrapper>
@@ -89,13 +128,10 @@ export default function Modal({
 }
 
 const ModalWrapper = styled.div``;
-const ModalImg = styled.img`
-  margin-top: 72px;
-`;
+const ModalImg = styled.img``;
 const ModalMsg = styled.h2`
   color: #575757;
   font-size: 20px;
   font-weight: bold;
-  margin-top: 55.59px;
-  margin-bottom: 95px;
+  margin-bottom: 35px;
 `;

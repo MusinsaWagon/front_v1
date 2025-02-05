@@ -39,6 +39,7 @@ export default function ProductImage({ url, id, isLiked }: ProductImageProps) {
           btnMsg="로그인하기"
           src="/images/logo2.png"
           url="/login"
+          closeBtn
         />
       )}
     </ImageWrapper>

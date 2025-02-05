@@ -97,6 +97,10 @@ const InputLabel = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+
+  label {
+    font-size: 11px;
+  }
 `;
 
 const CheckValid = styled.img``;
@@ -113,7 +117,7 @@ const Input = styled.div<{ $error?: boolean; $disabled: boolean }>`
 
   input {
     padding-left: 3.94%;
-    font-size: 2.74vw;
+    font-size: 12px;
     width: 80%;
     border: none;
     outline: none;
@@ -134,7 +138,7 @@ const Input = styled.div<{ $error?: boolean; $disabled: boolean }>`
 
   button {
     margin: 6px 4px;
-    font-size: 1.99vw;
+    font-size: 8px;
     color: #8f8f8f;
     background-color: ${({ theme }) => theme.colors.yellow};
     width: 19.09%;
@@ -150,7 +154,7 @@ const Input = styled.div<{ $error?: boolean; $disabled: boolean }>`
 
 const Message = styled.div<{ $error?: boolean }>`
   margin-top: 10px;
-  font-size: 2.24vw;
+  font-size: 9px;
   color: ${({ theme, $error }) =>
     $error ? theme.colors.red : theme.colors.green};
   padding-left: 3.94%;

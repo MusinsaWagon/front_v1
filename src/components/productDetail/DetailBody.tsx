@@ -121,6 +121,7 @@ export default function DetailBody({
           url="/login"
           src="/images/logo2.png"
           btnMsg="로그인하러 가기"
+          closeBtn
         />
       )}
     </BodyWrapper>

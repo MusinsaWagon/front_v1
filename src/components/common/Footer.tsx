@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 //아이콘
 import { TiHome } from 'react-icons/ti';
@@ -10,37 +9,35 @@ import { CiBellOn } from 'react-icons/ci';
 import { CgProfile } from 'react-icons/cg';
 
 const TabBar = () => {
-  const navigate = useNavigate();
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-  // const isStandalone = true;
 
   return isStandalone ? (
     <Container>
-      <Item onClick={() => navigate('/')}>
+      <Item to="/">
         <Logo>
           <TiHome />
         </Logo>
         <Text>홈</Text>
       </Item>
-      <Item onClick={() => navigate('/heartList')}>
+      <Item to="/heartList">
         <Logo>
           <CiHeart />
         </Logo>
         <Text>찜</Text>
       </Item>
-      <Item onClick={() => navigate('/enroll')}>
+      <Item to="/enroll">
         <Logo>
           <PiExportFill />
         </Logo>
         <Text>상품 등록</Text>
       </Item>
-      <Item onClick={() => navigate('/enrollList')}>
+      <Item to="/enrollList">
         <Logo>
           <CiBellOn />
         </Logo>
         <Text>알림</Text>
       </Item>
-      <Item onClick={() => navigate('/myPage')}>
+      <Item to="/myPage">
         <Logo>
           <CgProfile />
         </Logo>
@@ -51,7 +48,7 @@ const TabBar = () => {
 };
 
 const Container = styled.div`
-  max-width: 767px;
+  max-width: 600px;
   height: 90px;
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.black};
@@ -63,7 +60,7 @@ const Container = styled.div`
   z-index: 100;
   bottom: 0;
 `;
-const Item = styled.button`
+const Item = styled(Link)`
   background-color: transparent;
   margin-top: 16px;
 `;

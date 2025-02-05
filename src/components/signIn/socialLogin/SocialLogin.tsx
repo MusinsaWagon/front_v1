@@ -4,10 +4,10 @@ const SocialLogin = () => {
   return (
     <Container>
       <Btn href={KAKAO_AUTH_URL}>
-        <img src="../../../../public/images/kakaoIcon.png" />
+        <img src="/images/kakaoIcon.png" />
       </Btn>
       <Btn href={NAVER_AUTH_URL}>
-        <img src="../../../../public/images/naverIcon.png" />
+        <img src="/images/naverIcon.png" />
       </Btn>
     </Container>
   );
