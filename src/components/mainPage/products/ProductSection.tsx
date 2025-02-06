@@ -35,7 +35,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
         <LeftBox>
           <Logo />
           <InnerLeftBox>
-            <Cont FontWeight="700">COSTFLOWER</Cont>
+            <Cont FontWeight="700">프라이스웨건</Cont>
             <Cont state="title" FontWeight="700">
               {title}
             </Cont>
