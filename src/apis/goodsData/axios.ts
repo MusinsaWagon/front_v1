@@ -4,7 +4,7 @@ export const getData = async (getType?: string) => {
     let response;
     if (getType) {
       response = await APIService.private.get(
-        `/products/${getType}/MUSINSA?lastId=${0}&size=${15}`
+        `/products/${getType}/MUSINSA?lastId=${10}&size=${10}`
       );
     } else {
       response = await APIService.private.get(

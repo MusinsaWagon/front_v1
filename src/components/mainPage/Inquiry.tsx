@@ -14,7 +14,7 @@ const Btn = styled.button`
   width: 34.44px;
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  position: sticky;
+  position: fixed;
   bottom: 80px;
   left: 85%;
   display: flex;
