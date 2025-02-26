@@ -12,6 +12,7 @@ interface ProductProps {
   likeCount: number;
   imgUrl: string;
   shopType: string;
+  isLiked: boolean;
   currentPrice: number;
   previousPrice: number;
 }
@@ -46,7 +47,7 @@ const Item: React.FC<DataProps> = ({ info, type }) => {
           src={`https://image.msscdn.net${info.imgUrl}`}
         />
 
-        <LikeBtn>
+        <LikeBtn $isLiked={info.isLiked}>
           <LikeImg src={heartIcon} />
         </LikeBtn>
       </ImgBox>
@@ -82,10 +83,9 @@ const ImgBox = styled.div<{ $isEntire: boolean }>`
   position: relative;
 `;
 
-const LikeBtn = styled.button`
+const LikeBtn = styled.button<{ $isLiked?: boolean }>`
   height: 23.92px;
   width: 23.72px;
-  background-color: rgba(0, 0, 0, 0.15);
   border-radius: 4.74px;
   padding: 0;
   border: none;
@@ -96,12 +96,15 @@ const LikeBtn = styled.button`
   right: 4.74px;
   bottom: 3.72px;
   z-index: 10;
+  background-color: ${({ $isLiked, theme }) =>
+    $isLiked ? theme.colors.yellow : 'rgba(0, 0, 0, 0.3)'};
 `;
 const LikeImg = styled.img`
   height: 14.65px;
   width: 16.42px;
 `;
 const ContBox = styled.div`
+  width: 100%;
   display: grid;
   row-gap: 7px;
   text-align: left;

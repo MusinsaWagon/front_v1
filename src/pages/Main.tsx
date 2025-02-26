@@ -19,9 +19,6 @@ import musinsa from '../assets/images/musinsa.png';
 import ably from '../assets/images/ably.png';
 import zigzag from '../assets/images/zigzag.png';
 
-//axios
-import Inquiry from '../components/mainPage/Inquiry';
-
 const MainPage: React.FC = () => {
   const location = useLocation().pathname;
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
@@ -64,7 +61,6 @@ const MainPage: React.FC = () => {
             <ProductPreviewList />
           )}
         </InnerContainer>
-        <Inquiry />
       </Container>
       <CategoryDrawer
         $isVisible={isDrawerVisible}

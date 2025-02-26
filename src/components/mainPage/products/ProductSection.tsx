@@ -8,6 +8,7 @@ interface Product {
   starScore: number;
   reviewCount: number;
   likeCount: number;
+  isLiked: boolean;
   imgUrl: string;
   shopType: string;
   currentPrice: number;
