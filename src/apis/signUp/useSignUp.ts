@@ -18,7 +18,6 @@ export const checkDupId = async (
       email,
     });
     const data = await res.data.duplicated;
-    console.log('중복 확인');
     return data;
   } catch (error) {
     alert('중복확인 중 오류 발생' + error);
@@ -34,7 +33,6 @@ export const sendEmail = async (
       account,
     });
     const data = res.data;
-    console.log('이메일 전송');
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

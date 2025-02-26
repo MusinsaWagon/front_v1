@@ -32,7 +32,6 @@ const Item: React.FC<DataProps> = ({ info, type }) => {
     100
   ).toFixed(1);
   const navigate = useNavigate();
-  // console.log(location);
   const handleClick = () => {
     sessionStorage.setItem('isRefresh', 'false');
     navigate(`/product/${info.productNumber}?site=MUSINSA`);

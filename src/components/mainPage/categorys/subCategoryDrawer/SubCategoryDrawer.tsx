@@ -7,7 +7,6 @@ import {
   setCategoryId,
 } from '../../../../store/drawer/categoyDrawer.slice';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 
 type SubCategoryDrawerProps = {
   categories: categoryType[];
@@ -26,19 +25,12 @@ const SubCategoryDrawer = ({ categories }: SubCategoryDrawerProps) => {
   const isDrawerOpen = useSelector(
     (state: RootState) => state.categoryDrawer.isDrawerOpen
   );
-  const categoryId = useSelector(
-    (state: RootState) => state.categoryDrawer.categoryId
-  );
 
   const getActiveCategory = (index: number) => {
     dispatch(setChoicedIdx(index));
     dispatch(setCategoryId(categories[index].id));
     dispatch(closeDrawer());
   };
-
-  useEffect(() => {
-    console.log('id:', categoryId);
-  }, [categoryId]);
 
   return (
     <Container $isDrawerOpen={isDrawerOpen}>

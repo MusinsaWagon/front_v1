@@ -40,11 +40,6 @@ const BottomCategory: React.FC<BottomCategoryProps> = ({
     }
   }, [categories, selectedId]);
 
-  // useEffect(() => {
-  //   console.log('내용:', categories);
-  //   console.log('category:', topCategoryName);
-  // }, [topCategoryName, categories]);
-
   useEffect(() => {
     const fetchBottomCategories = async () => {
       if (selectedId > 0) {
