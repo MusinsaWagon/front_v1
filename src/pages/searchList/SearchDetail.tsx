@@ -12,29 +12,19 @@ import SearchModal from '../../components/search/SearchModal';
 import CategoryDrawer from '../../components/mainPage/categorys/CategoryDrawer';
 //icons
 import { IoIosArrowBack } from 'react-icons/io';
+import { ProductDetail } from '../../apis/productDetail/getProductDetail';
 
 type SearchParams = {
   brand?: string;
   keyword?: string;
 };
-type ProductType = {
-  productNumber: number;
-  name: string;
-  brand: string;
-  starScore: number;
-  reviewCount: number;
-  likeCount: number;
-  imgUrl: string;
-  shopType: string;
-  currentPrice: number;
-  previousPrice: number;
-};
+
 const SearchDetail = () => {
   const [searchParams] = useSearchParams();
   const brand = searchParams.get('brand');
   const keyword = searchParams.get('keyword');
   const isBrandPage = !!brand && !keyword;
-  const [dataList, setDataList] = useState<ProductType[] | undefined>();
+  const [dataList, setDataList] = useState<ProductDetail[] | undefined>();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -48,10 +38,10 @@ const SearchDetail = () => {
   useEffect(() => {
     const fetchData = async (params: SearchParams) => {
       const response = await getSearchDetail(params);
-      console.log(response);
       setDataList(response || []);
     };
     fetchData(props);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand, keyword]);
 
   return (

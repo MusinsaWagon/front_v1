@@ -21,7 +21,6 @@ const CategoryDrawer: React.FC<DrawerProps> = ({
   useEffect(() => {
     const fetchCategories = async () => {
       const data: TopCategoryType[] | undefined = await getTopCategory();
-      console.log('category:', data);
       if (data) {
         setCategories(data);
       }

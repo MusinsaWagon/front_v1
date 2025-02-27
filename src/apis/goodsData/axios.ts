@@ -12,7 +12,6 @@ export const getData = async (getType?: string) => {
       );
     }
 
-    console.log('Response:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error sending data:', error);

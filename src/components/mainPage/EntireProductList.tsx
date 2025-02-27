@@ -23,25 +23,14 @@ import {
 } from '../../store/drawer/categoyDrawer.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-interface Product {
-  productNumber: number;
-  name: string;
-  brand: string;
-  starScore: number;
-  reviewCount: number;
-  likeCount: number;
-  imgUrl: string;
-  shopType: string;
-  currentPrice: number;
-  previousPrice: number;
-}
+import { ProductDetail } from '../../apis/productDetail/getProductDetail';
 
 type categoryType = {
   id: number;
   categoryName: string;
 };
 const EntireProductList = () => {
-  const [datas, setDatas] = useState<Product[] | null>(null);
+  const [datas, setDatas] = useState<ProductDetail[] | null>(null);
   const [searchParams] = useSearchParams();
   const [categoryName, setCategoryName] = useState('전체');
   // const [isDrawerOpen, setIsDrawerOpen] = useState(false);

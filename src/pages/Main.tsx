@@ -19,9 +19,6 @@ import musinsa from '../assets/images/musinsa.png';
 import ably from '../assets/images/ably.png';
 import zigzag from '../assets/images/zigzag.png';
 
-//axios
-import Inquiry from '../components/mainPage/Inquiry';
-
 const MainPage: React.FC = () => {
   const location = useLocation().pathname;
   const [isDrawerVisible, setIsDrawerVisible] = useState<boolean>(false);
@@ -41,7 +38,7 @@ const MainPage: React.FC = () => {
 
   return (
     <Outer>
-      <Container isScrollable={!isDrawerVisible && !isSearchVisible}>
+      <Container $isScrollable={!isDrawerVisible && !isSearchVisible}>
         <TopBox>
           <SearchBox
             setIsDrawerVisible={setIsDrawerVisible}
@@ -64,7 +61,6 @@ const MainPage: React.FC = () => {
             <ProductPreviewList />
           )}
         </InnerContainer>
-        <Inquiry />
       </Container>
       <CategoryDrawer
         $isVisible={isDrawerVisible}
@@ -87,9 +83,9 @@ const Outer = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
 `;
 
-const Container = styled.div<{ isScrollable: boolean }>`
+const Container = styled.div<{ $isScrollable: boolean }>`
   position: relative;
-  overflow-y: ${({ isScrollable }) => (isScrollable ? 'auto' : 'hidden')};
+  overflow-y: ${({ $isScrollable }) => ($isScrollable ? 'auto' : 'hidden')};
 `;
 const TopBox = styled.div`
   padding: 13px 22px;

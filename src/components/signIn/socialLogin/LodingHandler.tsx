@@ -5,9 +5,8 @@ import { useLocation } from 'react-router-dom';
 const LoginHandler = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get('code');
-  console.log('code:', code);
   const location = useLocation().pathname.split('/').pop();
-  // console.log(location);
+
   if (code) localStorage.setItem('accessToken', code);
 
   useEffect(() => {
@@ -20,12 +19,12 @@ const LoginHandler = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then((res) => {
-        console.log(res);
+      }).then(() => {
         navigate('/');
       });
     };
     kakaoLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
   return (
     <div className="LoginHandeler">

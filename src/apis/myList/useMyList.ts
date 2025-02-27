@@ -37,7 +37,6 @@ export const getEmail = async () => {
   try {
     const res = await APIService.private.get('/users/mypage');
     const data = await res.data.email;
-    console.log(data);
 
     return data;
   } catch (error) {
