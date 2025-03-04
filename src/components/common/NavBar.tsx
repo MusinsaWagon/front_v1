@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-import isPWAActive from '../../hooks/detectPWA/useIsPWA';
 import { useState } from 'react';
 import HamburgerModal from '../hamburger/HamburgerModal';
 const Header = () => {
-  const isPWA = isPWAActive();
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
 
   const [isFold, setIsFold] = useState(true);
   const navigate = useNavigate();
@@ -16,12 +15,10 @@ const Header = () => {
     navigate('/');
   };
 
-  const token = localStorage.getItem('accessToken');
-
   return (
     <Container>
       <Logo src={logo} onClick={handleClick} />
-      {!isPWA && token && (
+      {!isStandalone && (
         <HamburgerBtn onClick={() => setIsFold((prev) => !prev)}>
           <RxHamburgerMenu />
         </HamburgerBtn>
