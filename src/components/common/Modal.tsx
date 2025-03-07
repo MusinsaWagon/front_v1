@@ -29,28 +29,42 @@ export default function Modal({
   useEffect(() => {
     if (showModal) {
       setIsAnimating(true); // 모달이 열릴 때 애니메이션 시작
+      document.body.style.overflow = 'hidden'; // 스크롤 방지
+    } else {
+      document.body.style.overflow = 'auto'; // 모달 닫힐 때 스크롤 복구
     }
+
+    return () => {
+      document.body.style.overflow = 'auto'; // 컴포넌트 언마운트 시 복구
+    };
   }, [showModal]);
 
   const handleClose = () => {
-    setIsAnimating(false); // 닫힐 때 slideUp 애니메이션 실행
+    setIsAnimating(false); // 닫힐 때 애니메이션 실행
     setTimeout(() => setShowModal(false), 300); // 애니메이션 시간(0.3s) 후 모달 닫기
   };
 
   const customModalStyles: ReactModal.Styles = {
     overlay: {
-      position: 'absolute',
-      top: '0',
+      position: 'fixed',
+      zIndex: 100,
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
       backgroundColor: 'rgba(0, 0, 0, 0.4)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: 'none', // 배경 클릭 방지
     },
     content: {
       width: '360px',
-      marginTop: '257px',
-      height: '400px',
-      position: 'relative',
+      position: 'fixed',
+      top: 0, // 화면 맨 위에 위치
       left: '50%',
-      transform: 'translate(-50%, -50%)',
-      borderRadius: '10px',
+      transform: 'translateX(-50%)',
+      borderRadius: '0 0 20px 20px',
       boxShadow: '2px 2px 2px rgba(0, 0, 0, 0.25)',
       backgroundColor: 'white',
       display: 'flex',
@@ -58,9 +72,11 @@ export default function Modal({
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
+      pointerEvents: 'auto', // 모달 내부는 클릭 가능
+      height: isAnimating ? '400px' : '0px', // 애니메이션을 통해 height가 점점 늘어나도록 설정
       animation: isAnimating
-        ? 'slideDown 0.3s ease-out'
-        : 'slideUp 0.3s ease-out',
+        ? 'expandHeight 0.3s ease-out forwards'
+        : 'shrinkHeight 0.3s ease-in forwards',
     },
   };
 
@@ -73,7 +89,7 @@ export default function Modal({
           style={customModalStyles}
           ariaHideApp={false}
           contentLabel="Example Modal"
-          shouldCloseOnOverlayClick={false}
+          shouldCloseOnOverlayClick={false} // 배경 터치 방지
         >
           <ModalImg src={src} alt="logo" />
           <ModalMsg>{msg}</ModalMsg>
@@ -101,24 +117,23 @@ export default function Modal({
         </ReactModal>
       )}
 
-      {/* 애니메이션 정의 */}
       <style>
         {`
-          @keyframes slideDown {
+          @keyframes expandHeight {
             from {
-              transform: translate(-50%, -100%);
+              height: 0;
             }
             to {
-              transform: translate(-50%, -50%);
+              height: 400px;
             }
           }
 
-          @keyframes slideUp {
+          @keyframes shrinkHeight {
             from {
-              transform: translate(-50%, -50%);
+              height: 400px;
             }
             to {
-              transform: translate(-50%, -150%);
+              height: 0;
             }
           }
         `}
