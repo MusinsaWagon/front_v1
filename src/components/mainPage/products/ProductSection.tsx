@@ -8,6 +8,7 @@ interface Product {
   starScore: number;
   reviewCount: number;
   likeCount: number;
+  isLiked: boolean;
   imgUrl: string;
   shopType: string;
   currentPrice: number;
@@ -20,7 +21,7 @@ interface ProductSectionProps {
 }
 
 interface ContProps {
-  FontWeight: string | number;
+  $fontWeight: string | number;
   state?: string;
 }
 const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
@@ -35,8 +36,8 @@ const ProductSection: React.FC<ProductSectionProps> = ({ datas, title }) => {
         <LeftBox>
           <Logo />
           <InnerLeftBox>
-            <Cont FontWeight="600">프라이스웨건</Cont>
-            <Cont state="title" FontWeight="700">
+            <Cont $fontWeight="700">프라이스웨건</Cont>
+            <Cont state="title" $fontWeight="700">
               {title}
             </Cont>
           </InnerLeftBox>
@@ -81,7 +82,7 @@ const InnerLeftBox = styled.div`
   gap: 3.46px;
 `;
 const Cont = styled.span<ContProps>`
-  font-weight: ${(props) => props.FontWeight};
+  font-weight: ${(props) => props.$fontWeight};
   font-size: 14.77px;
   background-color: ${(props) =>
     props.state ? `${props.theme.colors.yellow}` : null};

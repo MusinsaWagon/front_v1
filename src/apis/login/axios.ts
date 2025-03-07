@@ -16,7 +16,6 @@ export const loginUser = async ({
   const data = { account, password };
   try {
     const response = await APIService.public.post('/users/login', data);
-    console.log('Response:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error sending data:', error);

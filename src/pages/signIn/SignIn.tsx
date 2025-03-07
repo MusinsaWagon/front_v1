@@ -26,7 +26,6 @@ const SignIn = () => {
 
     try {
       const userData = await loginUser({ account, password });
-      console.log('로그인 성공:', userData);
 
       if (userData?.accessToken) {
         localStorage.setItem('accessToken', userData.accessToken);

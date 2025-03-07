@@ -40,8 +40,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({
         localStorage.getItem('keywords') || '[]'
       ) as Keyword[];
 
-      console.log('keyword:', existingKeywords);
-
       const newKeyword = { id: Date.now(), text: searchText };
 
       const updatedKeywords = [

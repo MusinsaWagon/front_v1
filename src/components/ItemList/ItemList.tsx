@@ -13,6 +13,7 @@ type ProductType = {
   reviewCount: number;
   likeCount: number;
   imgUrl: string;
+  isLiked: boolean;
   shopType: string;
   currentPrice: number;
   previousPrice: number;

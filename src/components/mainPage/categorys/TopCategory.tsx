@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { TopCategoryType } from '../types/categories';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface TopCategoryProps {
   categories: TopCategoryType[];
@@ -15,9 +15,6 @@ const TopCategory: React.FC<TopCategoryProps> = ({
     setSelectedIdx(idx);
     setSelectedId(categories[idx].id);
   };
-  useEffect(() => {
-    console.log('idx:', selectedIdx);
-  }, [selectedIdx]);
 
   return (
     <Container>

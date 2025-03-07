@@ -1,11 +1,11 @@
 {
-  "name": "프라이스웨건",
-  "short_name": "웨건",
+  "name": "COSTFLOWER",
+  "short_name": "CostFlower",
   "icons": [
     {
-      "src": "/icons/icon-196x196.png",
+      "src": "/icons/icon-192x192.png",
       "type": "image/png",
-      "sizes": "196x196",
+      "sizes": "192x192",
       "purpose": "maskable"
     },
     {
@@ -15,9 +15,9 @@
       "purpose": "maskable"
     },
     {
-      "src": "/icons/icon-196x196.png",
+      "src": "/icons/icon-192x192.png",
       "type": "image/png",
-      "sizes": "196x196",
+      "sizes": "192x192",
       "purpose": "any"
     },
     {

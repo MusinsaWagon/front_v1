@@ -49,6 +49,7 @@ export default function MyPage() {
 const PageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
   height: 80vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

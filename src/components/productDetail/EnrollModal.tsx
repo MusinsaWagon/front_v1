@@ -42,7 +42,7 @@ export default function EnrollModal({
     }
     const permission = Notification.permission;
 
-    if (permission !== 'granted') {
+    if (permission === 'denied') {
       setShowModal2(true);
       return;
     }
@@ -143,6 +143,7 @@ const Wrapper = styled.div`
   box-shadow: inset 0 0 0 3px #ffe760;
   aspect-ratio: 358/534;
   width: 89.05%;
+  max-width: 400px;
   position: fixed;
   top: 50%;
   left: 50%;
