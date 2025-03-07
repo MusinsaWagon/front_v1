@@ -42,7 +42,7 @@ export default function EnrollModal({
     }
     const permission = Notification.permission;
 
-    if (permission !== 'granted') {
+    if (permission === 'denied') {
       setShowModal2(true);
       return;
     }
