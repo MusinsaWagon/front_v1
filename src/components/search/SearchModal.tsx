@@ -9,10 +9,12 @@ import { IoSearch } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import History from './History';
 // import isPWAActive from '../../hooks/detectPWA/useIsPWA';
+
 interface DrawerProps {
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 type SearchParams = {
   brand?: string;
   keyword?: string;
