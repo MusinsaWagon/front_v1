@@ -18,6 +18,7 @@ type ProductType = {
   currentPrice: number;
   previousPrice: number;
 };
+
 const ItemList = ({ datas, isDrawerOpen }: ItemList) => {
   return (
     <ItemsContainer>
@@ -28,6 +29,7 @@ const ItemList = ({ datas, isDrawerOpen }: ItemList) => {
     </ItemsContainer>
   );
 };
+
 const ItemsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);

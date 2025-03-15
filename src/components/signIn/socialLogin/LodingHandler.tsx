@@ -7,25 +7,34 @@ const LoginHandler = () => {
   const code = new URL(window.location.href).searchParams.get('code');
   const location = useLocation().pathname.split('/').pop();
 
-  if (code) localStorage.setItem('accessToken', code);
-
   useEffect(() => {
     const kakaoLogin = async () => {
-      await axios({
-        method: 'GET',
-        url: `${
-          import.meta.env.VITE_API_URL
-        }/users/auth/login/${location}?code=${code}`,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(() => {
+      try {
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_API_URL
+          }/users/auth/login/${location}?code=${code}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        const token = response.data?.data?.accessToken;
+        if (!token) {
+          throw new Error('accessToken이 없습니다.');
+        }
+        localStorage.setItem('accessToken', token);
         navigate('/');
-      });
+      } catch (error) {
+        console.error('소셜 로그인 요청 중 오류 발생:', error);
+      }
     };
-    kakaoLogin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code]);
+
+    if (code) {
+      kakaoLogin();
+    }
+  }, [code, location, navigate]);
   return (
     <div className="LoginHandeler">
       <div className="notice">
