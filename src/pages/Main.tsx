@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 //components
 import SearchBox from '../components/mainPage/SearchBox';
-import BrandsBox from '../components/mainPage/BrandsBox';
+// import BrandsBox from '../components/mainPage/BrandsBox';
 import ProductPreviewList from '../components/mainPage/ProductPreviewList';
 import EntireProductList from '../components/mainPage/EntireProductList';
 
@@ -15,9 +15,9 @@ import CategoryDrawer from '../components/mainPage/categorys/CategoryDrawer';
 import SearchModal from '../components/search/SearchModal';
 
 //imgs
-import musinsa from '../assets/images/musinsa.png';
-import ably from '../assets/images/ably.png';
-import zigzag from '../assets/images/zigzag.png';
+// import musinsa from '../assets/images/musinsa.png';
+// import ably from '../assets/images/ably.png';
+// import zigzag from '../assets/images/zigzag.png';
 
 const MainPage: React.FC = () => {
   const location = useLocation().pathname;
@@ -47,12 +47,12 @@ const MainPage: React.FC = () => {
             placeholderText="원하는 상품, 브랜드 검색"
             setIsSearchVisible={setIsSearchVisible}
           />
-          <BrandsContainer>
+          {/* <BrandsContainer>
             <BrandsBox imgSrc={musinsa} name="ALL" />
             <BrandsBox imgSrc={musinsa} name="MUSINSA" />
             <BrandsBox imgSrc={zigzag} name="ZIGZAG" />
             <BrandsBox imgSrc={ably} name="ABLY" />
-          </BrandsContainer>
+          </BrandsContainer> */}
         </TopBox>
         <InnerContainer>
           {location === '/entire' ? (
@@ -91,12 +91,12 @@ const TopBox = styled.div`
   padding: 13px 22px;
   background-color: ${({ theme }) => theme.colors.black};
 `;
-const BrandsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px 0;
-`;
+// const BrandsContainer = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   padding: 16px 0;
+// `;
 const InnerContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding-top: 25px;

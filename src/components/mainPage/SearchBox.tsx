@@ -129,6 +129,7 @@ const InputBox = styled.input`
   border: none;
   color: #ffffff;
   font-size: 10px;
+  outline: none;
   ::placeholder {
     color: #ffffff;
   }
